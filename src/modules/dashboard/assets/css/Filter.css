@@ -1,0 +1,263 @@
+#form-get-data > .ant-row > .ant-col > .ant-form-item > .ant-form-item-label, 
+#form-get-data > .ant-row > .ant-col > .filter__ngay-bao-cao > .ant-row > .ant-form-item-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter__title {
+  margin-left: 0;
+}
+
+.ant-row.filter {
+ display: flex;
+ padding-top: 20px;
+}
+
+.mobile-toggle-filter-button {
+  display: none;
+}
+
+.date-filter > .ant-form-item-control {
+  max-width: 178px;
+}
+
+.pc-get-data-button {
+  width: 117px;
+  height: 40px;
+}
+
+.pc-get-data-button > span, .mobile-get-data-button > span {
+  color: #FDFDFD !important;
+}
+
+.ant-picker, .ant-select-selector {
+  min-height: 40px;
+  border-radius: 4px;
+}
+
+.ant-picker-input > input {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.filter-button > .ant-form-item-label > label::after {
+  opacity: 0;
+}
+
+@media screen and (max-width: 576px) {
+  .filter-mobile > .title{
+    padding: 8px 16px;
+  }
+
+  .mobile-toggle-filter-button {
+    display: block;
+    text-align: right;
+  }
+
+  .filter-section > form > .ant-row > .ant-col > .ant-form-item {
+    margin-bottom: 0 !important;
+  }
+
+  .button-pc {
+    align-self: end;
+    margin-bottom: 12px;
+  }
+
+  .button-pc > .filter__btn {
+    text-align: end;
+    margin-right: 0;
+    margin-top: 8px;
+  }
+
+  .button-pc > .filter__btn > .ant-form-item {
+    margin-bottom: 0 !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .header-title {
+    display: none;
+  }
+  .header--logo {
+    min-width: 225px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter-section {
+    padding: 16px;
+    height: 256px;
+  } 
+}
+
+@media (min-width: 525px) and (max-width: 576px) {
+  .header--logo {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 524px) {
+  .header--logo {
+    width: 100%;
+  }
+}
+
+.donViRow {
+  padding-right: 16px;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  .donViRow {
+    max-width: 45%;
+    flex: 0 0 45%;
+    padding-right: 16px;
+    display: grid;
+  }
+
+  #dashboard .ant-form-item-control-input-content {
+    width: 100%;
+  }
+
+  .donViRow .ant-row.ant-form-item {
+    display: grid;
+  }
+
+  .dateReport {
+    max-width: 25%;
+    flex: 0 0 25%;
+  }
+
+  .dateReport .date-filter {
+    display: grid;
+  }
+
+  .buttonFilter {
+    max-width: 30%;
+    flex: 0 0 30%;
+    text-align: right;
+    margin-top: 32px;
+  }
+
+  .buttonFilter .filter__btn {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #dashboard  .filter {
+    padding: 20px 20px;
+  }
+
+  .donViRow {
+    max-width: 45%;
+    flex: 0 0 45%;
+    padding-right: 16px;
+    display: grid;
+  }
+
+  .donViRow .ant-row.ant-form-item {
+    display: grid;
+  }
+
+  .dateReport {
+    max-width: 25%;
+    flex: 0 0 25%;
+    display: grid;
+  }
+
+  .dateReport .ant-row.ant-form-item {
+    display: grid;
+  }
+
+  .buttonFilter {
+    max-width: 30%;
+    flex: 0 0 30%;
+    text-align: right;
+  }
+
+  .buttonFilter button {
+    margin-top: 32px;
+  }
+
+  .buttonFilter .filter__btn {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  #dashboard #form-get-data .filter {
+    padding: 20px 0;
+  }
+  .donViMobile {
+    max-width: 80%;
+    flex: 0 0 80%;
+    padding-right: 16px;
+    display: grid;
+  }
+
+  .donViMobile .ant-row.ant-form-item {
+    display: grid;
+  }
+
+  .dateReportMobile {
+    max-width: 60%;
+    flex: 0 0 60%;
+    padding-right: 16px;
+    display: grid;
+  }
+
+  .dateReportMobile .ant-row.ant-form-item {
+    display: grid;
+  }
+
+  .buttonFilterMobile {
+    max-width: 40%;
+    flex: 0 0 40%;
+    text-align: right;
+    margin-top: 32px;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .donViMobile {
+    max-width: 90%;
+    flex: 0 0 90%;
+  }
+}
+
+@media screen and (min-width: 1025) {
+  .ant-row.filter > .ant-col:first-of-type {
+    padding-bottom: 18px;
+    padding-top: 4px;
+  }
+}
+
+@media screen and (min-width: 768px) { 
+
+  .button-pc  {
+    display: block !important;
+  }
+
+  .button-mobile{
+    display: none !important;
+  }
+  
+  .ant-row.filter {
+    padding: 15px 40px 0;
+  }
+
+  .form-row-filter{
+    padding: 0 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #form-get-data {
+    height: 72px;
+  }
+
+  #form-get-data > .ant-row > .ant-col > .ant-form-item {
+    float: right;
+  }
+}

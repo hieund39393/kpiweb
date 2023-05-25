@@ -1,0 +1,96 @@
+.low-high-box {
+  position: relative;
+  color: #FDFDFD;
+  height: 150px;
+  padding: 0 10px;
+}
+
+.page-setOfIndicators--charts-top {
+  height: 200px;
+}
+
+.sort-button {
+  position: absolute;
+  border-radius: 1px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #164397;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.sort-button {
+  top: 0;
+  right: 0;
+}
+
+.low-high-box > .content-title {
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.low-high-box > .content-title > h3 {
+  color: #0F0F1A !important;
+  font-weight: bold !important;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 1200px) {
+  .low-high-box > .content-title > h3 {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .low-high-box > .content-title > h3 {
+    font-size: 14px !important;
+  }
+}
+
+.top-no-mt {
+  margin-top: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .page-setOfIndicators--charts-top {
+    height: 316px;
+  }
+
+  .low-high-box {
+    height: 250px;
+  }
+
+  .low-high-box > .content-title > h3 {
+    font-size: 16px;
+  }
+
+  .sort-button {
+    top: 12px !important;
+    right: 0;
+  }
+}
+
+.three-col-general-chart-box.page-setOfIndicators--charts.page-setOfIndicators--charts-line .line-box.three-col-general-chart canvas {
+  padding-top: 0px;
+  height: 150px !important;
+}
+
+.page-setOfIndicators--charts.page-setOfIndicators--charts-line .line-box.three-col-general-chart canvas {
+  padding-top: 40px;
+  height: 220px !important;
+}
+
+@media screen and (max-width: 991px) {
+  .page-setOfIndicators--charts-top {
+    height: 250px !important;
+  }
+
+  .page-setOfIndicators--charts-top .low-high-box {
+    height: 200px !important;
+  }
+}

@@ -1,0 +1,467 @@
+#filter-report {
+    padding-top: 20px;
+}
+
+#filter-report .form-filter-report--date .ant-form-item-label{
+    padding-bottom: 8px;
+}
+
+#filter-report .ant-row.ant-form-item{
+	margin-bottom: 0 !important;
+}
+
+#filter-report .ant-row.ant-form-item .ant-form-item-control {
+	padding-left: 0 !important;
+}
+
+@media (min-width: 992px) {
+	.page-report--body .ant-table {
+		max-height: 100%;
+	}
+
+	.page-report--body .ant-table-tbody {
+		height: auto ;
+		max-height: 100%;
+	}
+}
+
+
+#filter-report .ant-picker {
+	width: 100%;
+}
+#filter-report .button-filter-report button {
+    height: 40px;
+}
+
+#filter-report .form-filter-report--reset {
+	display: flex;
+}
+
+#filter-report .button-rest-report {
+	margin-right: 16px;
+}
+
+#filter-report .button-filter-report {
+    margin-top: 32px;
+}
+
+#filter-report .form-filter-report--submit {
+    text-align: right;
+}
+
+#filter-report .form-filter-report--submit button {
+    width: 120px;
+}
+
+.button-excel {
+	text-align: right;
+	padding-top: 20px;
+}
+
+.button-excel button {
+	width: 180px;
+}
+
+@media (min-width: 1025px) {
+	#filter-report.filter-report-indicator .field-report-deparment {
+		max-width: 25%;
+    	flex: 0 0 25%;
+	}
+
+	#filter-report.filter-report-indicator .field-report-indicators {
+		max-width: 45%;
+    	flex: 0 0 45%;
+	}
+
+	#filter-report .form-filter-report--deparment {
+    max-width: 25%;
+    flex: 0 0 25%;
+	}
+
+	#filter-report .form-filter-report--type {
+			max-width: 20%;
+			flex: 0 0 20%;
+	}
+
+	#filter-report .form-filter-report--date {
+			max-width: 15%;
+			flex: 0 0 15%;
+	}
+
+	#filter-report .button-filter-report {
+			max-width: 20%;
+			flex: 0 0 20%;
+	}
+}
+
+@media (max-width: 1024px) {
+	#filter-report .form-filter-report--deparment {
+    max-width: 40%;
+    flex: 0 0 40%;
+	}
+
+	#filter-report .form-filter-report--type {
+			max-width: 25%;
+			flex: 0 0 25%;
+	}
+
+	#filter-report .form-filter-report--date {
+			max-width: 25%;
+			flex: 0 0 25%;
+	}
+
+	#filter-report .form-filter-report--reset {
+			max-width: 77%;
+			flex: 0 0 77%;
+			text-align: right;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+	}
+
+	#filter-report .form-filter-report--submit {
+			max-width: 23%;
+			flex: 0 0 23%;
+			padding-right: 8px !important;
+	}
+
+	#filter-report .button-filter-report {
+			margin-top: 16px;
+	}
+}
+
+@media (max-width: 991px) {
+	#filter-report .form-filter-report--reset {
+			max-width: 83%;
+			flex: 0 0 83%;
+	}
+
+	#filter-report .form-filter-report--submit {
+			max-width: 17%;
+			flex: 0 0 17576%;
+	}
+}
+
+@media (max-width: 768px) {
+	#filter-report .form-filter-report--reset {
+			max-width: 81%;
+			flex: 0 0 81%;
+			padding-right: 0 !important;
+	}
+
+	#filter-report .form-filter-report--submit {
+			max-width: 19%;
+			flex: 0 0 19%;
+	}
+}
+
+@media (max-width: 576px) {
+	#filter-report .form-filter-report--deparment {
+    max-width: 60%;
+    flex: 0 0 60%;
+	}
+
+	#filter-report .form-filter-report--type {
+			max-width: 40%;
+			flex: 0 0 40%;
+	}
+
+	#filter-report .form-filter-report--date {
+			max-width: 40%;
+			flex: 0 0 40%;
+	}
+
+	#filter-report .button-filter-report {
+		margin-top: 32px;
+	}
+
+	#filter-report .button-filter-report button {
+		width: 100%;
+	}
+
+	#filter-report .form-filter-report--reset {
+			max-width: 25%;
+			flex: 0 0 25%;
+			padding-right: 8px !important;
+	}
+
+	#filter-report .form-filter-report--submit {
+			max-width: 35%;
+			flex: 0 0 35%;
+	}
+
+	.page-report--header {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+#filter-report .form-filter-report button {
+	height: 40px;
+}
+
+@media screen and (min-width: 1025px) {
+	#filter-report .field-report-deparment {
+		max-width: 40%;
+		flex: 0 0 40%;
+	}
+
+	#filter-report .field-report-indicators {
+		max-width: 30%;
+		flex: 0 0 30%;
+	}
+	#filter-report .field-button-report-reset {
+		max-width: 15%;
+		flex: 0 0 15%;
+	}
+
+	#filter-report .field-button-report-submit {
+		max-width: 15%;
+		flex: 0 0 15%;
+	}
+
+	#filter-report .field-report-type,
+	#filter-report .field-report-date {
+		max-width: 25%;
+		flex: 0 0 25%;
+		margin-top: 8px;
+	}
+
+	#filter-report .field-report-submit {
+		max-width: 50%;
+		flex: 0 0 50%;
+	}
+}
+
+#filter-report .field-button-report-reset,
+#filter-report .field-button-report-submit  {
+	margin-top: 32px;
+}
+
+#filter-report .field-button-report-submit  {
+	text-align: right;
+}
+
+#filter-report .field-report-submit {
+	display: flex;
+	align-items: flex-end;
+	justify-content: right;
+}
+
+#filter-report .field-report-submit button:last-child {
+		margin-left: 16px;
+	}
+
+@media screen and (max-width: 1024px) {
+	#filter-report .field-report-deparment {
+		max-width: 40%;
+		flex: 0 0 40%;
+	}
+
+	#filter-report .field-report-indicators {
+		max-width: 40%;
+		flex: 0 0 40%;
+	}
+	#filter-report .field-button-report-reset {
+		max-width: 20%;
+		flex: 0 0 20%;
+		padding-right: 0 !important;
+	}
+
+	#filter-report .field-report-type,
+	#filter-report .field-report-date {
+		max-width: 30%;
+		flex: 0 0 30%;
+		margin-top: 8px;
+	}
+
+	#filter-report .field-report-submit {
+		max-width: 40%;
+		flex: 0 0 40%;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	#filter-report .field-button-report-submit {
+		padding-left: 0 !important;
+		margin-left: -4px;
+	}
+}
+
+@media screen and (min-width: 1025px) {
+	.max-1024 {
+		display: none;
+	}
+	.min-1025 {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.max-1024 {
+		display: block;
+	}
+	.min-1025 {
+		display: none;
+	}
+
+	#filter-report .field-button-report-reset {
+		text-align: right;
+		padding-right: 12px !important;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	#filter-report .field-report-type,
+	#filter-report .field-report-date {
+		max-width: 25%;
+		flex: 0 0 25%;
+		margin-top: 8px;
+	}
+
+	#filter-report .field-report-submit {
+		max-width: 50%;
+		flex: 0 0 50%;
+	}
+}
+
+@media screen and (max-width: 475px) {
+	#filter-report .field-report-deparment,
+	#filter-report .field-report-indicators,
+	#filter-report .field-report-type,
+	#filter-report .field-report-date {
+		max-width: 50%;
+		flex: 0 0 50%;
+	}
+
+	#filter-report .field-report-submit {
+		max-width: 100%;
+		flex: 0 0 100%;
+		margin-top: 16px;
+	}
+
+	#filter-report .field-report-submit button {
+		width: 100%;
+	}
+
+	#filter-report .field-report-submit button:nth-child(2) {
+		margin-left: 16px;
+	}
+
+	.max-475 {
+		display: block !important;
+	}
+
+	.min-476 {
+		display: none !important;
+	}
+}
+
+@media screen and (min-width: 476px) {
+	.min-476 {
+		display: block !important;
+	}
+	.max-475 {
+		display: none !important;
+	}
+}
+
+.report-closed,
+#filter-report .form-filter-report--submit button {
+	float: right;
+}
+@media (max-width: 1249px) {
+
+	.block-1199 {
+		display: block;
+	}
+	.block-1200 {
+		display: none;
+	}
+}
+
+@media (min-width: 1250px) {
+	.block-1199 {
+		display: none;
+	}
+
+	.block-1200 {
+		display: block;
+	}
+}
+
+#table-report .ant-table-tbody > tr > td {
+	padding: 8px 10px;
+}
+
+#filter-report button:disabled {
+	color: rgba(0, 0, 0, 0.25) !important;
+    background: #f5f5f5 !important;
+	border-color: #d9d9d9 !important;
+}
+
+.header-title-sort {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header-title-sort button,
+.header-title-sort button:hover,
+.header-title-sort button:focus {
+	background: #22438E;
+	border: 1px solid #22438E;
+	
+}
+
+.header-title-sort-button {
+	gap: 0 !important
+}
+
+.header-title-sort-button .ant-space-item {
+	margin-top: -4px;
+}
+
+.header-title-sort-button button {
+    width: 14px;
+	height: 0;
+}
+
+.header-title-sort button svg {
+	height: 12px;
+	width: 12px;
+	color: #f5f5f5;
+}
+
+#table-report table .ant-table-thead tr th,#table-report table .ant-table-thead tr td {
+	padding: 8px;
+}
+
+#table-report table .ant-table-tbody tr.text-right td:first-child {
+	text-align: right;
+}
+
+.page-report--body--table .option-report-indicators {
+	float: right;
+    margin-top: 20px;
+}
+
+.page-report--body--table .option-report-indicators span.option-report-indicators--total {
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: 8px;
+}
+
+.option-report-indicators-pagination {
+	align-items: center;
+}
+
+.option-report-indicators-pagination .ant-pagination-next {
+	margin-left: 8px;
+}
+
+.option-report-indicators-pagination .ant-pagination-item-link {
+	border-radius: 2rem
+}
+
+
+

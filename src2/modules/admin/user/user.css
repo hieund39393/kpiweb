@@ -1,0 +1,75 @@
+@media (min-width: 576px) {
+    #page-admin .page-admin--header {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+#form-users .ant-select-selection-placeholder,
+#form-users .ant-select-selection-item {
+  font-weight: 500;
+ 
+  font-size: 14px !important;
+}
+
+#form-users .ant-select-selection-placeholder {
+ color: #C9C9C9 !important;
+}
+
+#form-users .ant-select-selection-item {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.paste-user .ant-modal-body {
+    height: 400px;
+}
+
+#form-users .ant-input-affix-wrapper.ant-input-password {
+    height: 40px;
+    border-radius: 4px;
+}
+
+#form-users .ant-select-selection-search-input {
+    height: 40px;
+}
+
+#form-users_matKhau {
+    height: unset;
+}
+
+#page-admin .page-admin--header--form .ant-form-item-control-input-content {
+    width: 320px;
+}
+
+.modal-user .isActive .ant-form-item-label label{
+    display: none;
+}
+
+@media (max-width: 475px) {
+    #page-admin .page-admin--header--form .ant-form-item-control-input-content {
+        width: 250px;
+    }
+}
+
+@media (max-width: 375px) {
+    #page-admin .page-admin--header--form .ant-form-item-control-input-content {
+        width: 200px;
+    }
+}
+
+@media (max-width: 525px) {
+    #page-admin .ant-btn.button-primary span:last-child {
+        display: none;
+    }
+
+    #page-admin .ant-btn.button-primary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 575px) {
+    #page-admin .page-admin--header {
+        display: grid;
+        justify-content: unset;
+    }
+}

@@ -1,0 +1,114 @@
+.menu-link {
+    background-color: unset !important;
+}
+
+.link-text-images {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-style: normal;
+font-weight: normal;
+background: unset !important;
+}
+
+.link-text-images.change-password {
+    color: #0F0F1A !important;
+    
+}
+
+.link-text-images.logout {
+    color: #F5222D !important;
+}
+
+.menu-link-logout {
+    border-top: 0.5px solid #D3D2D5;
+}
+
+.header {
+  display: flex;
+  background: #FDFDFD !important;
+  border-radius: 0px 0px 8px 8px;
+  height: 80px !important;
+  line-height: 80px !important;
+  
+}
+
+@media screen and (min-width: 992px) {
+  .header {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .header {
+    justify-content: flex-start;
+  }
+}
+
+.header--logo img {
+  width: 240px;
+    height: 48px;
+  /* margin: 0 auto; */
+}
+
+.header--account {
+  display: flex;
+  padding-right: 10px;
+}
+
+.header--account--name {
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
+.header--logo {
+  /* padding-bottom: 30px; */
+  line-height: 9;
+}
+
+.header-title h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.header--account {
+      padding-top: 12px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 991px) {
+    .header--account {
+        position: absolute;
+        right: 30px;
+    }
+
+    .header--account--name {
+        margin-top: -32px;
+    }
+}
+
+@media (max-width: 575px) {
+  .header--account--name {
+    display: none;
+  }
+}
+
+@media (max-width: 425px) {
+  .header--account {
+        right: 12px;
+    }
+}
+
+.header--account span.anticon {
+  display: none;
+}
+
+.header--account img {
+  border-radius: 2rem;
+  width: 40px;
+  height: 40px;
+}

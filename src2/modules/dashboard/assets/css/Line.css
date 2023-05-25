@@ -1,0 +1,130 @@
+.three-col-general-chart-box.page-setOfIndicators--charts-line {
+  margin-top: 8px !important;
+}
+
+.three-col-general-chart-box {
+  height: 132px;
+}
+
+.line-box.three-col-general-chart {
+  height: 150px;
+}
+
+.line-box {
+  margin: 0 0 8px 0;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px 10px; 
+  max-height: 316px;
+  height: 200px;
+}
+
+.line-box > .content-title {
+  text-align: center;
+  font-weight: normal;
+}
+
+.line-box  .content-title  h3 {
+  font-weight: bold !important;
+  line-height: 18px;
+  color: #0F0F1A !important;
+  text-align: center;
+  display: inline-block;
+  word-break: break-word;
+  width: 100%;
+}
+
+@media screen and (min-width: 1025px) {
+  .line-box  .content-title  h3 {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .line-box  .content-title  h3 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .line-box {
+    display: block;
+    height: 150px;
+  }
+
+  .line-box > div:last-of-type {
+    margin-top: 8px;
+  };
+
+  .three-col-general-chart-box {
+    height: 132px;
+  }
+  
+  .line-box.three-col-general-chart {
+    height: 100px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .line-box {
+    height: 250px;
+  }
+
+  .line-box > .content-title{
+    padding-bottom: 7px;
+  }
+
+  .three-col-general-chart-box {
+    height: 200px;
+  }
+  
+  .three-col-general-chart {
+    height: 150px;
+  }
+}
+
+#boChiTieuKyThuat .page-setOfIndicators--content.content-body .scld110-layout .statistical:nth-child(2n + 1) .page-setOfIndicators--charts-line{
+  margin-top: 35px;
+}
+
+#boChiTieuKyThuat .page-setOfIndicators--content.content-body .ctngccd-layout .page-setOfIndicators--charts.page-setOfIndicators--charts-line {
+  margin-top: 0 !important;
+}
+
+@media screen and (max-width: 576px) {
+  #boChiTieuKyThuat .page-setOfIndicators--content.content-body:nth-child(3) .statistical:nth-child(2n+1) .page-setOfIndicators--charts-line {
+    margin-top: 0 !important;
+  }
+}
+
+#boChiTieuKyThuat .page-setOfIndicators--content.content-body .statistical .page-setOfIndicators--charts-line,
+#boChiTieuKyThuat .page-setOfIndicators--content.content-body .statistical .page-setOfIndicators--charts-bar,
+#boChiTieuKyThuat .page-setOfIndicators--content.content-body .statistical .page-setOfIndicators--charts-top {
+  margin-bottom: 8px;
+}
+
+#boChiTieuKyThuat .page-setOfIndicators--content.content-body:nth-child(6) .statistical:nth-child(2) .ctxlvphlld-layout--speedometer {
+  height: 459px;
+}
+
+@media screen and (max-width: 1200px) {
+  #boChiTieuKyThuat .page-setOfIndicators--content.content-body:nth-child(6) .statistical:nth-child(2) .ctxlvphlld-layout--speedometer {
+    height: 343px;
+  }
+
+  .statistical {
+    padding-right: 10px !important;
+  }
+
+  .tonthat-diennang .inner-statistical-wrapper:last-child,
+  .giaDienBinhQuan.statistical .page-setOfIndicators--charts-top {
+    margin-left: 10px ;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  #boChiTieuKinhDoanh .giaDienBinhQuan.statistical div:first-child .page-setOfIndicators--charts.page-setOfIndicators--charts-line {
+    height: 250px;
+  }
+}
