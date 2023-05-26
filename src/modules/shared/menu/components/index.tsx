@@ -365,9 +365,11 @@ const SideBar = () => {
           <Switch>
             {menu.map(items => {
 
+              const asss = items;
+
               if (items.children.length > 0) {
-                return items.children.map(item => (
-                  <Route path={item.path} key={item.key}>
+                return items.children.map((item, index) => (
+                  <Route path={item.path} key={index}>
                     {item.component}
                   </Route>
                 ));
