@@ -4,43 +4,46 @@ import ChartService from 'modules/dashboard/services/ChartService';
 import { useEffect, useState } from 'react';
 import Charts from '../charts';
 
-const chartService = ChartService.instance()
+const chartService = ChartService.instance();
 
 function BoChiTieuQuanTri(props) {
-    const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange } = props;
-    const [indicatorsLevel, setIndicatorsLevel] = useState<BoChiTieu[]>([]);
+  const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange, chiTieuId } = props;
+  const [indicatorsLevel, setIndicatorsLevel] = useState<BoChiTieu[]>([]);
 
-    const fetchIndicators = () => {
-        chartService.getIndicatorsLevel({ boChiTieuID: boChiTieuID, level: 1 })
-            .then((response) => {
-                if (response.data && response.statusCode === _STATUSCODE200)
-                    setIndicatorsLevel(response.data.chiTieus);
-            })
-            .catch(() => { });
-    }
+  const fetchIndicators = () => {
+    chartService
+      .getIndicatorsLevel({ boChiTieuID: boChiTieuID, level: 1 })
+      .then((response) => {
+        if (response.data && response.statusCode === _STATUSCODE200)
+          setIndicatorsLevel(response.data.chiTieus);
+      })
+      .catch(() => {});
+  };
 
-    useEffect(() => {
-        fetchIndicators();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    return (
-        <div
-            // style={{ display: 'none' }} // tạm thời comment
-            id="boChiTieuQuanTri">
-            <div className="bct-data__title">
-                <h3>Bộ chỉ tiêu quản trị</h3>
-            </div>
-            <Charts
-                donViID={donViID}
-                boChiTieuID={boChiTieuID}
-                ngayBaoCao={ngayBaoCao}
-                fetchAt={fetchAt}
-                indicatorsLevel={indicatorsLevel}
-                setIsChange={setIsChange}
-                isChange={isChange}
-            />
-        </div>
-    )
+  useEffect(() => {
+    fetchIndicators();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <div
+      // style={{ display: 'none' }} // tạm thời comment
+      id="boChiTieuQuanTri"
+    >
+      <div className="bct-data__title">
+        <h3>Bộ chỉ tiêu quản trị</h3>
+      </div>
+      <Charts
+        donViID={donViID}
+        boChiTieuID={boChiTieuID}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        indicatorsLevel={indicatorsLevel}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+      />
+    </div>
+  );
 }
 
 export default BoChiTieuQuanTri;

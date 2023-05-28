@@ -18,7 +18,7 @@ import TiviShow from '../../tivishow/components';
 import BaoCaoTheoChiTieu from '../../report/components/indicators';
 import BaoCaoTheoDonVi from '../../report/components/deparment';
 import NhomKeHoach from 'modules/dashboard/components/nhomKeHoach';
-import ChiTieuTable from 'modules/dashboard/components/newPage/ChiTieuTable';
+import ChiTieuTable from 'modules/dashboard/components/bang/ChiTieuTable';
 
 import Dashboard from 'modules/dashboard/components/index';
 import CauHinhBieuDo from '../../admin/configCharts/components';
@@ -269,7 +269,7 @@ export const routes = [
 
   {
     key: 'chiTieuTable',
-    id: 45,
+    id: 35,
     icon: '',
     path: '/bang-chi-tiet',
     title: '',
@@ -279,3 +279,4 @@ export const routes = [
 
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
+export const BANG_BAO_CAO_CHI_TIEU = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu';

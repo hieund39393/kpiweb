@@ -1,15 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  Form,
-  Select,
-  DatePicker,
-  Button,
-  Col,
-  Row,
-  Breadcrumb,
-  BackTop,
-  Collapse,
-} from 'antd';
+import { Form, Select, DatePicker, Button, Col, Row, Breadcrumb, BackTop, Collapse } from 'antd';
 import { UpCircleOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
 
 import moment from 'moment';
@@ -36,6 +26,7 @@ import { _DAYFORMAT, _FALSE, _KHONGCODULIEUSELECT, _TRUE, _TRUESTRING } from 'co
 
 import '../assets/css/style.css';
 import { disabledDateCurrent, formatDate, getInYesterday } from 'core/utils/utility';
+import { useLocation } from 'react-router-dom';
 
 const donViService = DonViService.instance();
 const localStorageService = LocalStorageService.instance();
@@ -43,6 +34,9 @@ const localStorageService = LocalStorageService.instance();
 const { Option } = Select;
 
 const Dashboard = () => {
+  const location = useLocation();
+  const { chiTieuId } = location.state || {};
+
   const user = localStorageService.getUser();
 
   const [form] = Form.useForm();
@@ -76,13 +70,12 @@ const Dashboard = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [width]);
 
-  const [fixedForm, setFixedForm] = useState('notFixedForm')
+  const [fixedForm, setFixedForm] = useState('notFixedForm');
 
   const renderFilter = useMemo(() => {
     const changedForm = () => {
-      if (window.scrollY >= 80) setFixedForm('fixedForm')
-      else setFixedForm('notFixedForm')
-
+      if (window.scrollY >= 80) setFixedForm('fixedForm');
+      else setFixedForm('notFixedForm');
     };
     window.addEventListener('scroll', changedForm);
     return (
@@ -93,7 +86,7 @@ const Dashboard = () => {
           className={fixedForm}
           initialValues={{
             ngayBaoCao: moment(convertDate, _DAYFORMAT),
-            donViID: { label: user.tenDonVi, value: user.donViID }
+            donViID: { label: user.tenDonVi, value: user.donViID },
           }}
           onFinish={filterChart}
         >
@@ -108,12 +101,16 @@ const Dashboard = () => {
                 <Select
                   className="dashboard-selector-pc"
                   labelInValue
-                  placeholder={user.isTongCongTy || user.isAdmin ? user.tenDonVi : "Chọn đơn vị"}
+                  placeholder={user.isTongCongTy || user.isAdmin ? user.tenDonVi : 'Chọn đơn vị'}
                   showSearch
                   optionFilterProp="children"
-                  disabled={(user.isTongCongTy === _TRUESTRING || user.isAdmin === _TRUESTRING) ? _FALSE : _TRUE}
+                  disabled={
+                    user.isTongCongTy === _TRUESTRING || user.isAdmin === _TRUESTRING
+                      ? _FALSE
+                      : _TRUE
+                  }
                   //filterOption={(input, option) =>
-                    //option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  //option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   //}
                   notFoundContent={_KHONGCODULIEUSELECT}
                 >
@@ -141,11 +138,22 @@ const Dashboard = () => {
                   rules={[{ required: true, message: 'Ngày không được bỏ trống!' }]}
                   className="date-filter"
                 >
-                  <DatePicker placeholder="Chọn ngày" locale={locale} format={_DAYFORMAT} disabledDate={disabledDateCurrent} />
+                  <DatePicker
+                    placeholder="Chọn ngày"
+                    locale={locale}
+                    format={_DAYFORMAT}
+                    disabledDate={disabledDateCurrent}
+                  />
                 </Form.Item>
               </div>
             </Col>
-            <Col span={12} sm={12} md={4} xl={3} className="row-padding button-data buttonFilter button-pc">
+            <Col
+              span={12}
+              sm={12}
+              md={4}
+              xl={3}
+              className="row-padding button-data buttonFilter button-pc"
+            >
               <div className="filter__btn">
                 <Form.Item label="">
                   <Button
@@ -161,8 +169,17 @@ const Dashboard = () => {
           </Row>
         </Form>
       </>
-    )
-  }, [convertDate, dataDonVi, form, user.donViID, user.isAdmin, user.isTongCongTy, user.tenDonVi, fixedForm])
+    );
+  }, [
+    convertDate,
+    dataDonVi,
+    form,
+    user.donViID,
+    user.isAdmin,
+    user.isTongCongTy,
+    user.tenDonVi,
+    fixedForm,
+  ]);
 
   const { Panel } = Collapse;
 
@@ -198,7 +215,7 @@ const Dashboard = () => {
             form={form}
             initialValues={{
               ngayBaoCao: moment(convertDate, _DAYFORMAT),
-              donViID: { label: user.tenDonVi, value: user.donViID }
+              donViID: { label: user.tenDonVi, value: user.donViID },
             }}
             onFinish={filterChart}
           >
@@ -208,12 +225,12 @@ const Dashboard = () => {
                   <Select
                     className="dashboard-selector-mobile"
                     labelInValue
-                    placeholder={user.isTongCongTy || user.isAdmin ? user.tenDonVi : "Chọn đơn vị"}
+                    placeholder={user.isTongCongTy || user.isAdmin ? user.tenDonVi : 'Chọn đơn vị'}
                     showSearch
                     optionFilterProp="children"
                     disabled={user.isTongCongTy || user.isAdmin ? _FALSE : _TRUE}
                     //filterOption={(input, option) =>
-                      //option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    //option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     //}
                     notFoundContent={_KHONGCODULIEUSELECT}
                   >
@@ -241,11 +258,22 @@ const Dashboard = () => {
                     rules={[{ required: true, message: 'Ngày không được bỏ trống!' }]}
                     className="date-filter"
                   >
-                    <DatePicker placeholder="Chọn ngày" locale={locale} format={_DAYFORMAT} disabledDate={disabledDateCurrent} />
+                    <DatePicker
+                      placeholder="Chọn ngày"
+                      locale={locale}
+                      format={_DAYFORMAT}
+                      disabledDate={disabledDateCurrent}
+                    />
                   </Form.Item>
                 </div>
               </Col>
-              <Col span={12} sm={12} md={4} xl={3} className="row-padding button-data button-pc buttonFilterMobile">
+              <Col
+                span={12}
+                sm={12}
+                md={4}
+                xl={3}
+                className="row-padding button-data button-pc buttonFilterMobile"
+              >
                 <div className="filter__btn">
                   <Form.Item label="">
                     <Button
@@ -264,7 +292,7 @@ const Dashboard = () => {
       </Collapse>
     </>
   );
-  const [isChange, setIsChange] = useState(false)
+  const [isChange, setIsChange] = useState(false);
   // Filter data
   function filterChart(values) {
     const convert = new Date(values.ngayBaoCao);
@@ -272,16 +300,14 @@ const Dashboard = () => {
     const convertMonth = convert.getMonth() + 1;
     const convertYear = convert.getFullYear();
 
-    const donViID = Number(values.donViID)
-      ? values.donViID
-      : values.donViID.value;
+    const donViID = Number(values.donViID) ? values.donViID : values.donViID.value;
 
     values.ngayBaoCao =
       convertYear + '-' + formatDate(convertMonth) + '-' + formatDate(convertDate);
     setNgayBaoCao(values.ngayBaoCao);
     setDonViId(donViID);
     setFetchAt(Date.now());
-    setIsChange(true)
+    setIsChange(true);
   }
 
   return (
@@ -297,6 +323,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
       <BoChiTieuKinhDoanh
         donViID={donViId}
@@ -305,6 +332,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
       <BoChiTieuDauTuXayDung
         donViID={donViId}
@@ -313,6 +341,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
       <BoChiTieuSuaChua
         donViID={donViId}
@@ -321,6 +350,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
 
       <BoChiTieuQuanTri
@@ -330,6 +360,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
 
       <BoChiTieuTaiChinh
@@ -339,6 +370,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
 
       <BoChiTieuAnToan
@@ -348,6 +380,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
 
       <BoChiTieuChuyenDoiSo
@@ -357,6 +390,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
 
       <BoChiTieuThanhTraKiemTra
@@ -366,6 +400,7 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
       <BoChiTieuBaoCaoDieuHanh
         donViID={donViId}
@@ -374,14 +409,16 @@ const Dashboard = () => {
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
-  <BoChiTieuTuDongHoa
+      <BoChiTieuTuDongHoa
         donViID={donViId}
         boChiTieuID={37}
         ngayBaoCao={ngayBaoCao}
         fetchAt={fetchAt}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
       <BackTop>
         <UpCircleOutlined />

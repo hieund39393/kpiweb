@@ -48,7 +48,7 @@ background: unset !important;
 .header--logo img {
   width: 240px;
     height: 48px;
-  /* margin: 0 auto; */
+   margin-bottom: 40px;
 }
 
 .header--account {

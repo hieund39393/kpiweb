@@ -44,27 +44,33 @@
 // export default BoChiTieuThanhTraKiemTra;
 
 import { _STATUSCODE200 } from 'constant';
-import { _DONVITONGCONGTYID, _DONVITONGCONGTYIDSTRING, _LADONVI, _LATONGCONGTY } from 'constant/chart';
+import {
+  _DONVITONGCONGTYID,
+  _DONVITONGCONGTYIDSTRING,
+  _LADONVI,
+  _LATONGCONGTY,
+} from 'constant/chart';
 import { BoChiTieu } from 'modules/dashboard/dtos/responses/ChartResponse';
 import ChartService from 'modules/dashboard/services/ChartService';
 import { useEffect, useState } from 'react';
 import Charts from '../charts';
 
-const chartService = ChartService.instance()
+const chartService = ChartService.instance();
 
 function BoChiTieuThanhTraKiemTra(props) {
-  const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange } = props;
+  const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange, chiTieuId } = props;
   const [indicatorsLevel, setIndicatorsLevel] = useState<BoChiTieu[]>([]);
 
   const fetchIndicators = () => {
-    chartService.getIndicatorsLevel({ boChiTieuID: boChiTieuID, level: 1 })
+    chartService
+      .getIndicatorsLevel({ boChiTieuID: boChiTieuID, level: 1 })
       .then((response) => {
         if (response.data && response.statusCode === _STATUSCODE200)
           setIndicatorsLevel(response.data.chiTieus);
-        setIsChange(true)
+        setIsChange(true);
       })
-      .catch(() => { });
-  }
+      .catch(() => {});
+  };
 
   useEffect(() => {
     fetchIndicators();
@@ -74,7 +80,13 @@ function BoChiTieuThanhTraKiemTra(props) {
   return (
     <div
       // style={{ display: 'none' }} // tạm thời comment
-      id="boChiTieuThanhTraKiemTra" className={donViID === _DONVITONGCONGTYID || donViID === _DONVITONGCONGTYIDSTRING ? _LATONGCONGTY : _LADONVI}>
+      id="boChiTieuThanhTraKiemTra"
+      className={
+        donViID === _DONVITONGCONGTYID || donViID === _DONVITONGCONGTYIDSTRING
+          ? _LATONGCONGTY
+          : _LADONVI
+      }
+    >
       <div className="bct-data__title">
         <h3>Bộ chỉ tiêu thanh tra kiểm tra</h3>
       </div>
@@ -87,6 +99,7 @@ function BoChiTieuThanhTraKiemTra(props) {
         indicatorsLevel={indicatorsLevel}
         setIsChange={setIsChange}
         isChange={isChange}
+        chiTieuId={chiTieuId}
       />
     </div>
   );

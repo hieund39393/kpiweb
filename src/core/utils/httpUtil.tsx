@@ -14,8 +14,10 @@ const axioInstance = axios.create({
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
         // Request headers you wish to allow
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Authorization, Accept',
-        'Access-Control-Allow-Credentials': true
+        'Access-Control-Allow-Credentials': true,
         // 'Content-Type': 'application/json'
+        'ngrok-skip-browser-warning':true
+
     },
     maxContentLength: 2000,
     maxBodyLength: 2000

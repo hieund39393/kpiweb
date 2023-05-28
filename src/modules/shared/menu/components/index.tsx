@@ -247,6 +247,7 @@ const SideBar = () => {
 
             {menu.map(item => {
               if (item.children.length > 0) {
+
                 return (
                   <SubMenu
                     key={item.key}
@@ -368,12 +369,16 @@ const SideBar = () => {
               const asss = items;
 
               if (items.children.length > 0) {
-                return items.children.map((item, index) => (
-                  <Route path={item.path} key={index}>
-                    {item.component}
-                  </Route>
-                ));
+                return items.children.map(item => {
+                  if (item.path === undefined) return null;
+                  return (
+                    <Route path={item.path} key={item.key}>
+                      {item.component}
+                    </Route>
+                  )
+                });
               }
+              if (items.path === undefined) return null;
               return (
                 <Route path={items.path} key={items.key}>
                   {items.component}
