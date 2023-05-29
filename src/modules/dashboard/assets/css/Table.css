@@ -205,7 +205,7 @@
 }
 
 #dashboard .ant-table .ant-table-tbody tr td {
-  text-align: right;
+  /* text-align: right; */
 }
 
 #dashboard .range-charts .range-charts--item {

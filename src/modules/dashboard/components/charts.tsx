@@ -31,6 +31,7 @@ function Charts(props) {
     setIsChange,
     isChange,
     chiTieuId,
+    chiTieuChaId,
   } = props;
   const [arrTongHop, setArrTongHop] = useState<Array<[]>>([]);
   const [arrToanPhan, setArrToanPhan] = useState<Array<[]>>([]);
@@ -47,9 +48,10 @@ function Charts(props) {
   //data
   const [dataChartLevel2, setDataChartLevel2] = useState<Array<any>>([]);
 
-  const fetchDataChartLevel2 = (chiTieu) => {
+  const fetchDataChartLevel2 = (chiTieu, chiTieuId) => {
     const request = {
       chiTieuID: chiTieu.id,
+      chiTieuConId: chiTieuId,
       donViID: donViID,
       ngayBaoCao: ngayBaoCao,
       pageIndex: _PAGEINDEX,
@@ -79,8 +81,8 @@ function Charts(props) {
     indicatorsLevel &&
       Promise.all(
         indicatorsLevel.map((element) => {
-          if (element.id === chiTieuId) {
-            return fetchDataChartLevel2(element);
+          if (element.id === chiTieuChaId) {
+            return fetchDataChartLevel2(element, chiTieuId);
           }
         })
       ).then((data: any) => {

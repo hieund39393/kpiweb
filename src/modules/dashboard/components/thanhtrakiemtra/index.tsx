@@ -58,7 +58,7 @@ import Charts from '../charts';
 const chartService = ChartService.instance();
 
 function BoChiTieuThanhTraKiemTra(props) {
-  const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange, chiTieuId } = props;
+  const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange, chiTieuId, chiTieuChaId } = props;
   const [indicatorsLevel, setIndicatorsLevel] = useState<BoChiTieu[]>([]);
 
   const fetchIndicators = () => {
@@ -100,6 +100,7 @@ function BoChiTieuThanhTraKiemTra(props) {
         setIsChange={setIsChange}
         isChange={isChange}
         chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
       />
     </div>
   );

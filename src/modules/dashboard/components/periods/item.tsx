@@ -1002,7 +1002,7 @@ function PeriodsItem(props) {
       } else {
         return (
           <div className={`page-indicators-cong-suat  ${titleCase(parentTitle) === _CONGSUAT ? 'congsuat-linebar' : ''}`} >
-            <div className="cong-suat-content">l
+            <div className="cong-suat-content">
               <div className="cong-suat-content--left" >
                 {
                   configs.map((el, index) => {
