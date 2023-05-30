@@ -103,10 +103,11 @@
 
 
 #bangChiTiet .ant-table-thead tr th{
-  background: none;
-  font-weight: 600;
+  background: rgb(131 163 221 / 50%);
+  font-weight: 700;
   border: 1px solid  rgba(65, 94, 158, 0.5);
   color: #000;
+  text-align: center !important;
 }
 
 .view-chart:hover {
@@ -121,4 +122,8 @@
 
 .bct-data__charts{
   background-color: #f0f2f5 !important;
+}
+
+#form-get-datas label{
+  padding-top: 10px;
 }

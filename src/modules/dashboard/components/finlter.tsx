@@ -34,7 +34,7 @@ const localStorageService = LocalStorageService.instance();
 const { Option } = Select;
 
 const Filter = (props) => {
-  const { setInput, ids, getBangBaoCaoChiTieu3 } = props;
+  const { setInput, ids } = props;
   const location = useLocation();
   const { chiTieuId, chiTieuChaId } = location.state || {};
 
@@ -88,15 +88,11 @@ const Filter = (props) => {
           initialValues={{
             ngayBaoCao: moment(convertDate, _DAYFORMAT),
             donViID: { label: user.tenDonVi, value: user.donViID },
+            tanSuat: 'm',
           }}
           onFinish={filterChart}
         >
           <Row className="filter">
-            <Col span={24} sm={24} xl={1} xxl={1} className="row-padding">
-              <span className="filter__title">
-                <strong>Dashboard</strong>
-              </span>
-            </Col>
             <Col span={24} sm={24} xl={8} className="row-padding donViRow">
               <Form.Item name="donViID" label="Đơn vị">
                 <Select
@@ -206,11 +202,6 @@ const Filter = (props) => {
   const renderMobileFilterHeader = (
     <>
       <Row className="box-dashboard">
-        <Col span={12} sm={19} xl={5} className="row-padding dashboard-title">
-          <span className="filter__title">
-            <strong>Dashboard</strong>
-          </span>
-        </Col>
         <Col span={12} sm={19} xl={5} className="row-padding mobile-toggle-filter-button">
           <InsertRowAboveOutlined />
         </Col>
@@ -281,9 +272,9 @@ const Filter = (props) => {
                   >
                     <DatePicker
                       placeholder="Chọn ngày"
-                      locale={locale}
-                      format={_DAYFORMAT}
-                      disabledDate={disabledDateCurrent}
+                      // locale={locale}
+                      // format={_DAYFORMAT}
+                      // disabledDate={disabledDateCurrent}
                     />
                   </Form.Item>
                 </div>
@@ -339,25 +330,11 @@ const Filter = (props) => {
   const [isChange, setIsChange] = useState(false);
   // Filter data
   function filterChart(values) {
-    const nBC = moment(values.ngayBaoCao, _DAYFORMAT);
+    console.log('value:' + JSON.stringify(values));
 
-    console.log('valuess:' + nBC);
+    const ngayBC = moment(values.ngayBaoCao, _DAYFORMAT).format(_DAYFORMAT);
 
-    // const convert = new Date(values.ngayBaoCao);
-    // const convertDate = convert.getDate();
-    // const convertMonth = convert.getMonth() + 1;
-    // const convertYear = convert.getFullYear();
-
-    // const donViID = Number(values.donViID) ? values.donViID : values.donViID.value;
-
-    // values.ngayBaoCao =
-    //   convertYear + '-' + formatDate(convertMonth) + '-' + formatDate(convertDate);
-    // setNgayBaoCao(values.ngayBaoCao);
-    // setDonViId(donViID);
-    // setFetchAt(Date.now());
-    // setIsChange(true);
-
-    // setInput(values.ngayBaoCao, values.tuanSuat);
+    setInput({ ngayBaoCao: ngayBC, tanSuat: values.tanSuat });
   }
 
   return <div>{width > 576 ? renderFilter : renderMobileFilter}</div>;

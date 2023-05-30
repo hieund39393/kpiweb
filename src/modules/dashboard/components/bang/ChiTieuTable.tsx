@@ -42,16 +42,8 @@ const ChiTieuTable = ({ history }) => {
 
   const [data, setData] = useState<DataType[]>([]);
 
-  const now = new Date();
-  const optionsDate = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  } as Intl.DateTimeFormatOptions;
-  const formattedDate: string = now.toLocaleDateString('en-US', optionsDate);
-
   const [inputValue, setInputValue] = useState<InputValue>({
-    ngayBaoCao: formattedDate,
+    ngayBaoCao: '',
     tanSuat: 'm',
   });
 
@@ -194,18 +186,6 @@ const ChiTieuTable = ({ history }) => {
     setData(res);
   };
 
-  const getBangBaoCaoChiTieu3 = async (id, ngayBC, tanSuat) => {
-    let ids = id;
-    if (value.startsWith('0')) {
-      ids = chiTieu.filter((x) => !x.value.startsWith('0')).map((item) => parseInt(item.value));
-    }
-    const res = await httpService.get(
-      BANG_BAO_CAO_CHI_TIEU + `?ids=${ids}&ngayBaoCao=${ngayBC}&tanSuat=${tanSuat}`,
-      null
-    );
-    setData(res);
-  };
-
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
     history.push('/dashboard', { chiTieuId: chiTieuId, chiTieuChaId: chiTieuChaId });
   };
@@ -214,7 +194,7 @@ const ChiTieuTable = ({ history }) => {
 
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
-      <Filter setInput={setInputValue} ids={value} get getLevel3={getBangBaoCaoChiTieu3} />
+      <Filter setInput={setInputValue} ids={value} />
       <div id="bangChiTiet" style={{ width: '100%' }}>
         <Select
           style={{
