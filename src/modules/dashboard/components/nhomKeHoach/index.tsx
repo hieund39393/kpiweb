@@ -35,12 +35,11 @@ const NhomKeHoach = ({ history }) => {
 
   return (
     <div id="nhomKeHoach" style={{ marginLeft: 290, width: '100%' }}>
-      <div className="bct-data__title">
-        <h1 style={{ color: 'white' }}>Nhóm chỉ tiêu kế hoạch</h1>
+      <div className="bct-data__title1">
+        <h1 style={{ color: 'white', fontSize: 20, alignItems:'center' }}>NHÓM CHỈ TIÊU KẾ HOẠCH</h1>
       </div>
 
       <div>
-        <br />
         {menuCon.map((item: MenuCon, index: number) => {
           return (
             <div key={index}>

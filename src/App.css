@@ -116,8 +116,19 @@
 
 }
 
+.bct-data__title1{
+  padding-left: 30px !important;
+  width: 100%;
+  height: 64px;
+  background: #22438E;
+  border-radius: 8px 8px 0px 0px;
+  color: #FFFFFF;
+  display: flex; 
+  align-items: center;
+}
+
 .bct-data__title{
-  display: none;
+  display: none !important;
 }
 
 .bct-data__charts{

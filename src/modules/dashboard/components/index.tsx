@@ -184,7 +184,7 @@ const Dashboard = () => {
 
       <BoChiTieuThanhTraKiemTra
         donViID={donViId}
-        boChiTieuID={34}
+        boChiTieuID={47}
         ngayBaoCao={ngayBaoCao}
         fetchAt={fetchAt}
         setIsChange={setIsChange}

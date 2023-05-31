@@ -6,18 +6,6 @@ import moment from 'moment';
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
 
-import BoChiTieuKyThuat from '../components/skills/index';
-import BoChiTieuKinhDoanh from '../components/business/index';
-import BoChiTieuDauTuXayDung from '../components/construct/index';
-import BoChiTieuSuaChua from '../components/repair/index';
-import BoChiTieuQuanTri from '../components/quantri/index';
-import BoChiTieuTaiChinh from '../components/taichinh/index';
-import BoChiTieuAnToan from '../components/antoan/index';
-import BoChiTieuChuyenDoiSo from '../components/chuyendoiso/index';
-import BoChiTieuThanhTraKiemTra from '../components/thanhtrakiemtra/index';
-import BoChiTieuBaoCaoDieuHanh from '../components/baocaodieuhanh/index';
-import BoChiTieuTuDongHoa from '../components/tudonghoa/index';
-
 import { DonVi } from 'modules/dashboard/dtos/responses/ChartResponse';
 
 import DonViService from 'modules/admin/department/services/DonViService';
