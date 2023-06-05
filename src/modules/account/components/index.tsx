@@ -1,5 +1,6 @@
 import { Form, Input, Button, Checkbox, notification, Image } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { useEffect, useRef, useState } from 'react';
 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -18,15 +19,15 @@ const localStorageService = LocalStorageService.instance();
 
 const DangNhap = () => {
   const [form] = Form.useForm();
-  const history = useHistory();
+  const navigate = useNavigate();
+
   const inputRef = useRef<typeof Input>(null);
 
   const [visibleForgot, setVisibleForgot] = useState(false);
-  const [enterPass, setEnterPass] = useState(false)
+  const [enterPass, setEnterPass] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(() => {
     return localStorageService.getRememberMe() === 'true' ? true : false;
   });
-
 
   const userInit = () => {
     if (localStorageService.getRememberMe() === 'true') {
@@ -40,14 +41,17 @@ const DangNhap = () => {
 
   function enterPassword() {
     setEnterPass(true);
-    setIsRememberMe(false)
+    setIsRememberMe(false);
   }
 
   const submitHandler = async (values) => {
-    var md5 = require("md5");
+    var md5 = require('md5');
     const data = {
       ...values,
-      matKhau: localStorageService.getRememberMe() === 'true' && isRememberMe && !enterPass ? values.matKhau : md5(values.matKhau)
+      matKhau:
+        localStorageService.getRememberMe() === 'true' && isRememberMe && !enterPass
+          ? values.matKhau
+          : md5(values.matKhau),
     };
 
     // Đăng nhập: call service
@@ -67,7 +71,7 @@ const DangNhap = () => {
       if (isRememberMe)
         SessionService.setUser({ userName: data.tenDangNhap, password: data.matKhau });
 
-      history.push('/dashboard');
+      navigate('/dashboard');
     } else {
       const args = {
         message: 'Đăng nhập thất bại',

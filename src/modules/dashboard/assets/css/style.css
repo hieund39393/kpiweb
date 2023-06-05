@@ -135,7 +135,7 @@
 }
 
 .bct-data__charts {
-  min-height: 44px;
+  min-height: unset;
   background-color: #f0f2f5;
 }
 

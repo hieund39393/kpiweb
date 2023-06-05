@@ -1,22 +1,20 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Form, Select, DatePicker, Button, Col, Row, Breadcrumb, BackTop, Collapse } from 'antd';
-import { UpCircleOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react';
+import { Form, Col, Row, BackTop } from 'antd';
+import { UpCircleOutlined } from '@ant-design/icons';
 
-import moment from 'moment';
 import 'moment/locale/vi';
-import locale from 'antd/es/date-picker/locale/vi_VN';
 
-import BoChiTieuKyThuat from '../components/skills/index';
-import BoChiTieuKinhDoanh from '../components/business/index';
-import BoChiTieuDauTuXayDung from '../components/construct/index';
-import BoChiTieuSuaChua from '../components/repair/index';
-import BoChiTieuQuanTri from '../components/quantri/index';
-import BoChiTieuTaiChinh from '../components/taichinh/index';
-import BoChiTieuAnToan from '../components/antoan/index';
-import BoChiTieuChuyenDoiSo from '../components/chuyendoiso/index';
-import BoChiTieuThanhTraKiemTra from '../components/thanhtrakiemtra/index';
-import BoChiTieuBaoCaoDieuHanh from '../components/baocaodieuhanh/index';
-import BoChiTieuTuDongHoa from '../components/tudonghoa/index';
+import BoChiTieuKyThuat from '../../components/skills/index';
+import BoChiTieuKinhDoanh from '../../components/business/index';
+import BoChiTieuDauTuXayDung from '../../components/construct/index';
+import BoChiTieuSuaChua from '../../components/repair/index';
+import BoChiTieuQuanTri from '../../components/quantri/index';
+import BoChiTieuTaiChinh from '../../components/taichinh/index';
+import BoChiTieuAnToan from '../../components/antoan/index';
+import BoChiTieuChuyenDoiSo from '../../components/chuyendoiso/index';
+import BoChiTieuThanhTraKiemTra from '../../components/thanhtrakiemtra/index';
+import BoChiTieuBaoCaoDieuHanh from '../../components/baocaodieuhanh/index';
+import BoChiTieuTuDongHoa from '../../components/tudonghoa/index';
 
 import { DonVi } from 'modules/dashboard/dtos/responses/ChartResponse';
 
@@ -24,18 +22,18 @@ import DonViService from 'modules/admin/department/services/DonViService';
 import LocalStorageService from 'core/infrastructure/services/localStorageService';
 import { _DAYFORMAT, _FALSE, _KHONGCODULIEUSELECT, _TRUE, _TRUESTRING } from 'constant';
 
-import '../assets/css/style.css';
-import { disabledDateCurrent, formatDate, getInYesterday } from 'core/utils/utility';
+import { getInYesterday } from 'core/utils/utility';
 import { useLocation } from 'react-router-dom';
-import Filter from './finlter';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+
 
 const donViService = DonViService.instance();
 const localStorageService = LocalStorageService.instance();
 
-const { Option } = Select;
 
-const Dashboard = () => {
-  console.log('OKKKKK');
+const BieuDo = () => {
+  const navigate = useNavigate();
 
   const location = useLocation();
   const { chiTieuId, chiTieuChaId } = location.state || {};
@@ -55,9 +53,6 @@ const Dashboard = () => {
     else setDataDonVi([]);
   }
 
-  const date = getInYesterday();
-  const convertDate = date.split('-').reverse().join('/');
-
   useEffect(() => {
     fetchDonVi();
   }, []);
@@ -72,31 +67,21 @@ const Dashboard = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [width]);
 
-  const [fixedForm, setFixedForm] = useState('notFixedForm');
-
-  const { Panel } = Collapse;
-
   const [isChange, setIsChange] = useState(false);
-  // Filter data
-  function filterChart(values) {
-    const convert = new Date(values.ngayBaoCao);
-    const convertDate = convert.getDate();
-    const convertMonth = convert.getMonth() + 1;
-    const convertYear = convert.getFullYear();
 
-    const donViID = Number(values.donViID) ? values.donViID : values.donViID.value;
-
-    values.ngayBaoCao =
-      convertYear + '-' + formatDate(convertMonth) + '-' + formatDate(convertDate);
-    setNgayBaoCao(values.ngayBaoCao);
-    setDonViId(donViID);
-    setFetchAt(Date.now());
-    setIsChange(true);
-  }
+  const goBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
-      <Filter />
+      <>
+        <Row gutter={24}>
+          <Col span={12} style={{ color: 'blue', fontSize: 25 }}>
+            <ArrowLeftOutlined onClick={goBack} />
+          </Col>
+        </Row>
+      </>
 
       <BoChiTieuKyThuat
         donViID={donViId}
@@ -220,4 +205,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default BieuDo;

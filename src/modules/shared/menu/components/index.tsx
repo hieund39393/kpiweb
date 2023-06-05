@@ -1,22 +1,31 @@
 import { useEffect, useMemo, useState } from 'react';
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import { Layout, Menu, Button, Tooltip, Drawer } from 'antd';
 import { DoubleLeftOutlined, DoubleRightOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import '../../menu/menu.css';
 import { ChucNangItem, MenuItem } from '../model';
 import { routes } from '../routes';
-import BoChiTieuMenu from './kpi'
+import BoChiTieuMenu from './kpi';
 import { isTablet } from 'react-device-detect';
 
 import LocalStorageService from '../../../../core/infrastructure/services/localStorageService';
 import { _BCT, _BCTKT } from 'constant/chart';
 import {
-  _BAOCAO, _BOCHITIEUKINHDOANH, _BOCHITIEUKYTHUAT, _BOCHITIEUSUACHUA, _BOCHITIEUXAYDUNG,
-  _BOCHITIEUQUANTRI, _BOCHITIEUTAICHINH, _BOCHITIEUANTOAN, _BOCHITIEUCHUYENDOISO,
-  _BOCHITIEUTHANHTRAKIEMTRA, _BOCHITIEUBAOCAODIEUHANH, _BOCHITIEUTUDONGHOA,
-
-  _THEOCHITIEU, _THEODONVI
+  _BAOCAO,
+  _BOCHITIEUKINHDOANH,
+  _BOCHITIEUKYTHUAT,
+  _BOCHITIEUSUACHUA,
+  _BOCHITIEUXAYDUNG,
+  _BOCHITIEUQUANTRI,
+  _BOCHITIEUTAICHINH,
+  _BOCHITIEUANTOAN,
+  _BOCHITIEUCHUYENDOISO,
+  _BOCHITIEUTHANHTRAKIEMTRA,
+  _BOCHITIEUBAOCAODIEUHANH,
+  _BOCHITIEUTUDONGHOA,
+  _THEOCHITIEU,
+  _THEODONVI,
 } from 'constant/menu';
 
 const localStorageService = LocalStorageService.instance();
@@ -29,7 +38,7 @@ const SideBar = () => {
   const [defaultOpenKeys] = useState(setOpenKeyHandler());
   const [defaultSelectedKeys, setSelectedKeys] = useState(setSelectedKeyHandler());
   const [collapsed, setCollapsed] = useState(false);
-  const [fixContent, setFixContent] = useState('opened-menu')
+  const [fixContent, setFixContent] = useState('opened-menu');
   function fetchMenu() {
     const sessionMenu = localStorageService.getMenu();
     var menuData = { chucNangs: [] };
@@ -44,23 +53,22 @@ const SideBar = () => {
   function findDevice() {
     if (isTablet) {
       if (window.innerWidth <= 991) {
-        setCollapsed(false)
+        setCollapsed(false);
       } else if (window.innerWidth > 991 && window.innerWidth <= 1024) {
-        setCollapsed(true)
-      } else setCollapsed(false)
+        setCollapsed(true);
+      } else setCollapsed(false);
     } else if (window.innerWidth >= 1025 && window.innerWidth <= 1366) {
-      setFixContent('closed-menu')
-      setCollapsed(true)
-    }
-    else setCollapsed(false)
+      setFixContent('closed-menu');
+      setCollapsed(true);
+    } else setCollapsed(false);
   }
 
   useEffect(() => {
-    findDevice()
-  }, [])
+    findDevice();
+  }, []);
 
   function setOpenKeyHandler() {
-    let openKey = _BCT
+    let openKey = _BCT;
 
     menu.forEach((item) => {
       if (item.children.length > 0) {
@@ -98,15 +106,13 @@ const SideBar = () => {
     var menuItems: MenuItem[] = [];
 
     // Danh sách chức năng cha
-    const chucNangItems = chucNangs.filter(e => e.chucNangChaID === null && e.chiTieuID === 0);
-    const chiTieus = chucNangs.filter(e => e.chiTieuID > 0);
+    const chucNangItems = chucNangs.filter((e) => e.chucNangChaID === null && e.chiTieuID === 0);
+    const chiTieus = chucNangs.filter((e) => e.chiTieuID > 0);
     // console.log(chiTieus)
     // console.log(chucNangItems)
     // Menu cấp 1
     chucNangItems.forEach((cn) => {
-
       const route = routes.filter((o) => o.id === cn.chucNangID);
-
       if (route.length > 0) {
         let menuItem: MenuItem = {
           key: route[0].key,
@@ -118,34 +124,34 @@ const SideBar = () => {
           enableShow: false,
           chucNangID: cn.chucNangID,
           chiTieuID: 0,
-          rootID: 0
+          rootID: 0,
         };
 
         let children = chucNangs.filter((e) => e.chucNangChaID === cn.chucNangID);
-        children.forEach(child => {
+        children.forEach((child) => {
           // console.log(child)
           let childRoute = routes.filter((o) => o.id === child.chucNangID);
           let chiTieuss = chiTieus.filter((e) => e.chucNangChaID === child.chucNangID);
 
           if (childRoute != null) {
-            let chiTieusItems: Array<MenuItem> = []
+            let chiTieusItems: Array<MenuItem> = [];
 
-            chiTieuss.forEach(chiTieu => {
+            chiTieuss.forEach((chiTieu) => {
               let chiTieuItem: MenuItem = {
                 key: `CT_${chiTieu.chiTieuID}`,
                 title: chiTieu.tenChucNang,
-                path: "",
+                path: '',
                 icon: null,
                 component: null,
                 children: [],
                 enableShow: false,
                 chucNangID: chiTieu.chucNangID,
                 chiTieuID: chiTieu.chiTieuID,
-                rootID: chiTieu.rootID
+                rootID: chiTieu.rootID,
               };
 
               chiTieusItems.push(chiTieuItem);
-            })
+            });
             let childItem: MenuItem = {
               key: childRoute[0]?.key,
               title: child.tenChucNang,
@@ -156,7 +162,7 @@ const SideBar = () => {
               enableShow: false,
               chucNangID: child.chucNangID,
               chiTieuID: child.chiTieuID,
-              rootID: child.rootID
+              rootID: child.rootID,
             };
             menuItem.children.push(childItem);
           }
@@ -168,33 +174,42 @@ const SideBar = () => {
     return menuItems;
   }
 
-
   // Xử lý colspan
   const openMenu = () => {
     setCollapsed(true);
-    setFixContent('closed-menu')
+    setFixContent('closed-menu');
   };
 
   const closeMenu = () => {
     setCollapsed(false);
-    setFixContent('opened-menu')
+    setFixContent('opened-menu');
   };
 
-  const [name, setName] = useState('')
+  const [name, setName] = useState('');
 
   // eslint-disable-next-line
   const menuItemCickHandler = (e) => {
     setSelectedKeys(e.key);
     window.scrollTo(0, 0);
 
-    if (e.key === _BOCHITIEUKYTHUAT || e.key === _BOCHITIEUKINHDOANH || e.key === _BOCHITIEUXAYDUNG
-      || e.key === _BOCHITIEUSUACHUA || e.key === _BOCHITIEUQUANTRI ||
-      e.key === _BOCHITIEUTAICHINH || e.key === _BOCHITIEUANTOAN || e.key === _BOCHITIEUCHUYENDOISO
-      || e.Key === _BOCHITIEUTHANHTRAKIEMTRA || e.Key === _BOCHITIEUBAOCAODIEUHANH
-      || e.Key === _BOCHITIEUTUDONGHOA
-      || e.key === _THEODONVI || e.key === _THEOCHITIEU || e.key === _BAOCAO) {
-      setName('layout-dashboard')
-    } else setName('layout-content')
+    if (
+      e.key === _BOCHITIEUKYTHUAT ||
+      e.key === _BOCHITIEUKINHDOANH ||
+      e.key === _BOCHITIEUXAYDUNG ||
+      e.key === _BOCHITIEUSUACHUA ||
+      e.key === _BOCHITIEUQUANTRI ||
+      e.key === _BOCHITIEUTAICHINH ||
+      e.key === _BOCHITIEUANTOAN ||
+      e.key === _BOCHITIEUCHUYENDOISO ||
+      e.Key === _BOCHITIEUTHANHTRAKIEMTRA ||
+      e.Key === _BOCHITIEUBAOCAODIEUHANH ||
+      e.Key === _BOCHITIEUTUDONGHOA ||
+      e.key === _THEODONVI ||
+      e.key === _THEOCHITIEU ||
+      e.key === _BAOCAO
+    ) {
+      setName('layout-dashboard');
+    } else setName('layout-content');
   };
 
   const [visible, setVisible] = useState(false);
@@ -205,13 +220,20 @@ const SideBar = () => {
     setVisible(false);
   };
 
-  const [classMenu, setClassMenu] = useState('fixed-100')
+  const [classMenu, setClassMenu] = useState('fixed-100');
 
   // Render menu
   const renderMenu = useMemo(
     () => {
       return (
-        <Sider width={300} id="side-bar" className={classMenu} trigger={null} collapsible collapsed={collapsed}>
+        <Sider
+          width={300}
+          id="side-bar"
+          className={classMenu}
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+        >
           <Menu
             mode="inline"
             className="side-bar--menu"
@@ -245,9 +267,8 @@ const SideBar = () => {
               ''
             )}
 
-            {menu.map(item => {
+            {menu.map((item) => {
               if (item.children.length > 0) {
-
                 return (
                   <SubMenu
                     key={item.key}
@@ -260,51 +281,66 @@ const SideBar = () => {
                       </>
                     }
                   >
-                    {
-                      item.children.map(child => {
-                        if (child.key === _BOCHITIEUKYTHUAT || child.key === _BOCHITIEUKINHDOANH
-                          || child.key === _BOCHITIEUXAYDUNG || child.key === _BOCHITIEUSUACHUA
-                          || child.key === _BOCHITIEUQUANTRI || child.key === _BOCHITIEUTAICHINH
-                          || child.key === _BOCHITIEUANTOAN || child.key === _BOCHITIEUCHUYENDOISO
-                          || child.key === _BOCHITIEUTHANHTRAKIEMTRA || child.key === _BOCHITIEUBAOCAODIEUHANH
-                          || child.key === _BOCHITIEUTUDONGHOA
-                        ) {
-                          let href = '#' + child.key;
-                          let chiTieus = child.children.sort((a, b) => (a.rootID > b.rootID) ? 1 : -1);
+                    {item.children.map((child) => {
+                      if (
+                        child.key === _BOCHITIEUKYTHUAT ||
+                        child.key === _BOCHITIEUKINHDOANH ||
+                        child.key === _BOCHITIEUXAYDUNG ||
+                        child.key === _BOCHITIEUSUACHUA ||
+                        child.key === _BOCHITIEUQUANTRI ||
+                        child.key === _BOCHITIEUTAICHINH ||
+                        child.key === _BOCHITIEUANTOAN ||
+                        child.key === _BOCHITIEUCHUYENDOISO ||
+                        child.key === _BOCHITIEUTHANHTRAKIEMTRA ||
+                        child.key === _BOCHITIEUBAOCAODIEUHANH ||
+                        child.key === _BOCHITIEUTUDONGHOA
+                      ) {
+                        let href = '#' + child.key;
+                        let chiTieus = child.children.sort((a, b) =>
+                          a.rootID > b.rootID ? 1 : -1
+                        );
 
-                          if (chiTieus.length === 0) {
-                            return (
-                              <Menu.Item key={child.key} icon={child.icon} className="menu-item-lv2">
-                                <BoChiTieuMenu href={href} title={child.title} chiTieus={chiTieus} />
-                              </Menu.Item>
-                            )
-                          }
-                          else {
-                            return (
-                              <SubMenu key={child.key} icon={child.icon} title={child.title} className="submenu-item-lv2">
-                                {
-                                  chiTieus.map(e => {
-                                    let chiTieuHref = '#' + e.key;
-                                    return (
-                                      <Menu.Item key={e.key} className="menu-lv3">
-                                        <BoChiTieuMenu href={chiTieuHref} title={e.title} chiTieus={[]} />
-                                      </Menu.Item>
-                                    )
-                                  })
-                                }
-                              </SubMenu>
-                            )
-                          }
-                        }
-                        else {
+                        if (chiTieus.length === 0) {
                           return (
-                            <Menu.Item key={child.key} icon={child.icon} onClick={menuItemCickHandler}>
-                              <Link to={child.path}>{child.title}</Link>
+                            <Menu.Item key={child.key} icon={child.icon} className="menu-item-lv2">
+                              <BoChiTieuMenu href={href} title={child.title} chiTieus={chiTieus} />
                             </Menu.Item>
                           );
+                        } else {
+                          return (
+                            <SubMenu
+                              key={child.key}
+                              icon={child.icon}
+                              title={child.title}
+                              className="submenu-item-lv2"
+                            >
+                              {chiTieus.map((e) => {
+                                let chiTieuHref = '#' + e.key;
+                                return (
+                                  <Menu.Item key={e.key} className="menu-lv3">
+                                    <BoChiTieuMenu
+                                      href={chiTieuHref}
+                                      title={e.title}
+                                      chiTieus={[]}
+                                    />
+                                  </Menu.Item>
+                                );
+                              })}
+                            </SubMenu>
+                          );
                         }
-                      })
-                    }
+                      } else {
+                        return (
+                          <Menu.Item
+                            key={child.key}
+                            icon={child.icon}
+                            onClick={menuItemCickHandler}
+                          >
+                            <Link to={child.path}>{child.title}</Link>
+                          </Menu.Item>
+                        );
+                      }
+                    })}
                   </SubMenu>
                 );
               }
@@ -321,7 +357,7 @@ const SideBar = () => {
             })}
           </Menu>
         </Sider>
-      )
+      );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [collapsed, defaultSelectedKeys, defaultOpenKeys, menuItemCickHandler, menu]
@@ -329,9 +365,8 @@ const SideBar = () => {
 
   const menuResponsive = useMemo(() => {
     const changeBackground = () => {
-      if (window.scrollY >= 80) setClassMenu('fixed-0')
-      else setClassMenu('fixed-unset')
-
+      if (window.scrollY >= 80) setClassMenu('fixed-0');
+      else setClassMenu('fixed-unset');
     };
     window.addEventListener('scroll', changeBackground);
 
@@ -355,41 +390,7 @@ const SideBar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, collapsed, name, classMenu]);
 
-  return (
-    <Router>
-      <Layout className={name + ' ' + fixContent}>
-        {menuResponsive}
-        {/* Menu component */}
-        <Content
-          className="layout-content-container"
-        >
-          <Switch>
-            {menu.map(items => {
-
-              const asss = items;
-
-              if (items.children.length > 0) {
-                return items.children.map(item => {
-                  if (item.path === undefined) return null;
-                  return (
-                    <Route path={item.path} key={item.key}>
-                      {item.component}
-                    </Route>
-                  )
-                });
-              }
-              if (items.path === undefined) return null;
-              return (
-                <Route path={items.path} key={items.key}>
-                  {items.component}
-                </Route>
-              );
-            })}
-          </Switch>
-        </Content>
-      </Layout>
-    </Router>
-  );
+  return <>{menuResponsive}</>;
 };
 
 export default SideBar;

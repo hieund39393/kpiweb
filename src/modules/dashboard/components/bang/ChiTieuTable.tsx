@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { withRouter, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
 import { BANG_BAO_CAO_CHI_TIEU } from 'modules/shared/menu/routes';
@@ -36,7 +36,8 @@ interface InputValue {
   tanSuat: string;
 }
 
-const ChiTieuTable = ({ history }) => {
+const ChiTieuTable = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { chiTieu, value } = location.state;
 
@@ -187,10 +188,8 @@ const ChiTieuTable = ({ history }) => {
   };
 
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
-    history.push('/dashboard', { chiTieuId: chiTieuId, chiTieuChaId: chiTieuChaId });
+    navigate('/bieu-do', { state: { chiTieuId, chiTieuChaId } });
   };
-
-  console.log('inputValue' + inputValue);
 
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
@@ -210,11 +209,11 @@ const ChiTieuTable = ({ history }) => {
           }))}
         />
         <div style={{ margin: 10 }}>
-          <Table columns={columns} dataSource={data} />;
+          <Table columns={columns} dataSource={data.map((item) => ({ ...item, key: item.id }))} />
         </div>
       </div>
     </div>
   );
 };
 
-export default withRouter(ChiTieuTable);
+export default ChiTieuTable;

@@ -11,7 +11,6 @@ const localStorageService = (function () {
 
   function _setUser(user) {
 
-    console.log("localST: ", user)
 
     localStorage.setItem(`access_token`, user.token);
     localStorage.setItem(`userID`, user.userID);

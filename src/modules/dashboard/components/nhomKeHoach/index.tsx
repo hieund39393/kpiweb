@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
@@ -13,7 +13,8 @@ interface MenuCon {
   listChucNangChiTieu: MenuItem[];
 }
 
-const NhomKeHoach = ({ history }) => {
+const NhomKeHoach = () => {
+  const navigate = useNavigate();
   const [menuCon, setMenuCon] = useState<MenuCon[]>([]);
   const [chiTieu, setChiTieu] = useState<MenuItem[]>([]);
 
@@ -27,16 +28,18 @@ const NhomKeHoach = ({ history }) => {
   }, []);
 
   const handleChange = (value: string, index) => {
-    console.log('!');
     const selectedArray = menuCon[index];
-
-    history.push('/bang-chi-tiet', { chiTieu: selectedArray.listChucNangChiTieu, value: value });
+    navigate('/bang-chi-tiet', {
+      state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+    });
   };
 
   return (
     <div id="nhomKeHoach" style={{ marginLeft: 290, width: '100%' }}>
       <div className="bct-data__title1">
-        <h1 style={{ color: 'white', fontSize: 20, alignItems:'center' }}>NHÓM CHỈ TIÊU KẾ HOẠCH</h1>
+        <h1 style={{ color: 'white', fontSize: 20, alignItems: 'center' }}>
+          NHÓM CHỈ TIÊU KẾ HOẠCH
+        </h1>
       </div>
 
       <div>
@@ -65,4 +68,4 @@ const NhomKeHoach = ({ history }) => {
   );
 };
 
-export default withRouter(NhomKeHoach);
+export default NhomKeHoach;

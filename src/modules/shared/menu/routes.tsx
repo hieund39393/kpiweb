@@ -19,6 +19,7 @@ import BaoCaoTheoChiTieu from '../../report/components/indicators';
 import BaoCaoTheoDonVi from '../../report/components/deparment';
 import NhomKeHoach from 'modules/dashboard/components/nhomKeHoach';
 import ChiTieuTable from 'modules/dashboard/components/bang/ChiTieuTable';
+import BieuDoChart from 'modules/dashboard/components/bieudo';
 
 import Dashboard from 'modules/dashboard/components/index';
 import CauHinhBieuDo from '../../admin/configCharts/components';
@@ -39,71 +40,6 @@ export const routes = [
     icon: <HomeFilled />,
     component: <Dashboard />,
   },
-  {
-    key: 'boChiTieuKyThuat',
-    id: 2,
-    icon: '',
-    title: 'Kỹ thuật',
-    path: '/dashboard',
-    component: <Dashboard />,
-  },
-  {
-    key: 'boChiTieuKinhDoanh',
-    id: 3,
-    icon: '',
-    title: 'Kinh doanh',
-    path: '#',
-  },
-  // {
-  //   key: 'boChiTieuXayDung',
-  //   id: 4,
-  //   icon: '',
-  //   title: 'Đầu tư xây dựng',
-  //   path: '#',
-  // },
-  // {
-  //   key: 'boChiTieuSuaChua',
-  //   id: 5,
-  //   icon: '',
-  //   title: 'Sửa chữa lớn',
-  //   path: '#',
-  // },
-  // {
-  //   key: 'boChiTieuQuanTri',
-  //   id: 29,
-  //   icon: '',
-  //   title: 'Quản Trị',
-  //   path: '#',
-  // },
-  // {
-  //   key: 'boChiTieuTaiChinh',
-  //   id: 31,
-  //   icon: '',
-  //   title: 'Tài chính',
-  //   path: '#',
-  // },
-  // {
-  //   key: 'boChiTieuAnToan',
-  //   id: 32,
-  //   icon: '',
-  //   title: 'An Toàn',
-  //   path: '#',
-  // },
-  // {
-  //   key: 'boChiTieuChuyenDoiSo',
-  //   id: 33,
-  //   icon: '',
-  //   title: 'Chuyển đổi số',
-  //   path: '#',
-  // },
-  // {
-  //   key: 'boChiTieuThanhTraKiemTra',
-  //   id: 35,
-  //   icon: '',
-  //   title: 'Thanh Tra Kiểm Tra',
-  //   path: '#',
-  // },
-
   {
     key: 'nhomChiTieuQuanLy',
     id: 44,
@@ -216,7 +152,7 @@ export const routes = [
     title: 'Cấu hình',
     path: '/admin/cai-dat-chung',
     icon: <SettingFilled />,
-    component: <CauHinhChung />
+    component: <CauHinhChung />,
   },
   {
     key: 'danhMucChiTieu',
@@ -240,7 +176,7 @@ export const routes = [
     title: 'Cấu hình đồng bộ',
     path: '/cau-hinh-dong-bo',
     icon: '',
-    component: <CauHinhDongBo />
+    component: <CauHinhDongBo />,
   },
   {
     key: 'chinhSach',
@@ -274,9 +210,16 @@ export const routes = [
     path: '/bang-chi-tiet',
     title: '',
     component: <ChiTieuTable />,
-  }
+  },
+  {
+    key: 'bieuDo',
+    id: 36,
+    icon: '',
+    path: '/bieu-do',
+    title: '',
+    component: <BieuDoChart />,
+  },
 ];
-
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
 export const BANG_BAO_CAO_CHI_TIEU = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu';

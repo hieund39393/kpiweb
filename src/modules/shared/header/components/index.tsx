@@ -41,19 +41,17 @@ function HeaderSection(props: Props) {
     setShowModalChangePass(false);
   }
   const dropdownMenu = (
-    <Router>
-      <Menu>
-        <Menu.Item key="0" className="menu-link" onClick={showModal}>
-          <Link rel="noopener noreferrer" className="link-text-images change-password" to={'/'}>
-            <SafetyOutlined />
-            Thay đổi mật khẩu
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="1" className="menu-link-logout">
-          <HeaderLogout />
-        </Menu.Item>
-      </Menu>
-    </Router>
+    <Menu>
+      <Menu.Item key="0" className="menu-link" onClick={showModal}>
+        <Link rel="noopener noreferrer" className="link-text-images change-password" to={'/'}>
+          <SafetyOutlined />
+          Thay đổi mật khẩu
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="1" className="menu-link-logout">
+        <HeaderLogout />
+      </Menu.Item>
+    </Menu>
   );
   const modal = useMemo(
     () =>
@@ -67,7 +65,7 @@ function HeaderSection(props: Props) {
     [showModalChangePass]
   );
   return (
-    <Router>
+    <>
       <Header className="header">
         <div className="header--logo">
           <a href={'/dashboard'}>
@@ -92,7 +90,7 @@ function HeaderSection(props: Props) {
         </div>
       </Header>
       {modal}
-    </Router>
+    </>
   );
 }
 
