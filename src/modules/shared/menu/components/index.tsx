@@ -24,6 +24,9 @@ import {
   _BOCHITIEUTHANHTRAKIEMTRA,
   _BOCHITIEUBAOCAODIEUHANH,
   _BOCHITIEUTUDONGHOA,
+  _BOCHITIEUDICHVUKHACHHANG,
+  _BOCHITIEUCONGTACDAUTHAU,
+
   _THEOCHITIEU,
   _THEODONVI,
 } from 'constant/menu';
@@ -202,6 +205,8 @@ const SideBar = () => {
       e.key === _BOCHITIEUANTOAN ||
       e.key === _BOCHITIEUCHUYENDOISO ||
       e.Key === _BOCHITIEUTHANHTRAKIEMTRA ||
+      e.Key === _BOCHITIEUDICHVUKHACHHANG ||
+      e.Key === _BOCHITIEUCONGTACDAUTHAU ||
       e.Key === _BOCHITIEUBAOCAODIEUHANH ||
       e.Key === _BOCHITIEUTUDONGHOA ||
       e.key === _THEODONVI ||
@@ -292,6 +297,8 @@ const SideBar = () => {
                         child.key === _BOCHITIEUANTOAN ||
                         child.key === _BOCHITIEUCHUYENDOISO ||
                         child.key === _BOCHITIEUTHANHTRAKIEMTRA ||
+                        child.key === _BOCHITIEUDICHVUKHACHHANG ||
+                        child.key === _BOCHITIEUCONGTACDAUTHAU ||
                         child.key === _BOCHITIEUBAOCAODIEUHANH ||
                         child.key === _BOCHITIEUTUDONGHOA
                       ) {

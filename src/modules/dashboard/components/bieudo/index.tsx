@@ -13,6 +13,8 @@ import BoChiTieuTaiChinh from '../../components/taichinh/index';
 import BoChiTieuAnToan from '../../components/antoan/index';
 import BoChiTieuChuyenDoiSo from '../../components/chuyendoiso/index';
 import BoChiTieuThanhTraKiemTra from '../../components/thanhtrakiemtra/index';
+import BoChiTieuDichVuKhachHang from '../dichvukhachhang';
+import BoChiTieuCongTacDauThau from '../congtacdauthau';
 import BoChiTieuBaoCaoDieuHanh from '../../components/baocaodieuhanh/index';
 import BoChiTieuTuDongHoa from '../../components/tudonghoa/index';
 
@@ -171,6 +173,26 @@ const BieuDo = () => {
       <BoChiTieuThanhTraKiemTra
         donViID={donViId}
         boChiTieuID={47}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
+      />
+      <BoChiTieuDichVuKhachHang
+        donViID={donViId}
+        boChiTieuID={50}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
+      />
+      <BoChiTieuCongTacDauThau
+        donViID={donViId}
+        boChiTieuID={49}
         ngayBaoCao={ngayBaoCao}
         fetchAt={fetchAt}
         setIsChange={setIsChange}

@@ -17,6 +17,8 @@ import BoChiTieuChuyenDoiSo from '../components/chuyendoiso/index';
 import BoChiTieuThanhTraKiemTra from '../components/thanhtrakiemtra/index';
 import BoChiTieuBaoCaoDieuHanh from '../components/baocaodieuhanh/index';
 import BoChiTieuTuDongHoa from '../components/tudonghoa/index';
+import BoChiTieuDichVuKhachHang from './dichvukhachhang';
+import BoChiTieuCongTacDauThau from './congtacdauthau';
 
 import { DonVi } from 'modules/dashboard/dtos/responses/ChartResponse';
 
@@ -193,6 +195,28 @@ const Dashboard = () => {
         chiTieuId={chiTieuId}
         chiTieuChaId={chiTieuChaId}
       />
+
+      <BoChiTieuDichVuKhachHang
+        donViID={donViId}
+        boChiTieuID={50}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
+      />
+      <BoChiTieuCongTacDauThau
+        donViID={donViId}
+        boChiTieuID={49}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
+      />
+
       <BoChiTieuBaoCaoDieuHanh
         donViID={donViId}
         boChiTieuID={35}

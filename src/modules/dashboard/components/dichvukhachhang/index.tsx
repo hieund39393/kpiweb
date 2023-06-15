@@ -6,7 +6,7 @@ import Charts from '../charts';
 
 const chartService = ChartService.instance();
 
-function BoChiTieuThanhTraKiemTra(props) {
+function BoChiTieuDichVuKhachHang(props) {
   const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange, chiTieuId, chiTieuChaId } = props;
   const [indicatorsLevel, setIndicatorsLevel] = useState<BoChiTieu[]>([]);
 
@@ -27,10 +27,10 @@ function BoChiTieuThanhTraKiemTra(props) {
   return (
     <div
       // style={{ display: 'none' }} // tạm thời comment
-      id="boChiTieuThanhTraKiemTra"
+      id="boChiTieuDichVuKhachHang"
     >
       <div className="bct-data__title">
-        <h3>Bộ chỉ tiêu báo thanh tra kiểm tra</h3>
+        <h3>Bộ chỉ tiêu dịch vụ khách hàng</h3>
       </div>
       <Charts
         donViID={donViID}
@@ -47,4 +47,4 @@ function BoChiTieuThanhTraKiemTra(props) {
   );
 }
 
-export default BoChiTieuThanhTraKiemTra;
+export default BoChiTieuDichVuKhachHang;
