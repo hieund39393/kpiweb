@@ -71,7 +71,7 @@ const DangNhap = () => {
       if (isRememberMe)
         SessionService.setUser({ userName: data.tenDangNhap, password: data.matKhau });
 
-      navigate('/dashboard');
+      navigate('/nhom-ke-hoach');
     } else {
       const args = {
         message: 'Đăng nhập thất bại',

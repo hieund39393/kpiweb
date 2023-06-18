@@ -37,7 +37,7 @@ let fontSize = 18;
 
 export const configChartPie = (typeChart, data) => {
   const pie: any = formatPie(data);
-  console.log("pie:" + pie)
+  // console.log("pie:" + pie)
   const colorsPie = formatColorPie(data);
   const configChart = {
     typeChart: typeChart,

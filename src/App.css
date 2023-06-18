@@ -41,7 +41,7 @@
 /* css cho thẻ div to bao cả khung chart */
 #boChiTieuKyThuat>div.bct-data__charts>div:nth-child(1)>div.periods-item-wrap>div>div:nth-child(2)>div {
   /* margin-top: -128px; */
-  height: 550px !important;
+  /* height: 550px !important; */
 }
 
 #boChiTieuKyThuat>div.bct-data__charts>div:nth-child(1)>div.periods-item-wrap>div>div:nth-child(2)>div>div>div>div:nth-child(3) {
@@ -137,4 +137,9 @@
 
 #form-get-datas label{
   padding-top: 10px;
+}
+
+#boChiTieuKyThuat .bct-data__charts .inner-statistical-wrapper{
+  width: 50% !important;
+  padding: 5px
 }

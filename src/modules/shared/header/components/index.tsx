@@ -6,6 +6,8 @@ import logo from '../../assets/images/logo-text-evn.png';
 import avatar from '../../assets/images/avatar.svg';
 import '../../header/header.css';
 import HeaderLogout from './logout';
+import { LogoutOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import ModalChangePassword from '../../../account/components/modalChangePassword';
 import { useMemo, useState } from 'react';
 
@@ -32,7 +34,7 @@ type Props =
 function HeaderSection(props: Props) {
   const { token, profile } = props;
   const [showModalChangePass, setShowModalChangePass] = useState(false);
-
+  const navigate = useNavigate();
   function showModal() {
     setShowModalChangePass(true);
   }
@@ -40,6 +42,12 @@ function HeaderSection(props: Props) {
   function closeModal() {
     setShowModalChangePass(false);
   }
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    navigate('/dang-nhap');
+  };
+
   const dropdownMenu = (
     <Menu>
       <Menu.Item key="0" className="menu-link" onClick={showModal}>
@@ -48,8 +56,8 @@ function HeaderSection(props: Props) {
           Thay đổi mật khẩu
         </Link>
       </Menu.Item>
-      <Menu.Item key="1" className="menu-link-logout">
-        <HeaderLogout />
+      <Menu.Item key="1" className="menu-link-logout" onClick={() => logoutHandler()}>
+        <LogoutOutlined /> Đăng xuất
       </Menu.Item>
     </Menu>
   );
