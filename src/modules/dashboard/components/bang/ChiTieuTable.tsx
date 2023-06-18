@@ -159,6 +159,14 @@ const ChiTieuTable = () => {
   ];
   useEffect(() => {
     getBangBaoCaoChiTieu();
+    const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
+    if (spanElement) {
+      if (chiTieu[0].value === selectedValue) {
+        spanElement.textContent = chiTieu[0].label
+      } else {
+        spanElement.textContent = `${(chiTieu[0].label).split('(')[0]} ${`>`} ${chiTieu.filter(x => x.value === selectedValue)[0].label}`;
+      }
+    }
   }, [chiTieu, value, inputValue]);
 
   const getBangBaoCaoChiTieu = async () => {
@@ -168,7 +176,7 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
       null
     );
     setData(res);
@@ -181,33 +189,47 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
       null
     );
     setData(res);
+
+    const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
+    if (spanElement) {
+      if (chiTieu[0].value === value) {
+        spanElement.textContent = chiTieu[0].label
+      } else {
+        spanElement.textContent = `${(chiTieu[0].label).split('(')[0]} ${`>`} ${chiTieu.filter(x => x.value === value)[0].label}`;
+      }
+    }
   };
 
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
     navigate('/bieu-do', { state: { chiTieuId, chiTieuChaId } });
   };
 
+  const [selectedValue, setSelectedValue] = useState(value ?? chiTieu[0].value);
+
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
       <Filter setInput={setInputValue} ids={value} />
       <div id="bangChiTiet" style={{ width: '100%' }}>
-        <Select
-          style={{
-            paddingLeft: 10,
-            paddingTop: 10,
-            width: '100%',
-          }}
-          defaultValue={value ?? chiTieu[0].value}
-          onChange={getBangBaoCaoChiTieu2}
-          options={chiTieu?.map((option) => ({
-            label: option.label,
-            value: option.value,
-          }))}
-        />
+        <>
+          <Select
+            style={{
+              paddingLeft: 10,
+              paddingTop: 10,
+              width: '100%',
+            }}
+            defaultValue={selectedValue}
+            onChange={getBangBaoCaoChiTieu2}
+            options={chiTieu?.map((option, index) => ({
+              label: option.label,
+              value: option.value,
+              style: index === 0 ? { fontWeight: 'bold' } : {},
+            }))}
+          />
+        </>
         <div style={{ margin: 10 }}>
           <Table columns={columns} dataSource={data.map((item) => ({ ...item, key: item.id }))} />
         </div>
