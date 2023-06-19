@@ -143,3 +143,17 @@
   width: 50% !important;
   padding: 5px
 }
+
+.bct-data__title2{
+    height: 64px;
+    background: #22438E;
+    border-radius: 8px 8px 0px 0px;
+    color: #FFFFFF;
+}
+
+.bct-data__title2>h3 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+
+}

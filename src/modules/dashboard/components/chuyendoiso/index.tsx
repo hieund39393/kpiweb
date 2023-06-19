@@ -33,6 +33,7 @@ function BoChiTieuChuyenDoiSo(props) {
         <h3>Bộ chỉ tiêu chuyển đổi số</h3>
       </div>
       <Charts
+       boChiTieuDisplayID="Bộ chỉ tiêu chuyển đổi số"
         donViID={donViID}
         boChiTieuID={boChiTieuID}
         ngayBaoCao={ngayBaoCao}

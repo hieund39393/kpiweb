@@ -54,7 +54,7 @@ function BoChiTieuKyThuat(props) {
         <h3>Bộ chỉ tiêu kỹ thuật</h3>
       </div>
       <Charts
-        boChiTieuDisplayID="boChiTieuKyThuat"
+        boChiTieuDisplayID="Bộ chỉ tiêu kỹ thuật"
         donViID={donViID}
         boChiTieuID={boChiTieuID}
         ngayBaoCao={ngayBaoCao}

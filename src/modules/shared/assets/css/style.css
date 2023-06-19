@@ -82,7 +82,6 @@ form .ant-form-item-required::after {
 }
 
 
-.page-layout-content h2, 
 .page-layout-content h3 {
   font-style: normal;
   font-weight: bold !important;
@@ -90,6 +89,16 @@ form .ant-form-item-required::after {
   line-height: 32px;
   color: #164397 !important;
   margin-bottom: 0 !important;
+}
+.page-layout-content h2{
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 25px;
+  line-height: 32px;
+  color: #ffffff !important;
+  margin-bottom: 0 !important;
+  padding-top: 15px;
+  padding-left: 15px;
 }
 
 .ant-menu-title-content,

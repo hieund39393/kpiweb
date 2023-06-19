@@ -7,7 +7,16 @@ import Charts from '../charts';
 const chartService = ChartService.instance();
 
 function BoChiTieuAnToan(props) {
-  const { donViID, boChiTieuID, ngayBaoCao, fetchAt, setIsChange, isChange, chiTieuId, chiTieuChaId } = props;
+  const {
+    donViID,
+    boChiTieuID,
+    ngayBaoCao,
+    fetchAt,
+    setIsChange,
+    isChange,
+    chiTieuId,
+    chiTieuChaId,
+  } = props;
   const [indicatorsLevel, setIndicatorsLevel] = useState<BoChiTieu[]>([]);
 
   const fetchIndicators = () => {
@@ -33,6 +42,7 @@ function BoChiTieuAnToan(props) {
         <h3>Bộ chỉ tiêu an toàn</h3>
       </div>
       <Charts
+        boChiTieuDisplayID="Bộ chỉ tiêu an toàn"
         donViID={donViID}
         boChiTieuID={boChiTieuID}
         ngayBaoCao={ngayBaoCao}

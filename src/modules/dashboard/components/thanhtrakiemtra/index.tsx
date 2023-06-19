@@ -30,9 +30,10 @@ function BoChiTieuThanhTraKiemTra(props) {
       id="boChiTieuThanhTraKiemTra"
     >
       <div className="bct-data__title">
-        <h3>Bộ chỉ tiêu báo thanh tra kiểm tra</h3>
+        <h3>Bộ chỉ tiêu thanh tra kiểm tra</h3>
       </div>
       <Charts
+            boChiTieuDisplayID="Bộ chỉ tiêu thanh tra kiểm tra"
         donViID={donViID}
         boChiTieuID={boChiTieuID}
         ngayBaoCao={ngayBaoCao}
