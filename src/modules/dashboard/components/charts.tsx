@@ -207,6 +207,7 @@ function Charts(props) {
                   isChange={isChange}
                   classTrungThe={classTrungThe}
                   key={index} // Thêm key vào đây
+                  
                 />
               )
             );

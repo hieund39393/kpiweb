@@ -46,123 +46,132 @@ function Periods(props) {
   };
 
   return (
-    <div className="page-setOfIndicators--content content-body" key={index}>
-      <div className="content-title title-lv2">
-        <h2 id={ctId} style={{ textAlign: 'center' }}>
-          {title}
-        </h2>
-
-        {titleCase(title) === _DTCCCD ? (
-          <div className={titleCase(title) === _DTCCCD ? 'doTinCayCungCapDien' : ''}>
-            {(arrTongHop && arrTongHop.length > 0) ||
-            (arrSauMienTru && arrSauMienTru.length > 0) ? (
-              <div className="speed-thtp">
-                <div className="speed-tongHop">
-                  {arrTongHop && arrTongHop.length > 0
-                    ? arrTongHop.map((element, index) => {
-                        return (
-                          <PieOneRow
-                            index={index}
-                            dataLv3Item={element.charts}
-                            countTongHop={countTongHop}
-                          />
-                        );
-                      })
-                    : null}
-                </div>
-                <div className="speed-toanPhan">
-                  {arrSauMienTru || arrSauMienTru.length > 0
-                    ? arrSauMienTru.map((element, index) => {
-                        return (
-                          <PieOneRow
-                            index={index}
-                            dataLv3Item={element.charts}
-                            countSauMienTru={countSauMienTru}
-                          />
-                        );
-                      })
-                    : null}
-                </div>
-              </div>
-            ) : null}
-
-            {arrPhanPhoi && arrPhanPhoi.length > 0 && arrToanPhan && arrToanPhan.length > 0 ? (
-              <div className="speed-thtp">
-                <div className="speed-smt">
-                  {arrToanPhan && arrToanPhan.length > 0
-                    ? arrToanPhan.map((element, index) => {
-                        return (
-                          <PieOneRow
-                            index={index}
-                            dataLv3Item={element.charts}
-                            countToanPhan={countToanPhan}
-                          />
-                        );
-                      })
-                    : null}
-                </div>
-                <div className="speed-phanPhoi">
-                  {arrPhanPhoi && arrPhanPhoi.length > 0
-                    ? arrPhanPhoi.map((element, index) => {
-                        return (
-                          <PieOneRow
-                            index={index}
-                            dataLv3Item={element.charts}
-                            countPhanPhoi={countPhanPhoi}
-                          />
-                        );
-                      })
-                    : null}
-                </div>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
+    <>
+      <div className="bct-data__title2">
+        <h2 style={{ color: 'white !important' }}>{boChiTieuDisplayID}</h2>
       </div>
+      <div className="page-setOfIndicators--content content-body" key={index}>
+        <div className="content-title title-lv2">
+          <h2 id={ctId} style={{ textAlign: 'center' }}>
+            {title}
+          </h2>
 
-      <div key={index} className={`periods-item-wrap ${classTrungThe} ${renderLayoutClass(title)}`}>
-        {dataChartsLv3.map((element, index) => {
-          let idDienThuongPham: number = 0;
-          if (element.id === _IDSANLUONGDIENTHUONGPHAM) idDienThuongPham = element.id;
-          let idChiTieuSuCo: number = 0;
-          if (element.showDetails === _TRUE) {
-            idChiTieuSuCo = element.id;
-          }
-          let idChiTieuGiaiQuyet: number = 0;
-          if (element.id === _IDCHARTGIAIQUYET) idChiTieuGiaiQuyet = _IDCHARTGIAIQUYET;
+          {titleCase(title) === _DTCCCD ? (
+            <div className={titleCase(title) === _DTCCCD ? 'doTinCayCungCapDien' : ''}>
+              {(arrTongHop && arrTongHop.length > 0) ||
+              (arrSauMienTru && arrSauMienTru.length > 0) ? (
+                <div className="speed-thtp">
+                  <div className="speed-tongHop">
+                    {arrTongHop && arrTongHop.length > 0
+                      ? arrTongHop.map((element, index) => {
+                          return (
+                            <PieOneRow
+                              index={index}
+                              dataLv3Item={element.charts}
+                              countTongHop={countTongHop}
+                            />
+                          );
+                        })
+                      : null}
+                  </div>
+                  <div className="speed-toanPhan">
+                    {arrSauMienTru || arrSauMienTru.length > 0
+                      ? arrSauMienTru.map((element, index) => {
+                          return (
+                            <PieOneRow
+                              index={index}
+                              dataLv3Item={element.charts}
+                              countSauMienTru={countSauMienTru}
+                            />
+                          );
+                        })
+                      : null}
+                  </div>
+                </div>
+              ) : null}
 
-          const configs = element?.charts.map((element) => {
-            return formatConfigChart(element.type, element);
-          });
-          return (
-            <PeriodsItem
-              key={element.id + index} // Add a unique "key" prop here
-              index={index}
-              parentTitle={title}
-              increaseAlertRate={element.periodData?.alertRateIncrease}
-              decreaseAlertRate={element.periodData?.alertRateDecrease}
-              dataPeriods={element.periodData?.periods}
-              typePeriods={element.periodData?.alertType}
-              showDetails={element.showDetails}
-              idChiTieuSuCo={idChiTieuSuCo}
-              idChiTieuGiaiQuyet={idChiTieuGiaiQuyet}
-              donViID={donViID}
-              chiTieuEVNID={element.chiTieuEVNID}
-              ngayBaoCao={ngayBaoCao}
-              isRow={element.isRow}
-              boChiTieuDisplayID={boChiTieuDisplayID}
-              isHeader={element.additionalTitle !== '' ? element.additionalTitle : ''}
-              idDienThuongPham={idDienThuongPham}
-              setIsChange={setIsChange}
-              isChange={isChange}
-              configs={configs}
-              ctId={ctId}
-              // showModalDetail={showModalDetailHandler}
-            />
-          );
-        })}
+              {arrPhanPhoi && arrPhanPhoi.length > 0 && arrToanPhan && arrToanPhan.length > 0 ? (
+                <div className="speed-thtp">
+                  <div className="speed-smt">
+                    {arrToanPhan && arrToanPhan.length > 0
+                      ? arrToanPhan.map((element, index) => {
+                          return (
+                            <PieOneRow
+                              index={index}
+                              dataLv3Item={element.charts}
+                              countToanPhan={countToanPhan}
+                            />
+                          );
+                        })
+                      : null}
+                  </div>
+                  <div className="speed-phanPhoi">
+                    {arrPhanPhoi && arrPhanPhoi.length > 0
+                      ? arrPhanPhoi.map((element, index) => {
+                          return (
+                            <PieOneRow
+                              index={index}
+                              dataLv3Item={element.charts}
+                              countPhanPhoi={countPhanPhoi}
+                            />
+                          );
+                        })
+                      : null}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+
+        <div
+          key={index}
+          className={`periods-item-wrap ${classTrungThe} ${renderLayoutClass(title)}`}
+        >
+          {dataChartsLv3.map((element, index) => {
+            let idDienThuongPham: number = 0;
+            if (element.id === _IDSANLUONGDIENTHUONGPHAM) idDienThuongPham = element.id;
+            let idChiTieuSuCo: number = 0;
+            if (element.showDetails === _TRUE) {
+              idChiTieuSuCo = element.id;
+            }
+            let idChiTieuGiaiQuyet: number = 0;
+            if (element.id === _IDCHARTGIAIQUYET) idChiTieuGiaiQuyet = _IDCHARTGIAIQUYET;
+
+            const configs = element?.charts.map((element) => {
+              return formatConfigChart(element.type, element);
+            });
+            return (
+              <PeriodsItem
+                key={element.id + index} // Add a unique "key" prop here
+                index={index}
+                parentTitle={title}
+                increaseAlertRate={element.periodData?.alertRateIncrease}
+                decreaseAlertRate={element.periodData?.alertRateDecrease}
+                dataPeriods={element.periodData?.periods}
+                typePeriods={element.periodData?.alertType}
+                showDetails={element.showDetails}
+                idChiTieuSuCo={idChiTieuSuCo}
+                idChiTieuGiaiQuyet={idChiTieuGiaiQuyet}
+                donViID={donViID}
+                chiTieuEVNID={element.chiTieuEVNID}
+                ngayBaoCao={ngayBaoCao}
+                isRow={element.isRow}
+                boChiTieuDisplayID={boChiTieuDisplayID}
+                isHeader={element.additionalTitle !== '' ? element.additionalTitle : ''}
+                idDienThuongPham={idDienThuongPham}
+                setIsChange={setIsChange}
+                isChange={isChange}
+                configs={configs}
+                ctId={ctId}
+                // showModalDetail={showModalDetailHandler}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
+
     // </div>
   );
 }
