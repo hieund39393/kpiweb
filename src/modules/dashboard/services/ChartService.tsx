@@ -19,7 +19,15 @@ const ChartService = (function () {
     return await httpService.post(route.getChart, request);
   }
 
-  async function _listDetailAsync({ chiTieuID, chiTieuEVNID, donViID, ngay, layNgayGanNhat, pageIndex, pageSize }) {
+  async function _listDetailAsync({
+    chiTieuID,
+    chiTieuEVNID,
+    donViID,
+    ngay,
+    layNgayGanNhat,
+    pageIndex,
+    pageSize,
+  }) {
     let url =
       route.listDetail +
       '?chiTieuID=' +
@@ -57,17 +65,49 @@ const ChartService = (function () {
   };
 
   async function _listNgaySuCoAsync({ chiTieuID, chiTieuEVNID, donViID, ngay }) {
-    let url = route.listNgaySuCo + '?ChiTieuID=' + chiTieuID + '&ChiTieuEVNID=' + chiTieuEVNID + '&DonViID=' + donViID + '&Ngay=' + ngay;
+    let url =
+      route.listNgaySuCo +
+      '?ChiTieuID=' +
+      chiTieuID +
+      '&ChiTieuEVNID=' +
+      chiTieuEVNID +
+      '&DonViID=' +
+      donViID +
+      '&Ngay=' +
+      ngay;
     return await httpService.get(url, {});
   }
 
   async function _listGiaiQuyetAsync({ donViID, ngayBaoCao, thang, chiTieuID }) {
-    let url = route.listGiaiQuyet + '?DonViID=' + donViID + '&NgayBaoCao=' + ngayBaoCao + '&Thang=' + thang + '&ChiTieuID=' + chiTieuID;
+    let url =
+      route.listGiaiQuyet +
+      '?DonViID=' +
+      donViID +
+      '&NgayBaoCao=' +
+      ngayBaoCao +
+      '&Thang=' +
+      thang +
+      '&ChiTieuID=' +
+      chiTieuID;
     return await httpService.get(url, {});
   }
 
   async function _listSliderShowAsync(request) {
     return await httpService.post(route.listSliderShow, request);
+  }
+
+  async function _danhSachCongTrinhAsync({ chiTieuID, donViID, thang, nam }) {
+    let url =
+      route.getDanhSachCongTrinh +
+      '?chiTieuId=' +
+      chiTieuID +
+      '&donViId=' +
+      donViID +
+      '&thang=' +
+      thang +
+      '&nam=' +
+      nam;
+    return await httpService.get(url, {});
   }
 
   return {
@@ -80,7 +120,8 @@ const ChartService = (function () {
     getTableLevel2,
     listNgaySuCo: _listNgaySuCoAsync,
     listGiaiQuyetAsync: _listGiaiQuyetAsync,
-    listSliderShow: _listSliderShowAsync
+    listSliderShow: _listSliderShowAsync,
+    danhSachCongTrinhAsync: _danhSachCongTrinhAsync,
   };
 })();
 
