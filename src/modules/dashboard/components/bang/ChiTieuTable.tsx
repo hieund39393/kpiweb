@@ -48,6 +48,12 @@ const ChiTieuTable = () => {
     tanSuat: 'm',
   });
 
+  const [sanLuongDonVi, setSanLuongDonVi] = useState(false)
+
+  const handleShowSanLuongDonVi = () => {
+
+  }
+
   const columns: ColumnsType<DataType> = [
     {
       title: 'STT',
@@ -55,7 +61,12 @@ const ChiTieuTable = () => {
       key: 'stt',
       render: (text, record) => {
         if (record.chiTieuCha === true) {
-          return <strong className="view-chart">{text}</strong>;
+          if (text === "Sản lượng điện thương phẩm") {
+            return <strong className="view-chart" onClick={handleShowSanLuongDonVi}>{text}</strong>;
+          } else {
+            return <strong className="view-chart">{text}</strong>;
+
+          }
         }
         return (
           <span

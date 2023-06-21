@@ -20,6 +20,7 @@ import LineChart from 'core/components/charts/line';
 import PieChart from 'core/components/charts/pie';
 
 import ChiTietSuCo from 'modules/dashboard/modal/chiTietSuCo';
+import DanhSachCongTrinh from 'modules/dashboard/modal/danhSachCongTrinh';
 import ChartService from 'modules/dashboard/services/ChartService';
 import { SuCoProps } from 'core/dtos/requests/ComponentRequest';
 import {
@@ -57,7 +58,7 @@ import { titleCase } from 'core/utils/utility';
 import BarHorizontal from 'core/components/charts/bar/barHorizontal';
 import ChiTietGiaiQuyet from 'modules/dashboard/modal/chiTietGiaiQuyet';
 
-import '../../assets/css/modal.css'
+import '../../assets/css/modal.css';
 import TableChart from 'core/components/charts/table';
 import { Gauge } from '@ant-design/plots';
 
@@ -83,10 +84,12 @@ function PeriodsItem(props) {
     setIsChange,
     isChange,
     configs,
-    ctId
+    ctId,
   } = props;
 
   const [isShowChiTietSuCoModal, setShowChiTietSuCoModal] = useState(_FALSE);
+  const [isShowDanhSachCongTrinhCoModal, setShowDanhSachCongTrinhModal] = useState(_FALSE);
+
   const [isModalVisible, setIsModalVisible] = useState(_FALSE);
   const [suCoDetail, setSuCoDetail] = useState<SuCoProps[]>([]);
   const [loaiSuCo, setLoaiSuCo] = useState('');
@@ -137,13 +140,17 @@ function PeriodsItem(props) {
     setShowChiTietSuCoModal(_FALSE);
   };
 
+  const closeDanhSachCongTrinhModal = () => {
+    setShowDanhSachCongTrinhModal(_FALSE);
+  };
+
   const cancalModalGiaiQuyet = () => {
     setIsModalVisible(_FALSE);
   };
 
   const showModalGiaiQuyet = () => {
-    setIsModalVisible(true)
-  }
+    setIsModalVisible(true);
+  };
 
   const columns = [
     {
@@ -182,11 +189,31 @@ function PeriodsItem(props) {
     [isShowChiTietSuCoModal]
   );
 
+  const handleOpenSanhSachCongTrinh = () => {
+    setShowDanhSachCongTrinhModal(true);
+  };
+
+  const modalDanhSachCongTrinh = useMemo(
+    () =>
+      isShowDanhSachCongTrinhCoModal && (
+        <DanhSachCongTrinh
+          chiTieuID={idChiTieuSuCo}
+          chiTieuEVNID={chiTieuEVNID}
+          donViID={donViID}
+          tenSuCo={tenSuCo}
+          isShowModal={isShowDanhSachCongTrinhCoModal}
+          closeModal={closeDanhSachCongTrinhModal}
+        />
+      ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isShowDanhSachCongTrinhCoModal]
+  );
+
   useEffect(() => {
     // eslint-disable-next-line
-    configs.forEach(conf => {
-      if (conf.typeChart.indexOf("bartop") > -1) {
-        if (conf.typeChart.indexOf("lowest") > -1 && conf.order === 1) {
+    configs.forEach((conf) => {
+      if (conf.typeChart.indexOf('bartop') > -1) {
+        if (conf.typeChart.indexOf('lowest') > -1 && conf.order === 1) {
           setSortAscending(_FALSE);
         }
       }
@@ -235,7 +262,13 @@ function PeriodsItem(props) {
                 dataPeriods.map((item, index) => (
                   <div className="box-statistical--child" key={index}>
                     <h5>{item.pName}</h5>
-                    <div className={item.pRate !== '0%' && item.pRate !== '0' ? 'box-statistical--child--value' : 'box-statistical--child--not-value'}>
+                    <div
+                      className={
+                        item.pRate !== '0%' && item.pRate !== '0'
+                          ? 'box-statistical--child--value'
+                          : 'box-statistical--child--not-value'
+                      }
+                    >
                       <h3>{item.pValue}</h3>
                       <span className="period-item--wrapper box-statistical--child--percent">
                         {typePeriods === 1 ? (
@@ -243,8 +276,11 @@ function PeriodsItem(props) {
                             <>
                               <Image preview={_FALSE} src={icUp} alt="up" />
                               <span
-                                className={`statical-percentage ${isHigherThanPRate(item.pRate, increaseAlertRate) ? 'color-red' : ''
-                                  }`}
+                                className={`statical-percentage ${
+                                  isHigherThanPRate(item.pRate, increaseAlertRate)
+                                    ? 'color-red'
+                                    : ''
+                                }`}
                               >
                                 {item.pRate}
                               </span>
@@ -253,8 +289,11 @@ function PeriodsItem(props) {
                             <>
                               <Image preview={_FALSE} src={icDown} alt="down" />
                               <span
-                                className={`statical-percentage ${isHigherThanPRate(item.pRate, decreaseAlertRate) ? 'color-blue' : ''
-                                  } `}
+                                className={`statical-percentage ${
+                                  isHigherThanPRate(item.pRate, decreaseAlertRate)
+                                    ? 'color-blue'
+                                    : ''
+                                } `}
                               >
                                 {item.pRate}
                               </span>
@@ -274,8 +313,9 @@ function PeriodsItem(props) {
                               style={{ transform: 'rotate(180deg)' }}
                             />
                             <span
-                              className={`statical-percentage ${isHigherThanPRate(item.pRate, increaseAlertRate) ? 'color-blue' : ''
-                                }`}
+                              className={`statical-percentage ${
+                                isHigherThanPRate(item.pRate, increaseAlertRate) ? 'color-blue' : ''
+                              }`}
                             >
                               {item.pRate}
                             </span>
@@ -289,8 +329,9 @@ function PeriodsItem(props) {
                               style={{ transform: 'rotate(180deg)' }}
                             />
                             <span
-                              className={`statical-percentage ${isHigherThanPRate(item.pRate, decreaseAlertRate) ? 'color-red' : ''
-                                }`}
+                              className={`statical-percentage ${
+                                isHigherThanPRate(item.pRate, decreaseAlertRate) ? 'color-red' : ''
+                              }`}
                             >
                               {item.pRate}
                             </span>
@@ -309,18 +350,35 @@ function PeriodsItem(props) {
 
             {showDetails && (
               <div className="box-statistical--detail">
-                <Button
-                  data-id={idChiTieuSuCo}
-                  onClick={() => chiTietSuCoHandler(idChiTieuSuCo)}
-                  type="link"
-                  className="link-popup-detail button-closed"
-                  icon={<InfoCircleOutlined />}
-                >
-                  Chi tiết
-                </Button>
+                {idChiTieuSuCo === 19 ? (
+                  <Button
+                    data-id={idChiTieuSuCo}
+                    onClick={() => chiTietSuCoHandler(idChiTieuSuCo)}
+                    type="link"
+                    className="link-popup-detail button-closed"
+                    icon={<InfoCircleOutlined />}
+                  >
+                    Chi tiết
+                  </Button>
+                ) : idChiTieuSuCo === 101 ||
+                  idChiTieuSuCo === 98 ||
+                  idChiTieuSuCo === 99 ||
+                  idChiTieuSuCo === 102 ? (
+                  <Button
+                    data-id={idChiTieuSuCo}
+                    onClick={handleOpenSanhSachCongTrinh}
+                    type="link"
+                    className="link-popup-detail button-closed"
+                    icon={<InfoCircleOutlined />}
+                  >
+                    Chi tiết
+                  </Button>
+                ) : null}
               </div>
             )}
+
             {modal}
+            {modalDanhSachCongTrinh}
           </div>
         )}
       </>
@@ -343,9 +401,7 @@ function PeriodsItem(props) {
             {periodData.periods.map((period) => (
               <div className="period-item">
                 <span className="p-name">{period.pName}</span>
-                <span className="p-value">
-                  {period.pValue}
-                </span>
+                <span className="p-value">{period.pValue}</span>
                 <span className="p-rate">
                   <div className="period-item--wrapper">
                     {typePeriods === 1 ? (
@@ -353,10 +409,11 @@ function PeriodsItem(props) {
                         <>
                           <Image preview={_FALSE} src={icUp} alt="up" />
                           <span
-                            className={`statical-percentage ${isHigherThanPRate(period.pRate, periodData.alertRateIncrease)
-                              ? 'color-red'
-                              : ''
-                              }`}
+                            className={`statical-percentage ${
+                              isHigherThanPRate(period.pRate, periodData.alertRateIncrease)
+                                ? 'color-red'
+                                : ''
+                            }`}
                           >
                             {period.pRate}
                           </span>
@@ -365,10 +422,11 @@ function PeriodsItem(props) {
                         <>
                           <Image preview={_FALSE} src={icDown} alt="down" />
                           <span
-                            className={`statical-percentage ${isHigherThanPRate(period.pRate, periodData.alertRateDecrease)
-                              ? 'color-blue'
-                              : ''
-                              } `}
+                            className={`statical-percentage ${
+                              isHigherThanPRate(period.pRate, periodData.alertRateDecrease)
+                                ? 'color-blue'
+                                : ''
+                            } `}
                           >
                             {period.pRate}
                           </span>
@@ -388,10 +446,11 @@ function PeriodsItem(props) {
                           style={{ transform: 'rotate(180deg)' }}
                         />
                         <span
-                          className={`statical-percentage ${isHigherThanPRate(period.pRate, periodData.alertRateIncrease)
-                            ? 'color-blue'
-                            : ''
-                            }`}
+                          className={`statical-percentage ${
+                            isHigherThanPRate(period.pRate, periodData.alertRateIncrease)
+                              ? 'color-blue'
+                              : ''
+                          }`}
                         >
                           {period.pRate}
                         </span>
@@ -405,10 +464,11 @@ function PeriodsItem(props) {
                           style={{ transform: 'rotate(180deg)' }}
                         />
                         <span
-                          className={`statical-percentage ${isHigherThanPRate(period.pRate, periodData.alertRateDecrease)
-                            ? 'color-red'
-                            : ''
-                            }`}
+                          className={`statical-percentage ${
+                            isHigherThanPRate(period.pRate, periodData.alertRateDecrease)
+                              ? 'color-red'
+                              : ''
+                          }`}
                         >
                           {period.pRate}
                         </span>
@@ -425,26 +485,31 @@ function PeriodsItem(props) {
                 <span className="p-luyke-rate">
                   <div className="period-item--wrapper">
                     {typePeriods === 1 ? (
-                      (period.pAPositive && period.pARate !== '0%') && (period.pAPositive && period.pARate !== "0") ? (
+                      period.pAPositive &&
+                      period.pARate !== '0%' &&
+                      period.pAPositive &&
+                      period.pARate !== '0' ? (
                         <>
                           <Image preview={_FALSE} src={icUp} alt="up" />
                           <span
-                            className={`statical-percentage ${isHigherThanPRate(period.pARate, periodData.alertRateIncrease)
-                              ? 'color-red'
-                              : ''
-                              }`}
+                            className={`statical-percentage ${
+                              isHigherThanPRate(period.pARate, periodData.alertRateIncrease)
+                                ? 'color-red'
+                                : ''
+                            }`}
                           >
                             {period.pARate}
                           </span>
                         </>
-                      ) : period.pARate !== '0%' && period.pARate !== "0" ? (
+                      ) : period.pARate !== '0%' && period.pARate !== '0' ? (
                         <>
                           <Image preview={_FALSE} src={icDown} alt="down" />
                           <span
-                            className={`statical-percentage ${isHigherThanPRate(period.pARate, periodData.alertRateDecrease)
-                              ? 'color-blue'
-                              : ''
-                              } `}
+                            className={`statical-percentage ${
+                              isHigherThanPRate(period.pARate, periodData.alertRateDecrease)
+                                ? 'color-blue'
+                                : ''
+                            } `}
                           >
                             {period.pARate}
                           </span>
@@ -455,7 +520,10 @@ function PeriodsItem(props) {
                           <span className="statical-percentage"></span>
                         </>
                       )
-                    ) : (period.pAPositive && period.pARate !== '0%') && (period.pAPositive && period.pARate !== "0") ? (
+                    ) : period.pAPositive &&
+                      period.pARate !== '0%' &&
+                      period.pAPositive &&
+                      period.pARate !== '0' ? (
                       <>
                         <Image
                           preview={_FALSE}
@@ -464,15 +532,16 @@ function PeriodsItem(props) {
                           style={{ transform: 'rotate(180deg)' }}
                         />
                         <span
-                          className={`statical-percentage ${isHigherThanPRate(period.pARate, periodData.alertRateIncrease)
-                            ? 'color-blue'
-                            : ''
-                            }`}
+                          className={`statical-percentage ${
+                            isHigherThanPRate(period.pARate, periodData.alertRateIncrease)
+                              ? 'color-blue'
+                              : ''
+                          }`}
                         >
                           {period.pARate}
                         </span>
                       </>
-                    ) : period.pARate !== '0%' && period.pARate !== "0" ? (
+                    ) : period.pARate !== '0%' && period.pARate !== '0' ? (
                       <>
                         <Image
                           preview={_FALSE}
@@ -481,10 +550,11 @@ function PeriodsItem(props) {
                           style={{ transform: 'rotate(180deg)' }}
                         />
                         <span
-                          className={`statical-percentage ${isHigherThanPRate(period.pARate, periodData.alertRateDecrease)
-                            ? 'color-red'
-                            : ''
-                            }`}
+                          className={`statical-percentage ${
+                            isHigherThanPRate(period.pARate, periodData.alertRateDecrease)
+                              ? 'color-red'
+                              : ''
+                          }`}
                         >
                           {period.pARate}
                         </span>
@@ -516,17 +586,16 @@ function PeriodsItem(props) {
               ? 'two-column-speedometer-box-table'
               : ''
           }
-          className={`${child.layout === 1
-            ? 'page-setOfIndicators--charts-speedometer'
-            : 'page-setOfIndicators--two-column-charts-speedometer'
-            } 
+          className={`${
+            child.layout === 1
+              ? 'page-setOfIndicators--charts-speedometer'
+              : 'page-setOfIndicators--two-column-charts-speedometer'
+          } 
         
         ${isRow ? (parent.length > 1 ? 'small-speedometer row-item-pc' : 'medium-speedometer') : ''}
         page-setOfIndicators--charts ${bigSpeed}`}
         >
-          <h2 className="content-title">
-            {renderTitle(child.title, child.typeChart, child.unit)}
-          </h2>
+          <h2 className="content-title">{renderTitle(child.title, child.typeChart, child.unit)}</h2>
           <LazyLoad placeholder={<Spin />}>
             <div
               key={childIndex}
@@ -553,7 +622,7 @@ function PeriodsItem(props) {
           </LazyLoad>
         </div>
       </>
-    )
+    );
   };
 
   const renderMultipleColumnGauge = (parent, child, childIndex, fullRow, removeSpeed) => {
@@ -567,16 +636,20 @@ function PeriodsItem(props) {
               ? 'two-column-speedometer-box-table'
               : ''
           }
-          className={`${child.layout === 1
-            ? 'page-setOfIndicators--charts-speedometer'
-            : 'page-setOfIndicators--two-column-charts-speedometer'
-            } ${isRow
+          className={`${
+            child.layout === 1
+              ? 'page-setOfIndicators--charts-speedometer'
+              : 'page-setOfIndicators--two-column-charts-speedometer'
+          } ${
+            isRow
               ? parent.length > 3
                 ? 'small-speedometer row-item-pc'
                 : 'medium-speedometer'
               : ''
-            } ${fullRow ? 'full-row-speedometer' : ''} page-setOfIndicators--charts 
-            ${removeSpeed} ${titleCase(child.title) === 'boChiTieuSuaChuaLon' ? 'boChiTieuSuaChuaLon' : ''}`}
+          } ${fullRow ? 'full-row-speedometer' : ''} page-setOfIndicators--charts 
+            ${removeSpeed} ${
+            titleCase(child.title) === 'boChiTieuSuaChuaLon' ? 'boChiTieuSuaChuaLon' : ''
+          }`}
         >
           <h2 className="content-title">{renderTitle(child.title, child.typeChart, child.unit)}</h2>
           <LazyLoad placeholder={<Spin />}>
@@ -615,15 +688,17 @@ function PeriodsItem(props) {
               ? 'two-column-speedometer-box-table'
               : ''
           }
-          className={`${child.layout === 1
-            ? 'page-setOfIndicators--charts-speedometer '
-            : 'page-setOfIndicators--two-column-charts-speedometer'
-            } ${isRow
+          className={`${
+            child.layout === 1
+              ? 'page-setOfIndicators--charts-speedometer '
+              : 'page-setOfIndicators--two-column-charts-speedometer'
+          } ${
+            isRow
               ? parent.length > 3
                 ? 'small-speedometer row-item-pc'
                 : 'medium-speedometer'
               : ''
-            } ${fullRow ? 'full-row-speedometer' : ''} page-setOfIndicators--charts ${removeSpeed}`}
+          } ${fullRow ? 'full-row-speedometer' : ''} page-setOfIndicators--charts ${removeSpeed}`}
         >
           <h2 className="content-title">{renderTitle(child.title, child.typeChart, child.unit)}</h2>
           <LazyLoad placeholder={<Spin />}>
@@ -659,7 +734,9 @@ function PeriodsItem(props) {
     return (
       <>
         {childIndex === 0 ? renderPeriod() : null}
-        {(isHeader !== '' && isHeader !== undefined) ? renderHeaderLineBar(isHeader, child.unit) : null}
+        {isHeader !== '' && isHeader !== undefined
+          ? renderHeaderLineBar(isHeader, child.unit)
+          : null}
         <LineChart
           index={childIndex}
           parentTitle={parentTitle}
@@ -671,55 +748,70 @@ function PeriodsItem(props) {
   };
 
   const RenderMultipleColumnBar = (parent, child, childIndex, fullRow, additionalTitle) => {
-    const min = child.monthLength[child.monthLength.length - child.monthLength.length]
-    const max = child.monthLength[child.monthLength.length - 1]
-    const convertMin = min.split(_TEXTMONTHDATA)[1]
-    const convertMax = max.split(_TEXTMONTHDATA)[1]
-    const convertYear = ngayBaoCao.split('-')[0]
+    const min = child.monthLength[child.monthLength.length - child.monthLength.length];
+    const max = child.monthLength[child.monthLength.length - 1];
+    const convertMin = min.split(_TEXTMONTHDATA)[1];
+    const convertMax = max.split(_TEXTMONTHDATA)[1];
+    const convertYear = ngayBaoCao.split('-')[0];
     return (
       <>
         {childIndex === 0 ? renderPeriod() : null}
-        {(additionalTitle === '') ? null : renderHeaderLineBar(additionalTitle, child.unit)}
+        {additionalTitle === '' ? null : renderHeaderLineBar(additionalTitle, child.unit)}
 
-        <div className={`page-setOfIndicators--charts page-setOfIndicators--charts-bar ${child.dataID === _IDCONTACDICHVUKHACHHANG ? 'congTacDichVu-giaiQuyet' : ''}`}>
+        <div
+          className={`page-setOfIndicators--charts page-setOfIndicators--charts-bar ${
+            child.dataID === _IDCONTACDICHVUKHACHHANG ? 'congTacDichVu-giaiQuyet' : ''
+          }`}
+        >
           <LazyLoad placeholder={<Spin />}>
             <div className="bar-box">
-              <Column setIsChange={setIsChange} isChange={isChange} config={child} renderTitle={renderTitle} dataID={child.dataID} showDetails={child.showDetails} showModalGiaiQuyet={showModalGiaiQuyet} />
+              <Column
+                setIsChange={setIsChange}
+                isChange={isChange}
+                config={child}
+                renderTitle={renderTitle}
+                dataID={child.dataID}
+                showDetails={child.showDetails}
+                showModalGiaiQuyet={showModalGiaiQuyet}
+              />
             </div>
           </LazyLoad>
         </div>
 
-        {
-          isModalVisible ?
-            <ChiTietGiaiQuyet
-              isShowModal={isModalVisible}
-              closeModal={cancalModalGiaiQuyet}
-              donViID={donViID}
-              ngayBaoCao={ngayBaoCao}
-              chiTieuID={idChiTieuGiaiQuyet}
-              convertMin={convertMin}
-              convertMax={convertMax}
-              convertYear={convertYear}
-            />
-            : null
-        }
-
+        {isModalVisible ? (
+          <ChiTietGiaiQuyet
+            isShowModal={isModalVisible}
+            closeModal={cancalModalGiaiQuyet}
+            donViID={donViID}
+            ngayBaoCao={ngayBaoCao}
+            chiTieuID={idChiTieuGiaiQuyet}
+            convertMin={convertMin}
+            convertMax={convertMax}
+            convertYear={convertYear}
+          />
+        ) : null}
       </>
     );
   };
 
   const RenderMultipleBarHorizontal = (parent, child, childIndex, fullRow, additionalTitle) => {
-
-
     return (
       <>
         {childIndex === 0 ? renderPeriod() : null}
-        {(additionalTitle === '') ? null : renderHeaderLineBar(additionalTitle, child.unit)}
-        <div className={`page-setOfIndicators--charts page-setOfIndicators--charts-bar ${child.dataID === 225 ? 'bar-horizontal-many' : 'bar-horizontal'}`}>
-
+        {additionalTitle === '' ? null : renderHeaderLineBar(additionalTitle, child.unit)}
+        <div
+          className={`page-setOfIndicators--charts page-setOfIndicators--charts-bar ${
+            child.dataID === 225 ? 'bar-horizontal-many' : 'bar-horizontal'
+          }`}
+        >
           <LazyLoad placeholder={<Spin />}>
             <div className="bar-box">
-              <BarHorizontal setIsChange={setIsChange} isChange={isChange} config={child} renderTitle={renderTitle} />
+              <BarHorizontal
+                setIsChange={setIsChange}
+                isChange={isChange}
+                config={child}
+                renderTitle={renderTitle}
+              />
             </div>
           </LazyLoad>
         </div>
@@ -731,11 +823,14 @@ function PeriodsItem(props) {
     return (
       <>
         {childIndex === 0 ? renderPeriod() : null}
-        {(isHeader !== '' && isHeader !== undefined) ? renderHeaderLineBar(isHeader, child.unit) : null}
+        {isHeader !== '' && isHeader !== undefined
+          ? renderHeaderLineBar(isHeader, child.unit)
+          : null}
         <div
           key={childIndex}
-          className={`page-setOfIndicators--charts page-setOfIndicators--charts-top ${isRow ? 'top-no-mt' : ''
-            }`}
+          className={`page-setOfIndicators--charts page-setOfIndicators--charts-top ${
+            isRow ? 'top-no-mt' : ''
+          }`}
         >
           <LazyLoad placeholder={<Spin />}>
             <div key={childIndex} className="low-high-box">
@@ -757,11 +852,14 @@ function PeriodsItem(props) {
     return (
       <>
         {childIndex === 0 ? renderPeriod() : null}
-        {(isHeader !== '' && isHeader !== undefined) ? renderHeaderLineBar(isHeader, child.unit) : null}
+        {isHeader !== '' && isHeader !== undefined
+          ? renderHeaderLineBar(isHeader, child.unit)
+          : null}
         <div
           key={childIndex}
-          className={`page-setOfIndicators--charts page-setOfIndicators--charts-top ${isRow ? 'top-no-mt' : ''
-            }`}
+          className={`page-setOfIndicators--charts page-setOfIndicators--charts-top ${
+            isRow ? 'top-no-mt' : ''
+          }`}
         >
           <LazyLoad placeholder={<Spin />}>
             <div key={childIndex} className="low-high-box">
@@ -811,21 +909,21 @@ function PeriodsItem(props) {
     return (
       <div className="linebar-header">
         <span>Giá trị kế hoạch: </span>
-        <span>{unit === _UNITPHANTRAM ? (value + '' + unit) : (value + ' ' + unit)}</span>
+        <span>{unit === _UNITPHANTRAM ? value + '' + unit : value + ' ' + unit}</span>
       </div>
-    )
-  }
+    );
+  };
 
   const RenderMultipleColumnLineBar = (parent, child, childIndex, fullRow, additionalTitle) => {
-
     return (
       <>
         {childIndex === 0 && renderPeriod()}
-        {(additionalTitle === '') ? null : renderHeaderLineBar(additionalTitle, child.unit)}
+        {additionalTitle === '' ? null : renderHeaderLineBar(additionalTitle, child.unit)}
         <div
           key={childIndex}
-          className={`page-setOfIndicators--charts page-setOfIndicators--charts-line ${parent[1].typeChart === _SPEEDOMETERSTRING ? 'ctxlvphlld-layout--general-charts' : ''
-            }`}
+          className={`page-setOfIndicators--charts page-setOfIndicators--charts-line ${
+            parent[1].typeChart === _SPEEDOMETERSTRING ? 'ctxlvphlld-layout--general-charts' : ''
+          }`}
         >
           <LazyLoad placeholder={<Spin />}>
             <ManyColumnsOneLine
@@ -845,43 +943,70 @@ function PeriodsItem(props) {
     //Số công trình khởi công , đóng điện lưới 220-110 kV condition
     if (!configs.some((conf) => conf.typeChart.indexOf('pie') > 0)) fullRow = true;
     let bigSpeed = '';
-    if (titleCase(parentTitle) === _GIATRITHUCHIEN) bigSpeed = 'big-speed'
-    else if (titleCase(parentTitle) === _DTCCCD) bigSpeed = 'remove-speed'
+    if (titleCase(parentTitle) === _GIATRITHUCHIEN) bigSpeed = 'big-speed';
+    else if (titleCase(parentTitle) === _DTCCCD) bigSpeed = 'remove-speed';
     let doanhThu = '';
     if (titleCase(parentTitle) === _DOANHTHU) doanhThu = 'doanhThu';
-    else doanhThu = ''
+    else doanhThu = '';
     return configs.map((el, index) => {
       if (el === undefined) return null;
       if (el.typeChart === _SPEEDOMETERSTRING) {
-        return (<div className={`statistical ${doanhThu}`}>{renderSingleGaunge(configs, el, index, bigSpeed)}</div>)
+        return (
+          <div className={`statistical ${doanhThu}`}>
+            {renderSingleGaunge(configs, el, index, bigSpeed)}
+          </div>
+        );
       } else if (el.typeChart === _LINESTRING) {
         return (
-          <div className={`statistical ${ctId === _IDKHOILUONGTBAMBACAOTHE ? 'caoThe' : ''} ${doanhThu}`}>{RenderMultipleColumnLine(configs, el, index, fullRow)}</div>
+          <div
+            className={`statistical ${
+              ctId === _IDKHOILUONGTBAMBACAOTHE ? 'caoThe' : ''
+            } ${doanhThu}`}
+          >
+            {RenderMultipleColumnLine(configs, el, index, fullRow)}
+          </div>
         );
       } else if (el.typeChart === _BARSTRING && el.align === _VERTICAL) {
         return (
-          <div className={`statistical ${doanhThu}`}>{RenderMultipleColumnBar(configs, el, index, fullRow, el.additionalTitle)}</div>
+          <div className={`statistical ${doanhThu}`}>
+            {RenderMultipleColumnBar(configs, el, index, fullRow, el.additionalTitle)}
+          </div>
         );
       } else if (el.typeChart === _BARSTRING && el.align !== _VERTICAL) {
         return (
-          <div className={`statistical ${doanhThu}`}>{RenderMultipleBarHorizontal(configs, el, index, fullRow, el.additionalTitle)}</div>
+          <div className={`statistical ${doanhThu}`}>
+            {RenderMultipleBarHorizontal(configs, el, index, fullRow, el.additionalTitle)}
+          </div>
         );
       } else if (
         el.typeChart === _BARTOPHIGHESTSTRING ||
         el.typeChart === _BARTOPLUYKEHIGHESTSTRING
       ) {
-        return sortAscending === _TRUE ? RenderMultipleColumnTopHighest(configs, el, index, fullRow) : null;
+        return sortAscending === _TRUE
+          ? RenderMultipleColumnTopHighest(configs, el, index, fullRow)
+          : null;
       } else if (
         el.typeChart === _BARTOPLOWESTSTRING ||
         el.typeChart === _BARTOPLUYKELOWESTSTRING
       ) {
-        return sortAscending === _FALSE ? RenderMultipleColumnTopLowest(configs, el, index, fullRow) : null;
+        return sortAscending === _FALSE
+          ? RenderMultipleColumnTopLowest(configs, el, index, fullRow)
+          : null;
       } else if (el.typeChart === _PIESTRING) {
         return (
           <div
-            className={`${el.layout === 1 ? 'statistical' : 'statistical two-column-pie-statistical'
-              } ${fullRow ? 'statistical-row-style statistical-row-wrap' : 'statistical-row-style'}
-              ${el.data.length <= 3 ? 'pie-one-row' : el.data.length >= 4 && el.data.length <= 6 ? 'pie-two-row' : el.data.length >= 7 && el.data.length <= 9 ? 'pie-three-row' : 'pie-four-row'}`}
+            className={`${
+              el.layout === 1 ? 'statistical' : 'statistical two-column-pie-statistical'
+            } ${fullRow ? 'statistical-row-style statistical-row-wrap' : 'statistical-row-style'}
+              ${
+                el.data.length <= 3
+                  ? 'pie-one-row'
+                  : el.data.length >= 4 && el.data.length <= 6
+                  ? 'pie-two-row'
+                  : el.data.length >= 7 && el.data.length <= 9
+                  ? 'pie-three-row'
+                  : 'pie-four-row'
+              }`}
           >
             <div key={index} className={`pie-chart pie-content ${isRow ? 'mediumn-pie' : ''}`}>
               <LazyLoad placeholder={<Spin />} className="pie-lazyload">
@@ -902,27 +1027,23 @@ function PeriodsItem(props) {
       } else if (el.typeChart === _TABLESTRING) {
         return (
           <div key={index} className="only-table">
-            <TableChart
-              dataTable={el}
-              typeChart={el.typeChart}
-            />
+            <TableChart dataTable={el} typeChart={el.typeChart} />
           </div>
-        )
+        );
       } else {
         return (
           <div className={`statistical fullrow ${doanhThu}`}>
             {renderPeriod()}
-            {
-              el.additionalTitle === ''
-                ? null
-                :
-                (
-                  <div className="linebar-header">
-                    <span>Giá trị kế hoạch: </span>
-                    <span>{el.unit === _UNITPHANTRAM ? (el.additionalTitle + '' + el.unit) : (el.additionalTitle + ' ' + el.unit)}</span>
-                  </div>
-                )
-            }
+            {el.additionalTitle === '' ? null : (
+              <div className="linebar-header">
+                <span>Giá trị kế hoạch: </span>
+                <span>
+                  {el.unit === _UNITPHANTRAM
+                    ? el.additionalTitle + '' + el.unit
+                    : el.additionalTitle + ' ' + el.unit}
+                </span>
+              </div>
+            )}
 
             <div
               key={index}
@@ -966,7 +1087,13 @@ function PeriodsItem(props) {
               {configs.map((el, index) => {
                 if (el === undefined) return null;
                 if (el.typeChart !== _SPEEDOMETERSTRING) {
-                  return RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle);
+                  return RenderMultipleColumnLineBar(
+                    configs,
+                    el,
+                    index,
+                    fullRow,
+                    el.additionalTitle
+                  );
                 }
 
                 return null;
@@ -974,7 +1101,6 @@ function PeriodsItem(props) {
             </div>
             <div className="statistical">
               <div className="page-setOfIndicators--charts ctxlvphlld-layout--speedometer">
-
                 {configs.map((el, index) => {
                   if (el === undefined) return null;
 
@@ -993,7 +1119,6 @@ function PeriodsItem(props) {
 
                   return null;
                 })}
-
               </div>
             </div>
           </div>
@@ -1001,214 +1126,226 @@ function PeriodsItem(props) {
         //Case Công Suất
       } else {
         return (
-          <div className={`page-indicators-cong-suat  ${titleCase(parentTitle) === _CONGSUAT ? 'congsuat-linebar' : ''}`} >
+          <div
+            className={`page-indicators-cong-suat  ${
+              titleCase(parentTitle) === _CONGSUAT ? 'congsuat-linebar' : ''
+            }`}
+          >
             <div className="cong-suat-content">
-              <div className="cong-suat-content--left" >
-                {
-                  configs.map((el, index) => {
-                    if (el === undefined || index %2 !== 0) return null;
-                    if (el.typeChart !== _LINESTRING) {
-                      return (
-                        <div className="statistical" >
-                          {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
-                        </div>
-                      );
-                    }
+              <div className="cong-suat-content--left">
+                {configs.map((el, index) => {
+                  if (el === undefined || index % 2 !== 0) return null;
+                  if (el.typeChart !== _LINESTRING) {
+                    return (
+                      <div className="statistical">
+                        {RenderMultipleColumnLineBar(
+                          configs,
+                          el,
+                          index,
+                          fullRow,
+                          el.additionalTitle
+                        )}
+                      </div>
+                    );
+                  }
 
-                    if (el.typeChart === _LINESTRING) {
-                      return (
-                        <div className="statistical cong-suat--statistical">
-                          {RenderMultipleColumnLine(configs, el, index, fullRow)}
-                        </div>
-                      );
-                    }
+                  if (el.typeChart === _LINESTRING) {
+                    return (
+                      <div className="statistical cong-suat--statistical">
+                        {RenderMultipleColumnLine(configs, el, index, fullRow)}
+                      </div>
+                    );
+                  }
 
-                    return null;
-                  })
-                }
+                  return null;
+                })}
               </div>
               <div className="cong-suat-content--right">
-                <div className="box-statistical header-content-right" style={{backgroundColor: "transparent"}}/>
-                {
-                  configs.map((el, index) => {
-                    if (el === undefined || index %2 === 0) return null;
-                    if (el.typeChart !== _LINESTRING) {
-                      return (
-                        <div className="statistical">
-                          {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
-                        </div>
-                      );
-                    }
-                    if (el.typeChart === _LINESTRING) {
-                      return (
-                        <div className="statistical cong-suat--statistical">
-                          {RenderMultipleColumnLine(configs, el, index, fullRow)}
-                        </div>
-                      );
-                    }
-                    return null;
-                  })
-                }
+                <div
+                  className="box-statistical header-content-right"
+                  style={{ backgroundColor: 'transparent' }}
+                />
+                {configs.map((el, index) => {
+                  if (el === undefined || index % 2 === 0) return null;
+                  if (el.typeChart !== _LINESTRING) {
+                    return (
+                      <div className="statistical">
+                        {RenderMultipleColumnLineBar(
+                          configs,
+                          el,
+                          index,
+                          fullRow,
+                          el.additionalTitle
+                        )}
+                      </div>
+                    );
+                  }
+                  if (el.typeChart === _LINESTRING) {
+                    return (
+                      <div className="statistical cong-suat--statistical">
+                        {RenderMultipleColumnLine(configs, el, index, fullRow)}
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
               </div>
             </div>
           </div>
         );
       }
       //case công suất 2 chart linebar
-    } else if ((configs[0].typeChart === _LINEBARSTRING && configs[1].typeChart === _LINEBARSTRING)) {
-     
-        console.log("222: ")
+    } else if (configs[0].typeChart === _LINEBARSTRING && configs[1].typeChart === _LINEBARSTRING) {
+      console.log('222: ');
 
       return (
-        <div className={`page-indicators-cong-suat  ${titleCase(parentTitle) === _CONGSUAT ? 'congsuat-linebar' : ''}`}>
+        <div
+          className={`page-indicators-cong-suat  ${
+            titleCase(parentTitle) === _CONGSUAT ? 'congsuat-linebar' : ''
+          }`}
+        >
           <div className="cong-suat-content">
             <div className="cong-suat-content--left">
-              {
-                configs.map((el, index) => {
-                  if (el === undefined) return null;
-                  if (el.typeChart === _LINEBARSTRING) {
-                    return (
-                      <div className="statistical">
-                        {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
-                      </div>
-                    )
-                  } else if (el.typeChart === _LINESTRING) {
-                    return (
-                      <div className="statistical">
-                        {RenderMultipleColumnLine(configs, el, index, fullRow)}
-                      </div>
-                    )
-                  } else return null
-
-                })
-              }
+              {configs.map((el, index) => {
+                if (el === undefined) return null;
+                if (el.typeChart === _LINEBARSTRING) {
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
+                    </div>
+                  );
+                } else if (el.typeChart === _LINESTRING) {
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleColumnLine(configs, el, index, fullRow)}
+                    </div>
+                  );
+                } else return null;
+              })}
             </div>
             <div className="cong-suat-content--right">
-              {
-                configs.map((el, index) => {
-                  if (el === undefined) return null;
-                  if (el.typeChart === _LINEBARSTRING) {
-                    return (
-                      <div className="statistical">
-                        {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
-                      </div>
-                    )
-                  } else return <></>
-                })
-              }
+              {configs.map((el, index) => {
+                if (el === undefined) return null;
+                if (el.typeChart === _LINEBARSTRING) {
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
+                    </div>
+                  );
+                } else return <></>;
+              })}
             </div>
           </div>
         </div>
-      )
+      );
 
       //sản lượng điện thương phẩm
-    } else if ((configs.length >= _THREELENGTHCHART && configs[0].typeChart === _SPEEDOMETERSTRING && configs[1].typeChart === _PIESTRING) ||
-      (idDienThuongPham === _IDSANLUONGDIENTHUONGPHAM && configs.length >= _TWOLENGTHCHART && configs[0].typeChart === _PIESTRING && configs[1].typeChart === _BARSTRING && configs[1].align === _HORIZONTAL)) {
+    } else if (
+      (configs.length >= _THREELENGTHCHART &&
+        configs[0].typeChart === _SPEEDOMETERSTRING &&
+        configs[1].typeChart === _PIESTRING) ||
+      (idDienThuongPham === _IDSANLUONGDIENTHUONGPHAM &&
+        configs.length >= _TWOLENGTHCHART &&
+        configs[0].typeChart === _PIESTRING &&
+        configs[1].typeChart === _BARSTRING &&
+        configs[1].align === _HORIZONTAL)
+    ) {
       if (configs.length === _TWOLENGTHCHART) {
         return (
           <div className={`sanluong-dienthuongpham`}>
             <div className="sanluong-dienthuongpham--one">
-              {
-                configs.map((el, index) => {
-                  if (el === undefined) return null;
-                  if (el.typeChart === _PIESTRING) {
-                    let isTitle: boolean = false
-                    return (
-                      <div className="statistical" >
-                        {RenderMultipleColumnPie(configs, el, index, fullRow, isTitle)}
-                      </div>
-                    )
-                  } else if (el.typeChart === _BARSTRING && el.align !== _VERTICAL) {
-                    return (
-                      <div className="statistical" >
-                        {RenderMultipleBarHorizontal(configs, el, index, fullRow, el.additionalTitle)}
-                      </div>
-                    )
-                  } else return null
-                })
-              }
+              {configs.map((el, index) => {
+                if (el === undefined) return null;
+                if (el.typeChart === _PIESTRING) {
+                  let isTitle: boolean = false;
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleColumnPie(configs, el, index, fullRow, isTitle)}
+                    </div>
+                  );
+                } else if (el.typeChart === _BARSTRING && el.align !== _VERTICAL) {
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleBarHorizontal(configs, el, index, fullRow, el.additionalTitle)}
+                    </div>
+                  );
+                } else return null;
+              })}
             </div>
           </div>
-        )
+        );
       } else {
         return (
-          <div className={`sanluong-dienthuongpham ${configs[0].typeChart === _SPEEDOMETERSTRING ? 'have-speedometer' : 'not-speedometer'}`}>
+          <div
+            className={`sanluong-dienthuongpham ${
+              configs[0].typeChart === _SPEEDOMETERSTRING ? 'have-speedometer' : 'not-speedometer'
+            }`}
+          >
             <div className="sanluong-dienthuongpham--one">
-              {
-                configs.map((el, index) => {
-                  if (el === undefined) return null;
-                  if (el.typeChart === _SPEEDOMETERSTRING) {
-                    return (
-                      <div className="statistical" >
-                        {renderMultipleColumnGauge(configs, el, index, fullRow, '')}
-                      </div>
-                    );
-                  } else if (el.typeChart === _PIESTRING) {
-                    let isTitle: boolean = false
-                    return (
-                      <div className={`statistical ${configs[0].typeChart === _SPEEDOMETERSTRING ? '' : 'pie-summary-sanluong'}`} >
-                        {RenderMultipleColumnPie(configs, el, index, fullRow, isTitle)}
-                      </div>
-                    )
-                  } else return null
-                })
-              }
+              {configs.map((el, index) => {
+                if (el === undefined) return null;
+                if (el.typeChart === _SPEEDOMETERSTRING) {
+                  return (
+                    <div className="statistical">
+                      {renderMultipleColumnGauge(configs, el, index, fullRow, '')}
+                    </div>
+                  );
+                } else if (el.typeChart === _PIESTRING) {
+                  let isTitle: boolean = false;
+                  return (
+                    <div
+                      className={`statistical ${
+                        configs[0].typeChart === _SPEEDOMETERSTRING ? '' : 'pie-summary-sanluong'
+                      }`}
+                    >
+                      {RenderMultipleColumnPie(configs, el, index, fullRow, isTitle)}
+                    </div>
+                  );
+                } else return null;
+              })}
             </div>
             <div className="sanluong-dienthuongpham--two">
-              {
-                configs.map((el, index) => {
-                  if (el === undefined) return null;
-                  if (el.typeChart === _BARSTRING && el.align === _VERTICAL) {
-                    return (
-                      <div className="statistical" >
-                        {RenderMultipleColumnBar(configs, el, index, fullRow, el.additionalTitle)}
-                      </div>
-                    )
-                  } else if (el.typeChart === _BARSTRING && el.align !== _VERTICAL) {
-                    return (
-                      <div className="statistical" >
-                        {RenderMultipleBarHorizontal(configs, el, index, fullRow, el.additionalTitle)}
-                      </div>
-                    )
-                  } else if (
-                    el.typeChart === _BARTOPHIGHESTSTRING ||
-                    el.typeChart === _BARTOPLUYKEHIGHESTSTRING
-                  ) {
-
-                    return sortAscending === _TRUE ? (
-                      <div
-                        key={index}
-                        className={`inner-statistical-wrapper`}
-                      >
-                        {RenderMultipleColumnTopHighest(configs, el, index, fullRow)}
-                      </div>
-                    ) : null
-                  } else if (
-                    el.typeChart === _BARTOPLOWESTSTRING ||
-                    el.typeChart === _BARTOPLUYKELOWESTSTRING
-                  ) {
-
-                    return sortAscending === _FALSE ? (
-                      <div
-                        key={index}
-                        className={`inner-statistical-wrapper`}
-                      >
-                        {RenderMultipleColumnTopLowest(configs, el, index, fullRow)}
-                      </div>
-                    )
-                      : null;
-                  } else return null
-                })
-              }
+              {configs.map((el, index) => {
+                if (el === undefined) return null;
+                if (el.typeChart === _BARSTRING && el.align === _VERTICAL) {
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleColumnBar(configs, el, index, fullRow, el.additionalTitle)}
+                    </div>
+                  );
+                } else if (el.typeChart === _BARSTRING && el.align !== _VERTICAL) {
+                  return (
+                    <div className="statistical">
+                      {RenderMultipleBarHorizontal(configs, el, index, fullRow, el.additionalTitle)}
+                    </div>
+                  );
+                } else if (
+                  el.typeChart === _BARTOPHIGHESTSTRING ||
+                  el.typeChart === _BARTOPLUYKEHIGHESTSTRING
+                ) {
+                  return sortAscending === _TRUE ? (
+                    <div key={index} className={`inner-statistical-wrapper`}>
+                      {RenderMultipleColumnTopHighest(configs, el, index, fullRow)}
+                    </div>
+                  ) : null;
+                } else if (
+                  el.typeChart === _BARTOPLOWESTSTRING ||
+                  el.typeChart === _BARTOPLUYKELOWESTSTRING
+                ) {
+                  return sortAscending === _FALSE ? (
+                    <div key={index} className={`inner-statistical-wrapper`}>
+                      {RenderMultipleColumnTopLowest(configs, el, index, fullRow)}
+                    </div>
+                  ) : null;
+                } else return null;
+              })}
             </div>
           </div>
-        )
+        );
       }
-
-    }
-    else {
+    } else {
       let pieClass: string = '';
-      let hasBarTop: string = ''
+      let hasBarTop: string = '';
       let table: string = '';
       let hasLine: string = '';
       let manyBarTop: string = '';
@@ -1216,76 +1353,107 @@ function PeriodsItem(props) {
       // eslint-disable-next-line
       configs.map((el, index) => {
         if (el.typeChart === _PIESTRING && el.data.length <= 3) {
-          pieClass = 'pieRow pie-one-row'
-        } else if (el.typeChart === _PIESTRING && el.data.length >= 4 && el.typeChart === _PIESTRING && el.data.length <= 6) {
-          pieClass = 'pieRow pie-two-row'
-        } else if (el.typeChart === _PIESTRING && el.data.length >= 7 && el.typeChart === _PIESTRING && el.data.length <= 9) {
-          pieClass = 'pieRow pie-three-row'
-        } else pieClass = 'pieRow pie-four-row'
+          pieClass = 'pieRow pie-one-row';
+        } else if (
+          el.typeChart === _PIESTRING &&
+          el.data.length >= 4 &&
+          el.typeChart === _PIESTRING &&
+          el.data.length <= 6
+        ) {
+          pieClass = 'pieRow pie-two-row';
+        } else if (
+          el.typeChart === _PIESTRING &&
+          el.data.length >= 7 &&
+          el.typeChart === _PIESTRING &&
+          el.data.length <= 9
+        ) {
+          pieClass = 'pieRow pie-three-row';
+        } else pieClass = 'pieRow pie-four-row';
 
         if (el.typeChart === _TABLESTRING) {
-          table = 'chart-table'
+          table = 'chart-table';
         }
 
-        if ((titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE && el.typeChart === _BARTOPHIGHESTSTRING) ||
-          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE && el.typeChart === _BARTOPLOWESTSTRING) ||
-          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE && el.typeChart === _BARTOPLUYKEHIGHESTSTRING) ||
-          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE && el.typeChart === _BARTOPLUYKELOWESTSTRING)) hasBarTop = 'has-barTop'
-        else hasBarTop = ''
+        if (
+          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE &&
+            el.typeChart === _BARTOPHIGHESTSTRING) ||
+          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE &&
+            el.typeChart === _BARTOPLOWESTSTRING) ||
+          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE &&
+            el.typeChart === _BARTOPLUYKEHIGHESTSTRING) ||
+          (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE &&
+            el.typeChart === _BARTOPLUYKELOWESTSTRING)
+        )
+          hasBarTop = 'has-barTop';
+        else hasBarTop = '';
 
-        if ((titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE && el.typeChart === _LINESTRING)) hasLine = 'has-line'
+        if (titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE && el.typeChart === _LINESTRING)
+          hasLine = 'has-line';
 
         if (configs.length >= 4) {
-          if ((el.typeChart === _BARTOPHIGHESTSTRING) ||
-            (el.typeChart === _BARTOPLOWESTSTRING) ||
-            (el.typeChart === _BARTOPLUYKEHIGHESTSTRING) ||
-            (el.typeChart === _BARTOPLUYKELOWESTSTRING)) count++
-          if (titleCase(parentTitle) === _TONTHATDIENNANG || count >= 2) manyBarTop = 'many-barTop'
-          else manyBarTop = ''
+          if (
+            el.typeChart === _BARTOPHIGHESTSTRING ||
+            el.typeChart === _BARTOPLOWESTSTRING ||
+            el.typeChart === _BARTOPLUYKEHIGHESTSTRING ||
+            el.typeChart === _BARTOPLUYKELOWESTSTRING
+          )
+            count++;
+          if (titleCase(parentTitle) === _TONTHATDIENNANG || count >= 2) manyBarTop = 'many-barTop';
+          else manyBarTop = '';
         }
-      })
+      });
 
       let addClass: string = '';
-      if ((configs[0].typeChart === _PIESTRING && configs[1].typeChart === _BARTOPLUYKELOWESTSTRING) ||
-        (configs[0].typeChart === _PIESTRING && configs[1].typeChart === _BARTOPLUYKEHIGHESTSTRING) ||
+      if (
+        (configs[0].typeChart === _PIESTRING &&
+          configs[1].typeChart === _BARTOPLUYKELOWESTSTRING) ||
+        (configs[0].typeChart === _PIESTRING &&
+          configs[1].typeChart === _BARTOPLUYKEHIGHESTSTRING) ||
         (configs[0].typeChart === _PIESTRING && configs[1].typeChart === _BARTOPLOWESTSTRING) ||
-        (configs[0].typeChart === _PIESTRING && configs[1].typeChart === _BARTOPHIGHESTSTRING)) {
-        addClass = 'pie-bar'
-      } else addClass = 'not-pie-bar'
+        (configs[0].typeChart === _PIESTRING && configs[1].typeChart === _BARTOPHIGHESTSTRING)
+      ) {
+        addClass = 'pie-bar';
+      } else addClass = 'not-pie-bar';
 
-      let removeSpeed: string = ''
-      if (configs[0].typeChart === _SPEEDOMETERSTRING && titleCase(parentTitle) === _DTCCCD) removeSpeed = 'remove-speed'
-      else if (titleCase(parentTitle) === _BOCHITIEUSUACHUALON) removeSpeed = 'big-speed'
-      else removeSpeed = ''
+      let removeSpeed: string = '';
+      if (configs[0].typeChart === _SPEEDOMETERSTRING && titleCase(parentTitle) === _DTCCCD)
+        removeSpeed = 'remove-speed';
+      else if (titleCase(parentTitle) === _BOCHITIEUSUACHUALON) removeSpeed = 'big-speed';
+      else removeSpeed = '';
       return (
         <div
-          className={`statistical ${isRow && titleCase(parentTitle) !== _TONTHATDIENNANG ? "column-row" : ''} ${isRow
-            ? fullRow && titleCase(parentTitle) !== _SANLUONGDIENTHUONGPHAM
-              ? 'statistical-row-three-chart' :
-              (fullRow && titleCase(parentTitle) === _SANLUONGDIENTHUONGPHAM) || (configs[0].typeChart === _SPEEDOMETERSTRING && configs.length === 4 && titleCase(parentTitle) === _SANLUONGDIENTHUONGPHAM) ? 'statistical-row-style statistical-row-wrap'
+          className={`statistical ${
+            isRow && titleCase(parentTitle) !== _TONTHATDIENNANG ? 'column-row' : ''
+          } ${
+            isRow
+              ? fullRow && titleCase(parentTitle) !== _SANLUONGDIENTHUONGPHAM
+                ? 'statistical-row-three-chart'
+                : (fullRow && titleCase(parentTitle) === _SANLUONGDIENTHUONGPHAM) ||
+                  (configs[0].typeChart === _SPEEDOMETERSTRING &&
+                    configs.length === 4 &&
+                    titleCase(parentTitle) === _SANLUONGDIENTHUONGPHAM)
+                ? 'statistical-row-style statistical-row-wrap'
                 : configs.length === 2 &&
                   configs[0].typeChart === _SPEEDOMETERSTRING &&
                   !dataPeriods
-                  ? 'statistical-row-style statistical-wrapped'
-                  : 'statistical-row-style'
-            : ''
-            } ${pieClass} ${table} ${addClass} ${titleCase(parentTitle) === _TONTHATDIENNANG ? 'tonthat-diennang' : ''}
+                ? 'statistical-row-style statistical-wrapped'
+                : 'statistical-row-style'
+              : ''
+          } ${pieClass} ${table} ${addClass} ${
+            titleCase(parentTitle) === _TONTHATDIENNANG ? 'tonthat-diennang' : ''
+          }
             ${titleCase(parentTitle) === _GIADIENBINHQUANTHANGN ? 'giaDienBinhQuan' : ''} 
-            ${titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE ? 'suCoLuoiDienTrungThe' : ''} ${hasBarTop} ${hasLine} ${manyBarTop}`}
+            ${
+              titleCase(parentTitle) === _SUCOLUOIDIENTRUNGTHE ? 'suCoLuoiDienTrungThe' : ''
+            } ${hasBarTop} ${hasLine} ${manyBarTop}`}
         >
-
-
-
           {configs.map((el, index) => {
             if (el.typeChart === _TABLESTRING) {
               return (
                 <div key={index} className="table-charts">
-                  <TableChart
-                    dataTable={el}
-                    typeChart={el.typeChart}
-                  />
+                  <TableChart dataTable={el} typeChart={el.typeChart} />
                 </div>
-              )
+              );
             } else if (el.typeChart === _SPEEDOMETERSTRING) {
               return <>{renderMultipleColumnGauge(configs, el, index, fullRow, removeSpeed)}</>;
             } else if (el.typeChart === _LINESTRING) {
@@ -1324,11 +1492,12 @@ function PeriodsItem(props) {
                 isRow ? (
                   <div
                     key={index}
-                    className={`${configDisplayLength <= 2 &&
+                    className={`${
+                      configDisplayLength <= 2 &&
                       !configs.some((conf) => conf.typeChart.indexOf('pie') >= 0)
-                      ? 'inner-statistical-wrapper'
-                      : 'small-inner-statistical-wrapper row-item-pc'
-                      }`}
+                        ? 'inner-statistical-wrapper'
+                        : 'small-inner-statistical-wrapper row-item-pc'
+                    }`}
                   >
                     {RenderMultipleColumnTopHighest(configs, el, index, fullRow)}
                   </div>
@@ -1348,11 +1517,12 @@ function PeriodsItem(props) {
                 isRow ? (
                   <div
                     key={index}
-                    className={`${configDisplayLength <= 2 &&
+                    className={`${
+                      configDisplayLength <= 2 &&
                       !configs.some((conf) => conf.typeChart.indexOf('pie') >= 0)
-                      ? 'inner-statistical-wrapper'
-                      : 'small-inner-statistical-wrapper row-item-pc'
-                      }`}
+                        ? 'inner-statistical-wrapper'
+                        : 'small-inner-statistical-wrapper row-item-pc'
+                    }`}
                   >
                     {RenderMultipleColumnTopLowest(configs, el, index, fullRow)}
                   </div>
@@ -1363,7 +1533,6 @@ function PeriodsItem(props) {
             } else if (el.typeChart === _PIESTRING) {
               return RenderMultipleColumnPie(configs, el, index, fullRow, true);
             } else {
-
               const configDisplayLength = configs.filter(
                 (conf) => conf.typeChart.indexOf('bartop') < 0
               ).length;
@@ -1371,10 +1540,11 @@ function PeriodsItem(props) {
               return isRow ? (
                 <div
                   key={index}
-                  className={`${configDisplayLength <= 1 || fullRow
-                    ? 'inner-statistical-wrapper'
-                    : 'small-inner-statistical-wrapper row-item-pc'
-                    }`}
+                  className={`${
+                    configDisplayLength <= 1 || fullRow
+                      ? 'inner-statistical-wrapper'
+                      : 'small-inner-statistical-wrapper row-item-pc'
+                  }`}
                 >
                   {RenderMultipleColumnLineBar(configs, el, index, fullRow, el.additionalTitle)}
                 </div>
@@ -1387,7 +1557,6 @@ function PeriodsItem(props) {
           })}
         </div>
       );
-
     }
   }
 }
