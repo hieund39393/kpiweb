@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
@@ -6,6 +6,7 @@ import { BANG_BAO_CAO_CHI_TIEU } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
+import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
 
 interface MenuItem {
   label: string;
@@ -42,17 +43,35 @@ const ChiTieuTable = () => {
   const { chiTieu, value } = location.state;
 
   const [data, setData] = useState<DataType[]>([]);
+  const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
 
   const [inputValue, setInputValue] = useState<InputValue>({
     ngayBaoCao: '',
     tanSuat: 'm',
   });
 
-  const [sanLuongDonVi, setSanLuongDonVi] = useState(false)
+  const [idChiTieu, setIDChiTieu] = useState<number>(49);
 
   const handleShowSanLuongDonVi = () => {
+    setModalSanLuongDonVi(true);
+  };
+  const handleCloseSanLuongDonVi = () => {
+    setModalSanLuongDonVi(false);
+  };
 
-  }
+  const modalSL = useMemo(
+    () =>
+      modalSanLuongDonVi && (
+        <SanLuongDien
+          chiTieuId={idChiTieu}
+          isShowModal={modalSanLuongDonVi}
+          ngayBaoCao={inputValue.ngayBaoCao}
+          tanSuat={inputValue.tanSuat}
+          closeModal={handleCloseSanLuongDonVi}
+        />
+      ),
+    [modalSanLuongDonVi]
+  );
 
   const columns: ColumnsType<DataType> = [
     {
@@ -61,12 +80,7 @@ const ChiTieuTable = () => {
       key: 'stt',
       render: (text, record) => {
         if (record.chiTieuCha === true) {
-          if (text === "Sản lượng điện thương phẩm") {
-            return <strong className="view-chart" onClick={handleShowSanLuongDonVi}>{text}</strong>;
-          } else {
-            return <strong className="view-chart">{text}</strong>;
-
-          }
+          return <strong className="view-chart">{text}</strong>;
         }
         return (
           <span
@@ -84,7 +98,23 @@ const ChiTieuTable = () => {
       key: 'tenChiTieu',
       render: (text, record) => {
         if (record.chiTieuCha === true) {
-          return <strong className="view-chart">{text}</strong>;
+          if (text === 'Sản lượng điện thương phẩm') {
+            setIDChiTieu(49);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Sản lượng điện nhận đầu nguồn và mặt trời') {
+            setIDChiTieu(57);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else {
+            return <strong className="view-chart">{text}</strong>;
+          }
         }
         return (
           <span
@@ -168,14 +198,17 @@ const ChiTieuTable = () => {
       },
     },
   ];
+
   useEffect(() => {
     getBangBaoCaoChiTieu();
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
       if (chiTieu[0].value === selectedValue) {
-        spanElement.textContent = chiTieu[0].label
+        spanElement.textContent = chiTieu[0].label;
       } else {
-        spanElement.textContent = `${(chiTieu[0].label).split('(')[0]} ${`>`} ${chiTieu.filter(x => x.value === selectedValue)[0].label}`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
+          chiTieu.filter((x) => x.value === selectedValue)[0].label
+        }`;
       }
     }
   }, [chiTieu, value, inputValue]);
@@ -187,7 +220,7 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
       null
     );
     setData(res);
@@ -200,7 +233,7 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
       null
     );
     setData(res);
@@ -208,9 +241,11 @@ const ChiTieuTable = () => {
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
       if (chiTieu[0].value === value) {
-        spanElement.textContent = chiTieu[0].label
+        spanElement.textContent = chiTieu[0].label;
       } else {
-        spanElement.textContent = `${(chiTieu[0].label).split('(')[0]} ${`>`} ${chiTieu.filter(x => x.value === value)[0].label}`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
+          chiTieu.filter((x) => x.value === value)[0].label
+        }`;
       }
     }
   };
@@ -245,6 +280,7 @@ const ChiTieuTable = () => {
           <Table columns={columns} dataSource={data.map((item) => ({ ...item, key: item.id }))} />
         </div>
       </div>
+      <>{modalSL}</>
     </div>
   );
 };

@@ -223,3 +223,4 @@ export const routes = [
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
 export const BANG_BAO_CAO_CHI_TIEU = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu';
+export const BANG_BAO_CAO_CHI_TIEU_CAC_DON_VI = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu-cac-don-vi';
