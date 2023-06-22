@@ -17,6 +17,7 @@ import BoChiTieuChuyenDoiSo from '../components/chuyendoiso/index';
 import BoChiTieuThanhTraKiemTra from '../components/thanhtrakiemtra/index';
 import BoChiTieuBaoCaoDieuHanh from '../components/baocaodieuhanh/index';
 import BoChiTieuTuDongHoa from '../components/tudonghoa/index';
+import BoChiTieuTruyenThong from './truyenthong';
 import BoChiTieuDichVuKhachHang from './dichvukhachhang';
 import BoChiTieuCongTacDauThau from './congtacdauthau';
 
@@ -230,6 +231,16 @@ const Dashboard = () => {
       <BoChiTieuTuDongHoa
         donViID={donViId}
         boChiTieuID={37}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
+      />
+      <BoChiTieuTruyenThong
+        donViID={donViId}
+        boChiTieuID={51}
         ngayBaoCao={ngayBaoCao}
         fetchAt={fetchAt}
         setIsChange={setIsChange}

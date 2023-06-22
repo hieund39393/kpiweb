@@ -17,6 +17,7 @@ import BoChiTieuDichVuKhachHang from '../dichvukhachhang';
 import BoChiTieuCongTacDauThau from '../congtacdauthau';
 import BoChiTieuBaoCaoDieuHanh from '../../components/baocaodieuhanh/index';
 import BoChiTieuTuDongHoa from '../../components/tudonghoa/index';
+import BoChiTieuTruyenThong from '../truyenthong';
 
 import { DonVi } from 'modules/dashboard/dtos/responses/ChartResponse';
 
@@ -29,10 +30,8 @@ import { useLocation } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-
 const donViService = DonViService.instance();
 const localStorageService = LocalStorageService.instance();
-
 
 const BieuDo = () => {
   const navigate = useNavigate();
@@ -213,6 +212,16 @@ const BieuDo = () => {
       <BoChiTieuTuDongHoa
         donViID={donViId}
         boChiTieuID={37}
+        ngayBaoCao={ngayBaoCao}
+        fetchAt={fetchAt}
+        setIsChange={setIsChange}
+        isChange={isChange}
+        chiTieuId={chiTieuId}
+        chiTieuChaId={chiTieuChaId}
+      />
+      <BoChiTieuTruyenThong
+        donViID={donViId}
+        boChiTieuID={51}
         ngayBaoCao={ngayBaoCao}
         fetchAt={fetchAt}
         setIsChange={setIsChange}

@@ -9,6 +9,7 @@ export const _BOCHITIEUCHUYENDOISO = 'boChiTieuChuyenDoiSo';
 export const _BOCHITIEUTHANHTRAKIEMTRA = 'boChiTieuThanhTraKiemTra';
 export const _BOCHITIEUBAOCAODIEUHANH = 'boChiTieuBaoCaoDieuHanh';
 export const _BOCHITIEUTUDONGHOA = 'boChiTieuTuDongHoa';
+export const _BOCHITIEUTRUYENTHONG = 'boChiTieuTruyenThong';
 
 export const _BOCHITIEUDICHVUKHACHHANG = 'boChiTieuDichVuKhachHang';
 export const _BOCHITIEUCONGTACDAUTHAU = 'boChiTieuCongTacDauThau';

@@ -157,3 +157,6 @@
   font-size: 20px;
 
 }
+#boChiTieuKyThuat.tongCongTy .suCoLuoiDienTrungThe.has-barTop:first-child .page-setOfIndicators--charts-top:nth-child(3){
+  top: 127px !important;
+}
