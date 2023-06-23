@@ -112,7 +112,16 @@ const ChiTieuTable = () => {
                 <strong className="view-chart">{text}</strong>
               </a>
             );
-          } else {
+          }
+          else if (text === 'Độ tin cậy cung cấp điện') {
+            setIDChiTieu(38);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } 
+           else {
             return <strong className="view-chart">{text}</strong>;
           }
         }
