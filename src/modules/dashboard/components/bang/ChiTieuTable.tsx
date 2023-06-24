@@ -121,6 +121,30 @@ const ChiTieuTable = () => {
               </a>
             );
           } 
+          else if (text === 'Sự cố lưới điện trung thế') {
+            setIDChiTieu(323);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          }
+          else if (text === 'Tổn thất điện năng') {
+            setIDChiTieu(122);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          }
+          else if (text === 'Giá bán điện bình quân tháng N') {
+            setIDChiTieu(123);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          }
            else {
             return <strong className="view-chart">{text}</strong>;
           }

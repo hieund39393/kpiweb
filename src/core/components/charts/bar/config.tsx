@@ -159,7 +159,7 @@ export const configChartBar = (typeChart, data) => {
     label: {
       style: {
         fill: _COLORBLACK,
-        fontSize: fontSize,
+        fontSize: 0,
         fontWeight: setWidth <= 1024 ? 400 : 600,
       },
       position: 'right',
