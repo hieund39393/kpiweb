@@ -279,7 +279,7 @@ export const configChartDualAxes = (typeChart, data) => {
           style: {
             fontWeight: setWidth <= 1024 ? 400 : 600,
             fill: '#0F0F1A',
-            fontSize: fontSize,
+            fontSize: 0,
           },
         },
         color: colorsBar,
@@ -305,7 +305,7 @@ export const configChartDualAxes = (typeChart, data) => {
           style: {
             fontWeight: setWidth <= 1024 ? 400 : 600,
             fill: '#0F0F1A',
-            fontSize: fontSize,
+            fontSize: 0,
             opacity: 1
           },
         },

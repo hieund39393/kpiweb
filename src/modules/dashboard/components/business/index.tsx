@@ -33,7 +33,7 @@ function BoChiTieuKinhDoanh(props) {
     fetchIndicators();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log('charts', indicatorsLevel);
   return (
     <div
       // style={{ display: 'none' }} // tạm thời comment

@@ -110,6 +110,18 @@ const ChartService = (function () {
     return await httpService.get(url, {});
   }
 
+  async function _bieuDoTronAsync({ chiTieuChaId, ngayBaoCao, tansuat }) {
+    let url =
+      route.getDuLieuBieuDoTron +
+      '?chiTieuId=' +
+      chiTieuChaId +
+      '&ngayBaoCao=' +
+      ngayBaoCao +
+      '&tansuat=' +
+      tansuat;
+    return await httpService.get(url, {});
+  }
+
   return {
     instance: _instance,
     get: _getChartAsync,
@@ -122,6 +134,7 @@ const ChartService = (function () {
     listGiaiQuyetAsync: _listGiaiQuyetAsync,
     listSliderShow: _listSliderShowAsync,
     danhSachCongTrinhAsync: _danhSachCongTrinhAsync,
+    bieuDoTronAsync: _bieuDoTronAsync,
   };
 })();
 

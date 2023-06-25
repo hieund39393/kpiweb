@@ -21,3 +21,4 @@ export const listGiaiQuyet = BASE_URL + 'du-lieu-bieu-do/list-chi-tiet';
 export const listSliderShow = BASE_URL + 'du-lieu-bieu-do/get-slideshow';
 
 export const getDanhSachCongTrinh = BASE_URL + 'bieu-do/get-danh-sach-cong-trinh';
+export const getDuLieuBieuDoTron = BASE_URL + 'bieu-do/get-du-lieu-bieu-do-tron';

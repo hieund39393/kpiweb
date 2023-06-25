@@ -33,7 +33,7 @@ function configColumns(config) {
       style: {
         fontWeight: setWidth <= 1024 ? 400 : 600,
         fill: '#0F0F1A',
-        fontSize: fontSize
+        fontSize: 0
       },
       formatter: function formatter(datum, text) {
         if (arr1.length > 4) {

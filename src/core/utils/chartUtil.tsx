@@ -7,13 +7,15 @@ import {
   _LINEBARSTRING,
   _LINESTRING,
   _PIESTRING,
+  _TRON,
   _SPEEDOMETERSTRING,
-  _TABLESTRING
+  _TABLESTRING,
 } from 'constant/chart';
 import { configChartBar, configChartBarTop } from 'core/components/charts/bar/config';
 import { configChartDualAxes } from 'core/components/charts/dualAxes/config';
 import { configChartLine } from 'core/components/charts/line/config';
 import { configChartPie } from 'core/components/charts/pie/config';
+import { configChartTron } from 'core/components/charts/tron/config';
 import { configChartSpeed } from 'core/components/charts/speedOMeter/config';
 import { configTable } from 'core/components/charts/table/config';
 
@@ -28,19 +30,19 @@ export const formatConfigChart = (typeChart, data) => {
 
     //chart bar
     case _BARSTRING: {
-      const configChart = configChartBar(typeChart, data)
+      const configChart = configChartBar(typeChart, data);
       return configChart;
     }
 
     //chart line
     case _LINESTRING: {
-      const configChart = configChartLine(typeChart, data)
+      const configChart = configChartLine(typeChart, data);
       return configChart;
     }
 
     //chart speedometer
     case _SPEEDOMETERSTRING: {
-      const configChart = configChartSpeed(typeChart, data)
+      const configChart = configChartSpeed(typeChart, data);
       return configChart;
     }
 
@@ -49,13 +51,19 @@ export const formatConfigChart = (typeChart, data) => {
     case _BARTOPLOWESTSTRING:
     case _BARTOPLUYKEHIGHESTSTRING:
     case _BARTOPLUYKELOWESTSTRING: {
-      const configChart = configChartBarTop(typeChart, data)
-      return configChart
+      const configChart = configChartBarTop(typeChart, data);
+      return configChart;
     }
 
     //chart pie
     case _PIESTRING: {
-      const configChart = configChartPie(typeChart, data)
+      const configChart = configChartPie(typeChart, data);
+      return configChart;
+    }
+
+    //chart tròn
+    case _TRON: {
+      const configChart = configChartTron(typeChart, data);
       return configChart;
     }
 

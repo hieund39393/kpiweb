@@ -20,6 +20,7 @@ import BaoCaoTheoDonVi from '../../report/components/deparment';
 import NhomKeHoach from 'modules/dashboard/components/nhomKeHoach';
 import ChiTieuTable from 'modules/dashboard/components/bang/ChiTieuTable';
 import BieuDoChart from 'modules/dashboard/components/bieudo';
+import BieuDoTron from 'modules/dashboard/components/bieudotron';
 
 import Dashboard from 'modules/dashboard/components/index';
 import CauHinhBieuDo from '../../admin/configCharts/components';
@@ -219,8 +220,17 @@ export const routes = [
     title: '',
     component: <BieuDoChart />,
   },
+  {
+    key: 'bieuDoTron',
+    id: 37,
+    icon: '',
+    path: '/bieu-do-tron',
+    title: '',
+    component: <BieuDoTron />,
+  },
 ];
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
 export const BANG_BAO_CAO_CHI_TIEU = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu';
-export const BANG_BAO_CAO_CHI_TIEU_CAC_DON_VI = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu-cac-don-vi';
+export const BANG_BAO_CAO_CHI_TIEU_CAC_DON_VI =
+  BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu-cac-don-vi';

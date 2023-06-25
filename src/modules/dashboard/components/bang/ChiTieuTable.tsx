@@ -112,16 +112,35 @@ const ChiTieuTable = () => {
                 <strong className="view-chart">{text}</strong>
               </a>
             );
-          }
-          else if (text === 'Độ tin cậy cung cấp điện') {
+          } else if (text === 'Độ tin cậy cung cấp điện') {
             setIDChiTieu(38);
             return (
               <a onClick={handleShowSanLuongDonVi}>
                 <strong className="view-chart">{text}</strong>
               </a>
             );
-          } 
-           else {
+          } else if (text === 'Sự cố lưới điện trung thế') {
+            setIDChiTieu(323);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Tổn thất điện năng') {
+            setIDChiTieu(122);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Giá bán điện bình quân tháng N') {
+            setIDChiTieu(123);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else {
             return <strong className="view-chart">{text}</strong>;
           }
         }
@@ -260,7 +279,18 @@ const ChiTieuTable = () => {
   };
 
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
-    navigate('/bieu-do', { state: { chiTieuId, chiTieuChaId } });
+    if (chiTieuChaId === 74) {
+      navigate('/bieu-do-tron', {
+        state: {
+          chiTieuId,
+          chiTieuChaId,
+          ngayBaoCao: inputValue.ngayBaoCao,
+          tansuat: inputValue.tanSuat,
+        },
+      });
+    } else {
+      navigate('/bieu-do', { state: { chiTieuId, chiTieuChaId } });
+    }
   };
 
   const [selectedValue, setSelectedValue] = useState(value ?? chiTieu[0].value);
