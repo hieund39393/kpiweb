@@ -35,6 +35,7 @@ interface DataType {
 interface InputValue {
   ngayBaoCao: string;
   tanSuat: string;
+  donViId: number
 }
 
 const ChiTieuTable = () => {
@@ -48,6 +49,7 @@ const ChiTieuTable = () => {
   const [inputValue, setInputValue] = useState<InputValue>({
     ngayBaoCao: '',
     tanSuat: 'm',
+    donViId: 1
   });
 
   const [idChiTieu, setIDChiTieu] = useState<number>(49);
@@ -135,6 +137,34 @@ const ChiTieuTable = () => {
             );
           } else if (text === 'Giá bán điện bình quân tháng N') {
             setIDChiTieu(123);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Dịch vụ cấp điện mới') {
+            setIDChiTieu(413);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Chỉ số tiếp cận điện năng') {
+            setIDChiTieu(415);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Đánh giá sự hài lòng của khách hàng') {
+            setIDChiTieu(417);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Tỷ lệ đầu nguồn theo giờ cao thấp điểm') {
+            setIDChiTieu(74);
             return (
               <a onClick={handleShowSanLuongDonVi}>
                 <strong className="view-chart">{text}</strong>
@@ -234,9 +264,8 @@ const ChiTieuTable = () => {
       if (chiTieu[0].value === selectedValue) {
         spanElement.textContent = chiTieu[0].label;
       } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
-          chiTieu.filter((x) => x.value === selectedValue)[0].label
-        }`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${chiTieu.filter((x) => x.value === selectedValue)[0].label
+          }`;
       }
     }
   }, [chiTieu, value, inputValue]);
@@ -248,7 +277,7 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -261,7 +290,7 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
       null
     );
     setData(res);
@@ -271,9 +300,8 @@ const ChiTieuTable = () => {
       if (chiTieu[0].value === value) {
         spanElement.textContent = chiTieu[0].label;
       } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
-          chiTieu.filter((x) => x.value === value)[0].label
-        }`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${chiTieu.filter((x) => x.value === value)[0].label
+          }`;
       }
     }
   };
@@ -316,7 +344,12 @@ const ChiTieuTable = () => {
           />
         </>
         <div style={{ margin: 10 }}>
-          <Table columns={columns} dataSource={data.map((item) => ({ ...item, key: item.id }))} />
+          <Table
+            pagination={{
+              defaultPageSize: 20,
+              defaultCurrent: 1,
+          
+            }} columns={columns} dataSource={data.map((item) => ({ ...item, key: item.id }))} />
         </div>
       </div>
       <>{modalSL}</>

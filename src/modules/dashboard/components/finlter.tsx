@@ -67,6 +67,11 @@ const Filter = (props) => {
       else setFixedForm('notFixedForm');
     };
     window.addEventListener('scroll', changedForm);
+
+    const handleChangDonVi = (value) => {
+      console.log(value.value);
+      setDonViId(value.value)
+    }
     return (
       <>
         <Form
@@ -94,6 +99,7 @@ const Filter = (props) => {
                       ? _FALSE
                       : _TRUE
                   }
+                  onChange={handleChangDonVi}
                   //filterOption={(input, option) =>
                   //option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   //}
@@ -260,9 +266,9 @@ const Filter = (props) => {
                   >
                     <DatePicker
                       placeholder="Chọn ngày"
-                      // locale={locale}
-                      // format={_DAYFORMAT}
-                      // disabledDate={disabledDateCurrent}
+                    // locale={locale}
+                    // format={_DAYFORMAT}
+                    // disabledDate={disabledDateCurrent}
                     />
                   </Form.Item>
                 </div>
@@ -322,7 +328,7 @@ const Filter = (props) => {
 
     const ngayBC = moment(values.ngayBaoCao, _DAYFORMAT).format(_DAYFORMAT);
 
-    setInput({ ngayBaoCao: ngayBC, tanSuat: values.tanSuat });
+    setInput({ donViId: values.donViID.value, ngayBaoCao: ngayBC, tanSuat: values.tanSuat });
   }
 
   return <div>{width > 576 ? renderFilter : renderMobileFilter}</div>;

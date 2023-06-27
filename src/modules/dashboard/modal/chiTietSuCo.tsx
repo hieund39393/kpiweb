@@ -162,7 +162,7 @@ function ChiTietSuCo({
               </Form.Item>
             </Col>
 
-            <Col span={24} sm={24} xl={12} className="row-padding donViRow">
+            {/* <Col span={24} sm={24} xl={12} className="row-padding donViRow">
               <Form.Item name="donViID" label="Đơn vị">
                 <Select
                   className="dashboard-selector-pc"
@@ -182,7 +182,7 @@ function ChiTietSuCo({
                     : null}
                 </Select>
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
         </Form>
       </div>
@@ -190,54 +190,54 @@ function ChiTietSuCo({
       <div className="modal-detail">
         {suCo && suCo.length
           ? suCo.map((item) => (
-              <>
-                <div className="modal-detail--content">
-                  <div className="modal-detail--content--title">
-                    <h3>{item.tenDuongDay}</h3>
-                  </div>
-                  <div className="modal-detail--content-body">
-                    <Row gutter={16}>
-                      <Col span={5} md={6}>
-                        Thời gian xảy ra
-                      </Col>
-                      <Col span={19} md={18}>
-                        {item.ngayXayRaSuCoStr}
-                      </Col>
-                      <Col span={5} md={6}>
-                        Thời gian khôi phục sự cố
-                      </Col>
-                      <Col span={19} md={18}>
-                        {item.ngayKhoiPhucSuCoStr}
-                      </Col>
-                      <Col span={5} md={6}>
-                        Công ty điện lực phụ trách
-                      </Col>
-                      <Col span={19} md={18}>
-                        {item.tenDonVi}
-                      </Col>
-                      <Col span={5} md={6}>
-                        Diễn biến
-                      </Col>
-                      <Col span={19} md={18}>
-                        {item.dienBien}
-                      </Col>
-                      <Col span={5} md={6}>
-                        Nguyên nhân
-                      </Col>
-                      <Col span={19} md={18} className="ctsc-reason">
-                        {item.nguyenNhan}
-                      </Col>
-                      <Col span={5} md={6}>
-                        Biện pháp khắc phục
-                      </Col>
-                      <Col span={19} md={18} className="ctsc-measure">
-                        {item.bienPhapKhacPhuc}
-                      </Col>
-                    </Row>
-                  </div>
+            <>
+              <div className="modal-detail--content">
+                <div className="modal-detail--content--title">
+                  <h3>{item.tenDuongDay}</h3>
                 </div>
-              </>
-            ))
+                <div className="modal-detail--content-body">
+                  <Row gutter={16}>
+                    <Col span={5} md={6}>
+                      Thời gian xảy ra
+                    </Col>
+                    <Col span={19} md={18}>
+                      {item.ngayXayRaSuCoStr}
+                    </Col>
+                    <Col span={5} md={6}>
+                      Thời gian khôi phục sự cố
+                    </Col>
+                    <Col span={19} md={18}>
+                      {item.ngayKhoiPhucSuCoStr}
+                    </Col>
+                    <Col span={5} md={6}>
+                      Công ty điện lực phụ trách
+                    </Col>
+                    <Col span={19} md={18}>
+                      {item.tenDonVi}
+                    </Col>
+                    <Col span={5} md={6}>
+                      Diễn biến
+                    </Col>
+                    <Col span={19} md={18}>
+                      {item.dienBien}
+                    </Col>
+                    <Col span={5} md={6}>
+                      Nguyên nhân
+                    </Col>
+                    <Col span={19} md={18} className="ctsc-reason">
+                      {item.nguyenNhan}
+                    </Col>
+                    <Col span={5} md={6}>
+                      Biện pháp khắc phục
+                    </Col>
+                    <Col span={19} md={18} className="ctsc-measure">
+                      {item.bienPhapKhacPhuc}
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </>
+          ))
           : null}
         {total > 20 ? (
           <Pagination
