@@ -35,12 +35,18 @@ interface DataType {
 interface InputValue {
   ngayBaoCao: string;
   tanSuat: string;
+  donViId: number;
 }
 
 const ChiTieuTable = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const { chiTieu, value } = location.state;
+
+  localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
+
+  const [valueChiTieu, setValueChiTieu] = useState(value);
 
   const [data, setData] = useState<DataType[]>([]);
   const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
@@ -48,9 +54,10 @@ const ChiTieuTable = () => {
   const [inputValue, setInputValue] = useState<InputValue>({
     ngayBaoCao: '',
     tanSuat: 'm',
+    donViId: 1,
   });
 
-  const [idChiTieu, setIDChiTieu] = useState<number>(49);
+  const [idChiTieu, setIDChiTieu] = useState<number>(value);
 
   const handleShowSanLuongDonVi = () => {
     setModalSanLuongDonVi(true);
@@ -135,6 +142,34 @@ const ChiTieuTable = () => {
             );
           } else if (text === 'Giá bán điện bình quân tháng N') {
             setIDChiTieu(123);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Dịch vụ cấp điện mới') {
+            setIDChiTieu(413);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Chỉ số tiếp cận điện năng') {
+            setIDChiTieu(415);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Đánh giá sự hài lòng của khách hàng') {
+            setIDChiTieu(417);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          } else if (text === 'Tỷ lệ đầu nguồn theo giờ cao thấp điểm') {
+            setIDChiTieu(74);
             return (
               <a onClick={handleShowSanLuongDonVi}>
                 <strong className="view-chart">{text}</strong>
@@ -242,13 +277,13 @@ const ChiTieuTable = () => {
   }, [chiTieu, value, inputValue]);
 
   const getBangBaoCaoChiTieu = async () => {
-    let ids = value;
-    if (value.startsWith('0')) {
+    let ids = valueChiTieu;
+    if (valueChiTieu.startsWith('0')) {
       ids = chiTieu.filter((x) => !x.value.startsWith('0')).map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -261,7 +296,7 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}`,
+        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -276,10 +311,20 @@ const ChiTieuTable = () => {
         }`;
       }
     }
+
+    setSelectedValue(value);
+    setValueChiTieu(value);
+
+    localStorage.setItem('selectedValue', value);
   };
 
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
-    if (chiTieuChaId === 74) {
+    if (
+      chiTieuChaId === 74 ||
+      (chiTieuId >= 338 && chiTieuId <= 342) ||
+      chiTieuId === 58 ||
+      chiTieuId === 124
+    ) {
       navigate('/bieu-do-tron', {
         state: {
           chiTieuId,
@@ -293,8 +338,13 @@ const ChiTieuTable = () => {
     }
   };
 
-  const [selectedValue, setSelectedValue] = useState(value ?? chiTieu[0].value);
+  const [selectedValue, setSelectedValue] = useState(valueChiTieu ?? chiTieu[0].value);
 
+  // const storedValue: string | null = localStorage.getItem('selectedValue');
+  // if (storedValue !== null) {
+  //   const parsedValue: number = parseInt(storedValue, 10);
+  //   setSelectedValue(parsedValue);
+  // }
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
       <Filter setInput={setInputValue} ids={value} />
@@ -316,7 +366,14 @@ const ChiTieuTable = () => {
           />
         </>
         <div style={{ margin: 10 }}>
-          <Table columns={columns} dataSource={data.map((item) => ({ ...item, key: item.id }))} />
+          <Table
+            pagination={{
+              defaultPageSize: 20,
+              defaultCurrent: 1,
+            }}
+            columns={columns}
+            dataSource={data.map((item) => ({ ...item, key: item.id }))}
+          />
         </div>
       </div>
       <>{modalSL}</>

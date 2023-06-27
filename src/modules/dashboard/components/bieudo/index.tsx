@@ -33,6 +33,11 @@ import { useNavigate } from 'react-router-dom';
 const donViService = DonViService.instance();
 const localStorageService = LocalStorageService.instance();
 
+interface MenuItem {
+  label: string;
+  value: string;
+}
+
 const BieuDo = () => {
   const navigate = useNavigate();
 
@@ -71,7 +76,23 @@ const BieuDo = () => {
   const [isChange, setIsChange] = useState(false);
 
   const goBack = () => {
-    navigate(-1);
+    const chitieuST = localStorage.getItem('chiTieuST');
+    let menuItems: MenuItem[] = [];
+
+    if (chitieuST) {
+      menuItems = JSON.parse(chitieuST).map((item: { label: string; value: string }) => ({
+        label: item.label,
+        value: item.value,
+      }));
+    }
+
+    const storedValue: string | null = localStorage.getItem('selectedValue');
+    if (storedValue !== null) {
+      const parsedValue: number = parseInt(storedValue, 10);
+      navigate('/bang-chi-tiet', {
+        state: { chiTieu: menuItems, value: parsedValue },
+      });
+    }
   };
 
   return (
