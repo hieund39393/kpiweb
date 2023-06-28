@@ -1,0 +1,9 @@
+.ant-modal .ant-modal-body {
+    max-height: 760px !important;
+    overflow-y: scroll;
+    overflow: auto;
+}
+
+.ant-modal-footer{
+    margin-top: -30px;
+}

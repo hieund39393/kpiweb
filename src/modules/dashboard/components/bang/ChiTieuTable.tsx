@@ -209,7 +209,9 @@ const ChiTieuTable = () => {
         if (record.chiTieuCha === true) {
           return <strong>{text}</strong>;
         }
-        return text;
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
       },
     },
     {
@@ -221,7 +223,9 @@ const ChiTieuTable = () => {
         if (record.chiTieuCha === true) {
           return <strong>{text}</strong>;
         }
-        return text;
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
       },
     },
     {
@@ -233,7 +237,9 @@ const ChiTieuTable = () => {
         if (record.chiTieuCha === true) {
           return <strong>{text}</strong>;
         }
-        return text;
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
       },
     },
     {
@@ -245,7 +251,9 @@ const ChiTieuTable = () => {
         if (record.chiTieuCha === true) {
           return <strong>{text}</strong>;
         }
-        return text;
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
       },
     },
     {
@@ -257,7 +265,9 @@ const ChiTieuTable = () => {
         if (record.chiTieuCha === true) {
           return <strong>{text}</strong>;
         }
-        return text;
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
       },
     },
   ];
@@ -269,21 +279,22 @@ const ChiTieuTable = () => {
       if (chiTieu[0]?.value.toString() === idChiTieu.toString()) {
         spanElement.textContent = chiTieu[0]?.label;
       } else if (chiTieu[0]?.label) {
-        const titleName = chiTieu.filter(x => x.value.toString() === idChiTieu.toString());
+        const titleName = chiTieu.filter((x) => x.value.toString() === idChiTieu.toString());
         spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${'>'} ${titleName[0].label}`;
       }
     }
   }, [chiTieu, value, inputValue]);
 
-
   const getBangBaoCaoChiTieu = async () => {
     let ids = idChiTieu;
     if (idChiTieu.toString().startsWith('0')) {
-      ids = chiTieu.filter((x) => !x.toString().startsWith('0')).map((item) => parseInt(item.value));
+      ids = chiTieu
+        .filter((x) => !x.toString().startsWith('0'))
+        .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
+        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -292,11 +303,13 @@ const ChiTieuTable = () => {
   const getBangBaoCaoChiTieu2 = async (value) => {
     let ids = value;
     if (value.toString().startsWith('0')) {
-      ids = chiTieu.filter((x) => !x.value.toString().startsWith('0')).map((item) => parseInt(item.value));
+      ids = chiTieu
+        .filter((x) => !x.value.toString().startsWith('0'))
+        .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
+        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -306,8 +319,9 @@ const ChiTieuTable = () => {
       if (chiTieu[0].value === value) {
         spanElement.textContent = chiTieu[0].label;
       } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${chiTieu.filter((x) => x.value === value)[0].label
-          }`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
+          chiTieu.filter((x) => x.value === value)[0].label
+        }`;
       }
     }
 
@@ -317,7 +331,6 @@ const ChiTieuTable = () => {
   };
 
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
-
     localStorage.setItem('selectedValue', chiTieuChaId);
     if (
       chiTieuChaId === 74 ||

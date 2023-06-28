@@ -160,3 +160,14 @@
 #boChiTieuKyThuat.tongCongTy .suCoLuoiDienTrungThe.has-barTop:first-child .page-setOfIndicators--charts-top:nth-child(3){
   top: 127px !important;
 }
+#boChiTieuKinhDoanh > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.summary-pie-box{
+  width: 50% !important;
+  margin-right: 20px;
+  margin-top: -5px;
+
+}
+
+#boChiTieuKinhDoanh > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.inner-statistical-wrapper{
+  width: 50% !important;
+
+}

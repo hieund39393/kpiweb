@@ -6,6 +6,7 @@ import '../assets/css/style.css';
 import type { ColumnsType } from 'antd/es/table';
 import httpService from 'core/infrastructure/services/httpService';
 import { BANG_BAO_CAO_CHI_TIEU_CAC_DON_VI } from 'modules/shared/menu/routes';
+import './sanluongdien.css';
 
 interface DataType {
   id: number;
@@ -151,7 +152,13 @@ function SanLuongDien({ chiTieuId, ngayBaoCao, tanSuat, isShowModal, closeModal 
       ]}
     >
       <div className="modal-detail" id="bangChiTiet">
-        <Table columns={columns} dataSource={data} rowKey={(record) => record.id} bordered />
+        <Table
+          columns={columns}
+          dataSource={data}
+          rowKey={(record) => record.id}
+          bordered
+          scroll={{ y: 530 }}
+        />
       </div>
     </Modal>
   );
