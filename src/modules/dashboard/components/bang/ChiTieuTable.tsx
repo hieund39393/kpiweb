@@ -266,11 +266,10 @@ const ChiTieuTable = () => {
     getBangBaoCaoChiTieu();
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
-      if (chiTieu[0]?.value === idChiTieu) {
+      if (chiTieu[0]?.value.toString() === idChiTieu.toString()) {
         spanElement.textContent = chiTieu[0]?.label;
       } else if (chiTieu[0]?.label) {
         const titleName = chiTieu.filter(x => x.value.toString() === idChiTieu.toString());
-        console.log(titleName)
         spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${'>'} ${titleName[0].label}`;
       }
     }
@@ -318,6 +317,8 @@ const ChiTieuTable = () => {
   };
 
   const handleViewChart = (chiTieuId, chiTieuChaId) => {
+
+    localStorage.setItem('selectedValue', chiTieuChaId);
     if (
       chiTieuChaId === 74 ||
       (chiTieuId >= 338 && chiTieuId <= 342) ||
