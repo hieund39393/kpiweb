@@ -46,7 +46,7 @@ const ChiTieuTable = () => {
 
   localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
 
-  const [valueChiTieu, setValueChiTieu] = useState(value);
+  // const [valueChiTieu, setValueChiTieu] = useState(value);
 
   const [data, setData] = useState<DataType[]>([]);
   const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
@@ -266,24 +266,25 @@ const ChiTieuTable = () => {
     getBangBaoCaoChiTieu();
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
-      if (chiTieu[0].value === selectedValue) {
-        spanElement.textContent = chiTieu[0].label;
-      } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
-          chiTieu.filter((x) => x.value === selectedValue)[0].label
-        }`;
+      if (chiTieu[0]?.value === idChiTieu) {
+        spanElement.textContent = chiTieu[0]?.label;
+      } else if (chiTieu[0]?.label) {
+        const titleName = chiTieu.filter(x => x.value.toString() === idChiTieu.toString());
+        console.log(titleName)
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${'>'} ${titleName[0].label}`;
       }
     }
   }, [chiTieu, value, inputValue]);
 
+
   const getBangBaoCaoChiTieu = async () => {
-    let ids = valueChiTieu;
-    if (valueChiTieu.startsWith('0')) {
-      ids = chiTieu.filter((x) => !x.value.startsWith('0')).map((item) => parseInt(item.value));
+    let ids = idChiTieu;
+    if (idChiTieu.toString().startsWith('0')) {
+      ids = chiTieu.filter((x) => !x.toString().startsWith('0')).map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -291,12 +292,12 @@ const ChiTieuTable = () => {
 
   const getBangBaoCaoChiTieu2 = async (value) => {
     let ids = value;
-    if (value.startsWith('0')) {
-      ids = chiTieu.filter((x) => !x.value.startsWith('0')).map((item) => parseInt(item.value));
+    if (value.toString().startsWith('0')) {
+      ids = chiTieu.filter((x) => !x.value.toString().startsWith('0')).map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
@@ -306,15 +307,13 @@ const ChiTieuTable = () => {
       if (chiTieu[0].value === value) {
         spanElement.textContent = chiTieu[0].label;
       } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
-          chiTieu.filter((x) => x.value === value)[0].label
-        }`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${chiTieu.filter((x) => x.value === value)[0].label
+          }`;
       }
     }
 
-    setSelectedValue(value);
-    setValueChiTieu(value);
-
+    // setSelectedValue(value);
+    setIDChiTieu(value);
     localStorage.setItem('selectedValue', value);
   };
 
@@ -338,7 +337,7 @@ const ChiTieuTable = () => {
     }
   };
 
-  const [selectedValue, setSelectedValue] = useState(valueChiTieu ?? chiTieu[0].value);
+  // const [selectedValue, setSelectedValue] = useState(idChiTieu ?? chiTieu[0].value);
 
   // const storedValue: string | null = localStorage.getItem('selectedValue');
   // if (storedValue !== null) {
@@ -356,7 +355,7 @@ const ChiTieuTable = () => {
               paddingTop: 10,
               width: '100%',
             }}
-            defaultValue={selectedValue}
+            defaultValue={idChiTieu}
             onChange={getBangBaoCaoChiTieu2}
             options={chiTieu?.map((option, index) => ({
               label: option.label,
@@ -372,7 +371,7 @@ const ChiTieuTable = () => {
               defaultCurrent: 1,
             }}
             columns={columns}
-            dataSource={data.map((item) => ({ ...item, key: item.id }))}
+            dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
         </div>
       </div>
