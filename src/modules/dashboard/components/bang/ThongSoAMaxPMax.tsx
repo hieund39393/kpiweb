@@ -84,7 +84,7 @@ const ThongSoAMaxPMax = () => {
       key: 'chiTieu',
     },
     {
-      title: 'Tháng 3',
+      title: 'Tháng',
       dataIndex: 'thang',
       key: 'thang',
       render: (text, record) => {
