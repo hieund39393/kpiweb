@@ -452,9 +452,9 @@ function PlansTable() {
     response()
       .then((data) => {
         if (data.statusCode === _STATUSCODE200) {
-          notify(_THANHCONG, _TIEUDECAPNHATTHANHCONG, _NOIDUNGCAPNHATKHTHANHCONG);
           fetchData(requestList)
           setDisabledUpdate(true)
+          notify(_THANHCONG, _TIEUDECAPNHATTHANHCONG, _NOIDUNGCAPNHATKHTHANHCONG);
         } else if (data.statusCode === 500) {
           notify(_LOI, _TIEUDECAPNHATTHATBAI, _VUILONGCAPNHAPDAYDUTHONGTIN);
           setDisabledUpdate(false)

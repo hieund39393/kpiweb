@@ -38,7 +38,7 @@ const KpiService = (
     }
 
     async function _updateAsync(request) {
-      return await httpService.put(route.update, request);
+      return await httpService.post(route.update, request);
     }
 
     async function _listThucHienAsync({ data, pageIndex, pageSize }) {
@@ -57,7 +57,7 @@ const KpiService = (
     }
 
     async function _updateThucHienAsync(request) {
-      return await httpService.put(route.updateThucHien, request);
+      return await httpService.post(route.updateThucHien, request);
     }
 
     async function _listLoaiChiTieuAsync({ donViID, keHoach }) {
