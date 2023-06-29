@@ -18,6 +18,7 @@ import TiviShow from '../../tivishow/components';
 import BaoCaoTheoChiTieu from '../../report/components/indicators';
 import BaoCaoTheoDonVi from '../../report/components/deparment';
 import NhomKeHoach from 'modules/dashboard/components/nhomKeHoach';
+import NhomQuanLy from 'modules/dashboard/components/nhomQuanLy';
 import ChiTieuTable from 'modules/dashboard/components/bang/ChiTieuTable';
 import BieuDoChart from 'modules/dashboard/components/bieudo';
 import BieuDoTron from 'modules/dashboard/components/bieudotron';
@@ -31,6 +32,8 @@ import CauHinhChung from 'modules/admin/setting/components';
 import DanhMucChiTieu from 'modules/indicators/components/kpi';
 import CauHinhDongBo from 'modules/admin/sync/components/index';
 import { BASE_URL } from 'configs/config';
+
+import ThongSoAMaxPMax from 'modules/dashboard/components/bang/ThongSoAMaxPMax';
 
 export const routes = [
   {
@@ -47,6 +50,7 @@ export const routes = [
     icon: '',
     title: 'Nhóm chỉ tiêu quản lý',
     path: '/nhom-quan-ly',
+    component: <NhomQuanLy />,
   },
   {
     key: 'quanlyBoChiTieu',
@@ -228,9 +232,20 @@ export const routes = [
     title: '',
     component: <BieuDoTron />,
   },
+  {
+    key: 'ThongSoAMaxPMax',
+    id: 38,
+    icon: '',
+    path: '/thong-so-amax-pmax',
+    title: '',
+    component: <ThongSoAMaxPMax />,
+  },
 ];
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
+export const GET_CN_NQL = BASE_URL + 'chuc-nang/chuc-nang-nhom-quan-ly';
 export const BANG_BAO_CAO_CHI_TIEU = BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu';
 export const BANG_BAO_CAO_CHI_TIEU_CAC_DON_VI =
   BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu-cac-don-vi';
+
+export const THONG_KE_AMAX_PMAX = BASE_URL + 'nhomquanly/thong-so-amax-pmax';
