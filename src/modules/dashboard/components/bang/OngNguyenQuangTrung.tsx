@@ -2,16 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { THONG_KE_AMAX_PMAX } from 'modules/shared/menu/routes';
+import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import Filter from '../finlterQuanLy';
+import Filter from '../finlter';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
-
-interface MenuItem {
-  label: string;
-  value: string;
-}
 
 interface InputValue {
   ngayBaoCao: string;
@@ -19,7 +14,7 @@ interface InputValue {
   donViId: number;
 }
 
-const ThongSoAMaxPMax = () => {
+const OngNguyenQuangTrung = () => {
   const location = useLocation();
 
   const { chiTieu, value } = location.state;
@@ -58,16 +53,16 @@ const ThongSoAMaxPMax = () => {
     [modalSanLuongDonVi]
   );
 
-  const columns: ColumnsType<any> = [
+  const columns1: ColumnsType<any> = [
     {
-      title: 'Chỉ tiêu',
-      dataIndex: 'chiTieu',
-      key: 'chiTieu',
+      title: 'STT',
+      dataIndex: 'stt',
+      key: 'stt',
     },
     {
-      title: 'Tháng',
-      dataIndex: 'thang',
-      key: 'thang',
+      title: 'Số',
+      dataIndex: 'so',
+      key: 'so',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -75,14 +70,32 @@ const ThongSoAMaxPMax = () => {
       },
     },
     {
-      title: 'So sánh cùng kỳ năm trước',
-      dataIndex: 'soSanh',
-      key: 'soSanh',
-      render: (text, record) => {
-        if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
-        }
-      },
+      title: 'Ngày',
+      dataIndex: 'ngay',
+      key: 'ngay',
+    },
+    {
+      title: 'Trích yếu VB',
+      dataIndex: 'trichYeuVB',
+      key: 'trichYeuVB',
+    },
+  ];
+
+  const columns2: ColumnsType<any> = [
+    {
+      title: 'STT',
+      dataIndex: 'stt',
+      key: 'stt',
+    },
+    {
+      title: 'Ngày',
+      dataIndex: 'ngay',
+      key: 'ngay',
+    },
+    {
+      title: 'Nội dung cuộc họp',
+      dataIndex: 'noiDungCuocHop',
+      key: 'noiDungCuocHop',
     },
   ];
 
@@ -107,7 +120,8 @@ const ThongSoAMaxPMax = () => {
         .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
-      THONG_KE_AMAX_PMAX + `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
     setData(res);
@@ -134,12 +148,26 @@ const ThongSoAMaxPMax = () => {
           />
         </>
         <div style={{ margin: 10 }}>
+          <div style={{ marginBottom: 10 }}>
+            <h3>1. Số văn bản ký duyệt ban hành theo từng lãnh đạo</h3>
+          </div>
           <Table
             pagination={{
               defaultPageSize: 20,
               defaultCurrent: 1,
             }}
-            columns={columns}
+            columns={columns1}
+            dataSource={data?.map((item) => ({ ...item, key: item.id }))}
+          />
+          <div style={{ marginBottom: 10, marginTop: 10 }}>
+            <h3>2. Số cuộc họp chủ trì theo từng lãnh đạo</h3>
+          </div>
+          <Table
+            pagination={{
+              defaultPageSize: 20,
+              defaultCurrent: 1,
+            }}
+            columns={columns2}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
         </div>
@@ -149,4 +177,4 @@ const ThongSoAMaxPMax = () => {
   );
 };
 
-export default ThongSoAMaxPMax;
+export default OngNguyenQuangTrung;

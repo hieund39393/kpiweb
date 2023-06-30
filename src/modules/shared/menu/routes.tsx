@@ -34,6 +34,20 @@ import CauHinhDongBo from 'modules/admin/sync/components/index';
 import { BASE_URL } from 'configs/config';
 
 import ThongSoAMaxPMax from 'modules/dashboard/components/bang/ThongSoAMaxPMax';
+import KhoiLuongQuanLyVanHanhLuoiDien from 'modules/dashboard/components/bang/KhoiLuongQuanLyVanHanhLuoiDien';
+import KhoiLuongQuanLyVanHanhTrungAp from 'modules/dashboard/components/bang/KhoiLuongQuanLyVanHanhTrungAp';
+import KhoiLuongQuanLyVanHanhDZHaAp from 'modules/dashboard/components/bang/KhoiLuongQuanLyVanHanhDZHaAp';
+import SoLuongKhachHang from 'modules/dashboard/components/bang/SoLuongKhachHang';
+import SoLuongCongTo from 'modules/dashboard/components/bang/SoLuongCongTo';
+import TongSoNhanSuVaBienDongNhanSu from 'modules/dashboard/components/bang/TongSoNhanSuVaBienDongNhanSu';
+import PhanMem from 'modules/dashboard/components/bang/PhanMem';
+import OngNguyenDanhDuyen from 'modules/dashboard/components/bang/OngNguyenDanhDuyen';
+import OngNguyenAnhDung from 'modules/dashboard/components/bang/OngNguyenAnhDung';
+import OngNguyenAnhTuan from 'modules/dashboard/components/bang/OngNguyenAnhTuan';
+import OngNguyenQuangTrung from 'modules/dashboard/components/bang/OngNguyenQuangTrung';
+import OngHoangMinhGiang from 'modules/dashboard/components/bang/OngHoangMinhGiang';
+import OngLeAnhDuong from 'modules/dashboard/components/bang/OngLeAnhDuong';
+import KetQuaThucHienNhiemVu from 'modules/dashboard/components/bang/KetQuaThucHienNhiemVu';
 
 export const routes = [
   {
@@ -240,6 +254,120 @@ export const routes = [
     title: '',
     component: <ThongSoAMaxPMax />,
   },
+
+  {
+    key: 'klqlvhld',
+    id: 39,
+    icon: '',
+    path: '/khoi-luong-quan-ly-van-hanh-luoi-dien',
+    title: '',
+    component: <KhoiLuongQuanLyVanHanhLuoiDien />,
+  },
+  {
+    key: 'klqlvhldta',
+    id: 40,
+    icon: '',
+    path: '/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap',
+    title: '',
+    component: <KhoiLuongQuanLyVanHanhTrungAp />,
+  },
+  {
+    key: 'klqlvhdzha',
+    id: 41,
+    icon: '',
+    path: '/khoi-luong-quan-ly-van-hanh-duong-day-ha-ap',
+    title: '',
+    component: <KhoiLuongQuanLyVanHanhDZHaAp />,
+  },
+  {
+    key: 'soluongkhachhang',
+    id: 42,
+    icon: '',
+    path: '/so-luong-khach-hang',
+    title: '',
+    component: <SoLuongKhachHang />,
+  },
+  {
+    key: 'soluongcongto',
+    id: 43,
+    icon: '',
+    path: '/so-luong-cong-to',
+    title: '',
+    component: <SoLuongCongTo />,
+  },
+  {
+    key: 'tongSoNhanSuVaBienDongNhanSu',
+    id: 44,
+    icon: '',
+    path: '/tong-so-nhan-su-va-bien-dong-nhan-su',
+    title: '',
+    component: <TongSoNhanSuVaBienDongNhanSu />,
+  },
+  {
+    key: 'phanMem',
+    id: 45,
+    icon: '',
+    path: '/phan-mem',
+    title: '',
+    component: <PhanMem />,
+  },
+  {
+    key: 'OngNguyenDanhDuyen',
+    id: 46,
+    icon: '',
+    path: '/ong-nguyen-danh-duyen',
+    title: '',
+    component: <OngNguyenDanhDuyen />,
+  },
+
+  {
+    key: 'OngNguyenAnhDung',
+    id: 47,
+    icon: '',
+    path: '/ong-nguyen-anh-dung',
+    title: '',
+    component: <OngNguyenAnhDung />,
+  },
+  {
+    key: 'ongNguyenAnhTuan',
+    id: 48,
+    icon: '',
+    path: '/ong-nguyen-anh-tuan',
+    title: '',
+    component: <OngNguyenAnhTuan />,
+  },
+  {
+    key: 'OngNguyenQuangTrung',
+    id: 49,
+    icon: '',
+    path: '/ong-nguyen-quang-trung',
+    title: '',
+    component: <OngNguyenQuangTrung />,
+  },
+  {
+    key: 'OngHoangMinhGiang',
+    id: 50,
+    icon: '',
+    path: '/ong-hoang-minh-giang',
+    title: '',
+    component: <OngHoangMinhGiang />,
+  },
+  {
+    key: 'ongLeAnhDuong',
+    id: 51,
+    icon: '',
+    path: '/ong-le-anh-duong',
+    title: '',
+    component: <OngLeAnhDuong />,
+  },
+  {
+    key: 'ketquathuchiennhiemvu',
+    id: 52,
+    icon: '',
+    path: '/ket-qua-thuc-hien-nhiem-vu',
+    title: '',
+    component: <KetQuaThucHienNhiemVu />,
+  },
 ];
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
@@ -249,3 +377,9 @@ export const BANG_BAO_CAO_CHI_TIEU_CAC_DON_VI =
   BASE_URL + 'chuc-nang/list-bao-cao-chi-tieu-cac-don-vi';
 
 export const THONG_KE_AMAX_PMAX = BASE_URL + 'nhomquanly/thong-so-amax-pmax';
+
+export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN =
+  BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien';
+
+export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP =
+  BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap';
