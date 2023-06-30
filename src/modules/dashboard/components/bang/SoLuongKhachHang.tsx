@@ -2,16 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { THONG_KE_AMAX_PMAX } from 'modules/shared/menu/routes';
+import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
-
-interface MenuItem {
-  label: string;
-  value: string;
-}
 
 interface InputValue {
   ngayBaoCao: string;
@@ -19,7 +14,7 @@ interface InputValue {
   donViId: number;
 }
 
-const ThongSoAMaxPMax = () => {
+const SoLuongKhachHang = () => {
   const location = useLocation();
 
   const { chiTieu, value } = location.state;
@@ -60,24 +55,14 @@ const ThongSoAMaxPMax = () => {
 
   const columns: ColumnsType<any> = [
     {
-      title: 'Chỉ tiêu',
-      dataIndex: 'chiTieu',
-      key: 'chiTieu',
+      title: 'Phân loại',
+      dataIndex: 'phanLoai',
+      key: 'phanLoai',
     },
     {
-      title: 'Tháng',
-      dataIndex: 'thang',
-      key: 'thang',
-      render: (text, record) => {
-        if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
-        }
-      },
-    },
-    {
-      title: 'So sánh cùng kỳ năm trước',
-      dataIndex: 'soSanh',
-      key: 'soSanh',
+      title: 'Số lượng',
+      dataIndex: 'soLuong',
+      key: 'soLuong',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -107,7 +92,8 @@ const ThongSoAMaxPMax = () => {
         .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
-      THONG_KE_AMAX_PMAX + `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
     setData(res);
@@ -149,4 +135,4 @@ const ThongSoAMaxPMax = () => {
   );
 };
 
-export default ThongSoAMaxPMax;
+export default SoLuongKhachHang;

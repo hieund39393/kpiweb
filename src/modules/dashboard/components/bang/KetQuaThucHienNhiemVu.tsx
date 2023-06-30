@@ -2,16 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { THONG_KE_AMAX_PMAX } from 'modules/shared/menu/routes';
+import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
-
-interface MenuItem {
-  label: string;
-  value: string;
-}
 
 interface InputValue {
   ngayBaoCao: string;
@@ -19,7 +14,7 @@ interface InputValue {
   donViId: number;
 }
 
-const ThongSoAMaxPMax = () => {
+const KetQuaThucHienNhiemVu = () => {
   const location = useLocation();
 
   const { chiTieu, value } = location.state;
@@ -60,29 +55,79 @@ const ThongSoAMaxPMax = () => {
 
   const columns: ColumnsType<any> = [
     {
-      title: 'Chỉ tiêu',
-      dataIndex: 'chiTieu',
-      key: 'chiTieu',
+      title: 'Đơn vị',
+      dataIndex: 'donVi',
+      key: 'donVi',
     },
     {
-      title: 'Tháng',
-      dataIndex: 'thang',
-      key: 'thang',
-      render: (text, record) => {
-        if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
-        }
-      },
+      title: 'Tổng số công việc',
+      dataIndex: 'tongSoCongViec',
+      key: 'tongSoCongViec',
     },
     {
-      title: 'So sánh cùng kỳ năm trước',
-      dataIndex: 'soSanh',
-      key: 'soSanh',
-      render: (text, record) => {
-        if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
-        }
-      },
+      title: 'Loại 1',
+      dataIndex: 'loaimot',
+      key: 'loaimot',
+    },
+    {
+      title: 'Loại 2',
+      dataIndex: 'loaihai',
+      key: 'loaihai',
+    },
+    {
+      title: 'Hoàn thành',
+      dataIndex: 'hoanThanh',
+      key: 'hoanThanh',
+    },
+    {
+      title: 'Đang làm',
+      dataIndex: 'dangLam',
+      key: 'dangLam',
+    },
+    {
+      title: 'Chủ trì',
+      dataIndex: 'chuTri',
+      key: 'chuTri',
+    },
+    {
+      title: 'Phối hợp',
+      dataIndex: 'phoiHop',
+      key: 'phoiHop',
+    },
+    {
+      title: 'Theo dõi',
+      dataIndex: 'theoDoi',
+      key: 'theoDoi',
+    },
+    {
+      title: 'Quá hạn',
+      dataIndex: 'quaHan',
+      key: 'quaHan',
+    },
+    {
+      title: 'Đến hạn',
+      dataIndex: 'denHan',
+      key: 'denHan',
+    },
+    {
+      title: 'Chờ duyệt',
+      dataIndex: 'choDuyet',
+      key: 'choDuyet',
+    },
+    {
+      title: 'Chờ duyệt gia hạn',
+      dataIndex: 'choDuyetGiaHan',
+      key: 'choDuyetGiaHan',
+    },
+    {
+      title: 'Gia hạn quá 2 lần',
+      dataIndex: 'giaHanQuaHaiLan',
+      key: 'giaHanQuaHaiLan',
+    },
+    {
+      title: 'Tỷ lệ hoàn thành',
+      dataIndex: 'tyLeHoanThanh',
+      key: 'tyLeHoanThanh',
     },
   ];
 
@@ -107,7 +152,8 @@ const ThongSoAMaxPMax = () => {
         .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
-      THONG_KE_AMAX_PMAX + `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
     setData(res);
@@ -149,4 +195,4 @@ const ThongSoAMaxPMax = () => {
   );
 };
 
-export default ThongSoAMaxPMax;
+export default KetQuaThucHienNhiemVu;

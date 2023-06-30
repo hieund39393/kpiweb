@@ -2,16 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { THONG_KE_AMAX_PMAX } from 'modules/shared/menu/routes';
+import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
-
-interface MenuItem {
-  label: string;
-  value: string;
-}
 
 interface InputValue {
   ngayBaoCao: string;
@@ -19,7 +14,7 @@ interface InputValue {
   donViId: number;
 }
 
-const ThongSoAMaxPMax = () => {
+const KhoiLuongQuanLyVanHanhDZHaAp = () => {
   const location = useLocation();
 
   const { chiTieu, value } = location.state;
@@ -58,16 +53,16 @@ const ThongSoAMaxPMax = () => {
     [modalSanLuongDonVi]
   );
 
-  const columns: ColumnsType<any> = [
+  const columns1: ColumnsType<any> = [
     {
-      title: 'Chỉ tiêu',
-      dataIndex: 'chiTieu',
-      key: 'chiTieu',
+      title: 'Đường dây không (km)',
+      dataIndex: 'duongDayKhong',
+      key: 'dienap',
     },
     {
-      title: 'Tháng',
-      dataIndex: 'thang',
-      key: 'thang',
+      title: 'Cáp ngầm (km)',
+      dataIndex: 'capNgam',
+      key: 'capNgam',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -75,9 +70,42 @@ const ThongSoAMaxPMax = () => {
       },
     },
     {
-      title: 'So sánh cùng kỳ năm trước',
-      dataIndex: 'soSanh',
-      key: 'soSanh',
+      title: 'Tổng cổng ĐZ (km)',
+      dataIndex: 'tongCongDZ',
+      key: 'tongCongDZ',
+      render: (text, record) => {
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
+      },
+    },
+  ];
+
+  const columns2: ColumnsType<any> = [
+    {
+      title: 'Tổng số trạm biến áp',
+      dataIndex: 'tongSoTramBienAp',
+      key: 'tongSoTramBienAp',
+      render: (text, record) => {
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
+      },
+    },
+    {
+      title: 'Tổng số máy biến áp',
+      dataIndex: 'tongSoMayBienAp',
+      key: 'tongSoMayBienAp',
+      render: (text, record) => {
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
+      },
+    },
+    {
+      title: 'Tổng công suất (MVA)',
+      dataIndex: 'tongCongSuatMVA',
+      key: 'tongCongSuatMVA',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -107,7 +135,8 @@ const ThongSoAMaxPMax = () => {
         .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
-      THONG_KE_AMAX_PMAX + `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
     setData(res);
@@ -134,12 +163,26 @@ const ThongSoAMaxPMax = () => {
           />
         </>
         <div style={{ margin: 10 }}>
+          <div style={{ marginBottom: 10 }}>
+            <h3>1.1. Đường dây (km)</h3>
+          </div>
           <Table
             pagination={{
               defaultPageSize: 20,
               defaultCurrent: 1,
             }}
-            columns={columns}
+            columns={columns1}
+            dataSource={data?.map((item) => ({ ...item, key: item.id }))}
+          />
+          <div style={{ marginBottom: 10, marginTop: 10 }}>
+            <h3>1.2. Trạm biến áp</h3>
+          </div>
+          <Table
+            pagination={{
+              defaultPageSize: 20,
+              defaultCurrent: 1,
+            }}
+            columns={columns2}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
         </div>
@@ -149,4 +192,4 @@ const ThongSoAMaxPMax = () => {
   );
 };
 
-export default ThongSoAMaxPMax;
+export default KhoiLuongQuanLyVanHanhDZHaAp;
