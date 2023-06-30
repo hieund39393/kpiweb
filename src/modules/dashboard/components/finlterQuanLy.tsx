@@ -21,7 +21,7 @@ const localStorageService = LocalStorageService.instance();
 
 const { Option } = Select;
 
-const Filter = (props) => {
+const FilterQuanLy = (props) => {
   const { setInput, ids } = props;
   const location = useLocation();
   const { chiTieuId, chiTieuChaId } = location.state || {};
@@ -70,8 +70,8 @@ const Filter = (props) => {
 
     const handleChangDonVi = (value) => {
       console.log(value.value);
-      setDonViId(value.value)
-    }
+      setDonViId(value.value);
+    };
     return (
       <>
         <Form
@@ -135,24 +135,6 @@ const Filter = (props) => {
                     format={_DAYFORMAT}
                     disabledDate={disabledDateCurrent}
                   />
-                </Form.Item>
-              </div>
-            </Col>
-
-            <Col span={12} sm={24} xl={5} className="row-padding dateReport">
-              <div style={{ marginRight: 10 }}>
-                <Form.Item name="tanSuat" label="Tần suất">
-                  <Select className="dashboard-selector-pc" defaultValue="m">
-                    <Option key="d" value="d" title="Ngày">
-                      Ngày
-                    </Option>
-                    <Option key="w" value="w" title="Tuần">
-                      Tuần
-                    </Option>
-                    <Option key="m" value="m" title="Tháng">
-                      Tháng
-                    </Option>
-                  </Select>
                 </Form.Item>
               </div>
             </Col>
@@ -266,36 +248,14 @@ const Filter = (props) => {
                   >
                     <DatePicker
                       placeholder="Chọn ngày"
-                    // locale={locale}
-                    // format={_DAYFORMAT}
-                    // disabledDate={disabledDateCurrent}
+                      // locale={locale}
+                      // format={_DAYFORMAT}
+                      // disabledDate={disabledDateCurrent}
                     />
                   </Form.Item>
                 </div>
               </Col>
-              <Col span={24} sm={24} xl={5} className="row-padding dateReport">
-                <div style={{ marginRight: 10 }}>
-                  <Form.Item name="tanSuat" label="Tần suất">
-                    <Select
-                      className="dashboard-selector-pc"
-                      options={[
-                        {
-                          value: 'd',
-                          label: 'Ngày',
-                        },
-                        {
-                          value: 'w',
-                          label: 'Tuần',
-                        },
-                        {
-                          value: 'm',
-                          label: 'Tháng',
-                        },
-                      ]}
-                    />
-                  </Form.Item>
-                </div>
-              </Col>
+
               <Col
                 span={12}
                 sm={12}
@@ -334,4 +294,4 @@ const Filter = (props) => {
   return <div>{width > 576 ? renderFilter : renderMobileFilter}</div>;
 };
 
-export default Filter;
+export default FilterQuanLy;

@@ -5,7 +5,7 @@ import httpService from 'core/infrastructure/services/httpService';
 import { THONG_KE_AMAX_PMAX } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import Filter from '../finlter';
+import Filter from '../finlterQuanLy';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
 
 interface MenuItem {
