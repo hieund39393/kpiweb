@@ -359,7 +359,9 @@ function PeriodsItem(props) {
                 ) : idChiTieuSuCo === 101 ||
                   idChiTieuSuCo === 98 ||
                   idChiTieuSuCo === 99 ||
-                  idChiTieuSuCo === 102 ? (
+                  idChiTieuSuCo === 102 ||
+                  idChiTieuSuCo === 215 ||
+                  idChiTieuSuCo === 216 ? (
                   <Button
                     data-id={idChiTieuSuCo}
                     onClick={handleOpenSanhSachCongTrinh}
