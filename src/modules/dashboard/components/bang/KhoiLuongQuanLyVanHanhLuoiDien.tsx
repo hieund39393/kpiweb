@@ -2,26 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { THONG_KE_AMAX_PMAX } from 'modules/shared/menu/routes';
+import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import Filter from '../finlterQuanLy';
+import Filter from '../finlter';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
-
-
-interface DataType {
-  id: number;
-  stt: string;
-  tenChiTieu: string;
-  donViTinh: string;
-  keHoachGiao: string;
-  giaTriThucHien: string;
-  luyKeThucHien: string;
-  soSanhTHKeHoach: string;
-  soSanhVoiCungKyNamTruoc: string;
-  chiTieuCha: boolean;
-  idChiTieuCha: number;
-}
 
 interface InputValue {
   ngayBaoCao: string;
@@ -36,7 +21,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
 
   localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
 
-  const [data, setData] = useState<DataType[]>([]);
+  const [data, setData] = useState<any>([]);
   const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
 
   const [inputValue, setInputValue] = useState<InputValue>({
@@ -68,16 +53,16 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
     [modalSanLuongDonVi]
   );
 
-  const columns1: any = [
+  const columns1: ColumnsType<any> = [
     {
-      title: 'Chỉ tiêu',
-      dataIndex: 'chiTieu',
-      key: 'chiTieu',
+      title: 'Điện áp',
+      dataIndex: 'dienap',
+      key: 'dienap',
     },
     {
-      title: 'Tháng',
-      dataIndex: 'thang',
-      key: 'thang',
+      title: 'Đường dây không (km)',
+      dataIndex: 'duongDayKhong',
+      key: 'duongDayKhong',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -85,28 +70,37 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
       },
     },
     {
-      title: 'So sánh cùng kỳ năm trước',
-      dataIndex: 'soSanh',
-      key: 'soSanh',
+      title: 'Cáp ngầm (km)',
+      dataIndex: 'capNgam',
+      key: 'capNgam',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
         }
       },
     },
-    
+    {
+      title: 'Tổng cổng ĐZ (km)',
+      dataIndex: 'tongCongDZ',
+      key: 'tongCongDZ',
+      render: (text, record) => {
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
+      },
+    },
   ];
 
-  const columns2: any = [
+  const columns2: ColumnsType<any> = [
     {
-      title: 'Chỉ tiêu',
-      dataIndex: 'chiTieu',
-      key: 'chiTieu',
+      title: 'Điện áp',
+      dataIndex: 'dienap',
+      key: 'dienap',
     },
     {
-      title: 'Tháng',
-      dataIndex: 'thang',
-      key: 'thang',
+      title: 'Tổng số trạm biến áp',
+      dataIndex: 'tongSoTramBienAp',
+      key: 'tongSoTramBienAp',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -114,16 +108,25 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
       },
     },
     {
-      title: 'So sánh cùng kỳ năm trước',
-      dataIndex: 'soSanh',
-      key: 'soSanh',
+      title: 'Tổng số máy biến áp',
+      dataIndex: 'tongSoMayBienAp',
+      key: 'tongSoMayBienAp',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
         }
       },
     },
-    
+    {
+      title: 'Tổng công suất (MVA)',
+      dataIndex: 'tongCongSuatMVA',
+      key: 'tongCongSuatMVA',
+      render: (text, record) => {
+        if (text !== null && text !== '') {
+          return parseFloat(text).toLocaleString();
+        }
+      },
+    },
   ];
 
   useEffect(() => {
@@ -147,39 +150,14 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
         .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
-      THONG_KE_AMAX_PMAX + `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
     setData(res);
   };
 
-  const getBangBaoCaoChiTieu2 = async (value) => {
-    let ids = value;
-    if (value.toString().startsWith('0')) {
-      ids = chiTieu
-        .filter((x) => !x.value.toString().startsWith('0'))
-        .map((item) => parseInt(item.value));
-    }
-    const res = await httpService.get(
-      THONG_KE_AMAX_PMAX + `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
-      null
-    );
-    setData(res);
-
-    const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
-    if (spanElement) {
-      if (chiTieu[0].value === value) {
-        spanElement.textContent = chiTieu[0].label;
-      } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${chiTieu.filter((x) => x.value === value)[0].label
-          }`;
-      }
-    }
-
-    setIDChiTieu(value);
-    localStorage.setItem('selectedValue', value);
-  };
-
+ 
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
       <Filter setInput={setInputValue} ids={value} />
@@ -192,7 +170,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
               width: '100%',
             }}
             defaultValue={idChiTieu}
-            onChange={getBangBaoCaoChiTieu2}
+            // onChange={getBangBaoCaoChiTieu2}
             options={chiTieu?.map((option, index) => ({
               label: option.label,
               value: option.value,
@@ -201,8 +179,8 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
           />
         </>
         <div style={{ margin: 10 }}>
-          <div>
-            <h2>1.1 Đường dây (km)</h2>
+          <div style={{ marginBottom: 10 }}>
+            <h3>1.1. Đường dây (km)</h3>
           </div>
           <Table
             pagination={{
@@ -212,9 +190,8 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
             columns={columns1}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
-
-          <div>
-            <h2>1.2 Trạm biến áp</h2>
+          <div style={{ marginBottom: 10, marginTop: 10 }}>
+            <h3>1.2. Trạm biến áp</h3>
           </div>
           <Table
             pagination={{
@@ -224,9 +201,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
             columns={columns2}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
-
         </div>
-
       </div>
       <>{modalSL}</>
     </div>

@@ -29,9 +29,67 @@ const NhomQuanLy = () => {
 
   const handleChange = (value: string, index) => {
     const selectedArray = menuCon[index];
-    navigate('/thong-so-amax-pmax', {
-      state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
-    });
+    if (value === '60') {
+      navigate('/thong-so-amax-pmax', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '61') {
+      navigate('/khoi-luong-quan-ly-van-hanh-luoi-dien', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '62') {
+      navigate('/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '63') {
+      navigate('/khoi-luong-quan-ly-van-hanh-duong-day-ha-ap', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '64') {
+      navigate('/so-luong-khach-hang', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '65') {
+      navigate('/so-luong-cong-to', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '66') {
+      navigate('/tong-so-nhan-su-va-bien-dong-nhan-su', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '68') {
+      navigate('/phan-mem', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '69') {
+      navigate('/ong-nguyen-danh-duyen', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '70') {
+      navigate('/ong-nguyen-anh-dung', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '71') {
+      navigate('/ong-nguyen-anh-tuan', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '72') {
+      navigate('/ong-nguyen-quang-trung', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '73') {
+      navigate('/ong-hoang-minh-giang', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '74') {
+      navigate('/ong-le-anh-duong', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    } else if (value === '75') {
+      navigate('/ket-qua-thuc-hien-nhiem-vu', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
+    }
   };
 
   return (
