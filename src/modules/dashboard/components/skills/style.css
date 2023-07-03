@@ -1,0 +1,20 @@
+@media screen and (min-width: 768px) {
+    .statistical {
+        max-width: 100%;
+        display: contents;
+    }
+}
+
+#boChiTieuKyThuat>div.bct-data__charts>div.page-setOfIndicators--content.content-body>div.periods-item-wrap>div>div.box-statistical {
+    width: 50%;
+    margin-right: 5px;
+}
+
+#boChiTieuKyThuat>div.bct-data__charts>div.page-setOfIndicators--content.content-body>div.periods-item-wrap>div>div.page-setOfIndicators--charts.page-setOfIndicators--charts-bar {
+    width: 50%;
+}
+
+#boChiTieuKyThuat>div.bct-data__charts>div.page-setOfIndicators--content.content-body>div.periods-item-wrap>div>div.page-setOfIndicators--charts.page-setOfIndicators--charts-top {
+    width: 49.5%;
+    margin-left: 5px;
+}
