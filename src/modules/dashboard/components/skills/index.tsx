@@ -9,6 +9,7 @@ import { BoChiTieu } from 'modules/dashboard/dtos/responses/ChartResponse';
 import ChartService from 'modules/dashboard/services/ChartService';
 import { useEffect, useState } from 'react';
 import Charts from '../charts';
+import './style.css'
 
 const chartService = ChartService.instance();
 
@@ -33,7 +34,7 @@ function BoChiTieuKyThuat(props) {
           setIndicatorsLevel(response.data.chiTieus);
         setIsChange(true);
       })
-      .catch(() => {});
+      .catch(() => { });
   };
 
   useEffect(() => {
