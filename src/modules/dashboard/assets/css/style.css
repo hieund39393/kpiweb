@@ -1623,7 +1623,7 @@ padding-left: 16px !important;
 
 .doTinCayCungCapDien .speed-thtp,
    .doTinCayCungCapDien .speed-ppsmt {
-     border: 1px solid #A8A8AE;
+     /* border: 1px solid #A8A8AE; */
      border-radius: 8px;
     margin-right: 20px;
    }
