@@ -167,10 +167,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
             <h3>1.1. Đường dây (km)</h3>
           </div>
           <Table
-            pagination={{
-              defaultPageSize: 20,
-              defaultCurrent: 1,
-            }}
+           pagination={false}
             columns={columns1}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
@@ -178,10 +175,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
             <h3>1.2. Trạm biến áp</h3>
           </div>
           <Table
-            pagination={{
-              defaultPageSize: 20,
-              defaultCurrent: 1,
-            }}
+         pagination={false}
             columns={columns2}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
