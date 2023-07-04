@@ -1,0 +1,25 @@
+@media screen and (min-width: 768px) {
+    #boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div {
+        max-width: 100%;
+        display: contents;
+    }
+}
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.box-statistical{
+    width: 50%;
+    margin-right: 5px;
+}
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--two-column-charts-speedometer.full-row-speedometer.page-setOfIndicators--charts{
+    width: 50%;
+    height: 330px;
+}
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div:nth-child(3) {
+    width: 49.5%;
+    margin-top: -35px;
+    margin-left: 5px;
+}
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div:nth-child(3) > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line{
+    height: 329px;
+}

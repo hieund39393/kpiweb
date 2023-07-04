@@ -1,5 +1,5 @@
 @media screen and (min-width: 768px) {
-    .statistical {
+    #boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div {
         max-width: 100%;
         display: contents;
     }
