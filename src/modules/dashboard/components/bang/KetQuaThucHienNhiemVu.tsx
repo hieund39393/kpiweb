@@ -181,10 +181,7 @@ const KetQuaThucHienNhiemVu = () => {
         </>
         <div style={{ margin: 10 }}>
           <Table
-            pagination={{
-              defaultPageSize: 20,
-              defaultCurrent: 1,
-            }}
+            pagination={false}
             columns={columns}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
