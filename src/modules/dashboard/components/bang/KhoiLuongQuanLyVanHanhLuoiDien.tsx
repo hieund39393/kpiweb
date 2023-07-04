@@ -2,7 +2,10 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN } from 'modules/shared/menu/routes';
+import {
+  KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN,
+  KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN1,
+} from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
@@ -22,6 +25,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
   localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
 
   const [data, setData] = useState<any>([]);
+  const [data1, setData1] = useState<any>([]);
   const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
 
   const [inputValue, setInputValue] = useState<InputValue>({
@@ -56,13 +60,14 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
   const columns1: ColumnsType<any> = [
     {
       title: 'Điện áp',
-      dataIndex: 'dienap',
-      key: 'dienap',
+      dataIndex: 'dienAp',
+      key: 'dienAp',
     },
     {
       title: 'Đường dây không (km)',
       dataIndex: 'duongDayKhong',
       key: 'duongDayKhong',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -73,6 +78,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
       title: 'Cáp ngầm (km)',
       dataIndex: 'capNgam',
       key: 'capNgam',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -94,13 +100,14 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
   const columns2: ColumnsType<any> = [
     {
       title: 'Điện áp',
-      dataIndex: 'dienap',
-      key: 'dienap',
+      dataIndex: 'dienAp',
+      key: 'dienAp',
     },
     {
       title: 'Tổng số trạm biến áp',
       dataIndex: 'tongSoTramBienAp',
       key: 'tongSoTramBienAp',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -111,6 +118,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
       title: 'Tổng số máy biến áp',
       dataIndex: 'tongSoMayBienAp',
       key: 'tongSoMayBienAp',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -131,6 +139,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
 
   useEffect(() => {
     getBangBaoCaoChiTieu();
+    getBangBaoCaoChiTieu1();
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
       if (chiTieu[0]?.value.toString() === idChiTieu.toString()) {
@@ -143,12 +152,6 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
   }, [chiTieu, value, inputValue]);
 
   const getBangBaoCaoChiTieu = async () => {
-    let ids = idChiTieu;
-    if (idChiTieu.toString().startsWith('0')) {
-      ids = chiTieu
-        .filter((x) => !x.toString().startsWith('0'))
-        .map((item) => parseInt(item.value));
-    }
     const res = await httpService.get(
       KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN +
         `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
@@ -156,8 +159,15 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
     );
     setData(res);
   };
+  const getBangBaoCaoChiTieu1 = async () => {
+    const res = await httpService.get(
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN1 +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      null
+    );
+    setData1(res);
+  };
 
- 
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
       <Filter setInput={setInputValue} ids={value} />
@@ -199,7 +209,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
               defaultCurrent: 1,
             }}
             columns={columns2}
-            dataSource={data?.map((item) => ({ ...item, key: item.id }))}
+            dataSource={data1.map((item) => ({ ...item, key: item.id }))}
           />
         </div>
       </div>

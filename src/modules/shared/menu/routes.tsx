@@ -380,6 +380,11 @@ export const THONG_KE_AMAX_PMAX = BASE_URL + 'nhomquanly/thong-so-amax-pmax';
 
 export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien';
+  export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN1 =
+  BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien1';
 
 export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap';
+
+  export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP1 =
+  BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap1';
