@@ -4,7 +4,6 @@ import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
 import {
   KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP,
-  KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP1,
 } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';

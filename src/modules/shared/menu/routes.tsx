@@ -386,5 +386,11 @@ export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN =
 export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap';
 
-  export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP1 =
-  BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap1';
+  export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP =
+  BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-ha-ap';
+
+  export const SO_LUONG_KHACH_HANG =
+  BASE_URL + 'nhomquanly/so-luong-khach-hang';
+
+  export const SO_LUONG_CONG_TO =
+  BASE_URL + 'nhomquanly/so-luong-cong-to';
