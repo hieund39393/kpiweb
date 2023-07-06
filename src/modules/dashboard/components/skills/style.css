@@ -27,3 +27,8 @@
 #boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line{
     width: 50%;
 }
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line
+{
+    width: 50%;
+}

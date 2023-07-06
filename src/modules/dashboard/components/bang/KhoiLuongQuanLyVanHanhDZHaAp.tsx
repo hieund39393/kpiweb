@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
+import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
@@ -63,6 +63,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
       title: 'Cáp ngầm (km)',
       dataIndex: 'capNgam',
       key: 'capNgam',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -96,6 +97,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
       title: 'Tổng số máy biến áp',
       dataIndex: 'tongSoMayBienAp',
       key: 'tongSoMayBienAp',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -106,6 +108,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
       title: 'Tổng công suất (MVA)',
       dataIndex: 'tongCongSuatMVA',
       key: 'tongCongSuatMVA',
+      align: 'center',
       render: (text, record) => {
         if (text !== null && text !== '') {
           return parseFloat(text).toLocaleString();
@@ -128,14 +131,8 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
   }, [chiTieu, value, inputValue]);
 
   const getBangBaoCaoChiTieu = async () => {
-    let ids = idChiTieu;
-    if (idChiTieu.toString().startsWith('0')) {
-      ids = chiTieu
-        .filter((x) => !x.toString().startsWith('0'))
-        .map((item) => parseInt(item.value));
-    }
     const res = await httpService.get(
-      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
+      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP +
         `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
@@ -167,7 +164,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
             <h3>1.1. Đường dây (km)</h3>
           </div>
           <Table
-           pagination={false}
+            pagination={false}
             columns={columns1}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
@@ -175,7 +172,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
             <h3>1.2. Trạm biến áp</h3>
           </div>
           <Table
-         pagination={false}
+            pagination={false}
             columns={columns2}
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
