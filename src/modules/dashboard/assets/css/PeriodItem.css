@@ -1114,7 +1114,7 @@
   .periods-item-wrap .column-row .inner-statistical-wrapper:first-child {
     right: 10px;
     width: calc(100% - 10px) !important;
-    margin-right: 20px;
+    /* margin-right: 20px; */
   }
 
   .periods-item-wrap .column-row .inner-statistical-wrapper:nth-child(2) {
@@ -1160,4 +1160,8 @@
 #boChiTieuKinhDoanh>div.bct-data__charts>div.page-setOfIndicators--content.content-body>div.periods-item-wrap>div>div.sanluong-dienthuongpham--two>div.inner-statistical-wrapper>div {
   margin-top: 10px;
   height: 328px;
+}
+
+.periods-item-wrap{
+  width: 100% !important;
 }

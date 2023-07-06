@@ -132,7 +132,7 @@
   .statistical {
     display: flex;
     padding-bottom: 0;
-    max-width: 50%;
+    /* max-width: 50%; */
     flex-direction: column;
   }
   

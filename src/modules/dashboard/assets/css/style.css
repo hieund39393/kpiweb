@@ -209,7 +209,7 @@
 }
 
 .periods-item-wrap {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
 }
 
