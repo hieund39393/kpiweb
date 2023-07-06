@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
+import { CONG_TAC_DIEU_HANH } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
@@ -58,26 +58,23 @@ const OngNguyenAnhDung = () => {
       title: 'STT',
       dataIndex: 'stt',
       key: 'stt',
+      render: (value, record, index) => index + 1,
     },
     {
       title: 'Số',
       dataIndex: 'so',
       key: 'so',
-      render: (text, record) => {
-        if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
-        }
-      },
     },
     {
       title: 'Ngày',
       dataIndex: 'ngay',
       key: 'ngay',
+      align: 'center',
     },
     {
       title: 'Trích yếu VB',
-      dataIndex: 'trichYeuVB',
-      key: 'trichYeuVB',
+      dataIndex: 'trichYeu',
+      key: 'trichYeu',
     },
   ];
 
@@ -86,6 +83,7 @@ const OngNguyenAnhDung = () => {
       title: 'STT',
       dataIndex: 'stt',
       key: 'stt',
+      render: (value, record, index) => index + 1,
     },
     {
       title: 'Ngày',
@@ -113,15 +111,9 @@ const OngNguyenAnhDung = () => {
   }, [chiTieu, value, inputValue]);
 
   const getBangBaoCaoChiTieu = async () => {
-    let ids = idChiTieu;
-    if (idChiTieu.toString().startsWith('0')) {
-      ids = chiTieu
-        .filter((x) => !x.toString().startsWith('0'))
-        .map((item) => parseInt(item.value));
-    }
     const res = await httpService.get(
-      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
-        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      CONG_TAC_DIEU_HANH +
+        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}&giamDoc=2`,
       null
     );
     setData(res);
@@ -157,7 +149,7 @@ const OngNguyenAnhDung = () => {
               defaultCurrent: 1,
             }}
             columns={columns1}
-            dataSource={data?.map((item) => ({ ...item, key: item.id }))}
+            dataSource={data?.vanBan?.map((item) => ({ ...item, key: item.id }))}
           />
           <div style={{ marginBottom: 10, marginTop: 10 }}>
             <h3>2. Số cuộc họp chủ trì theo từng lãnh đạo</h3>
@@ -168,7 +160,7 @@ const OngNguyenAnhDung = () => {
               defaultCurrent: 1,
             }}
             columns={columns2}
-            dataSource={data?.map((item) => ({ ...item, key: item.id }))}
+            dataSource={data?.chuTriHop?.map((item) => ({ ...item, key: item.id }))}
           />
         </div>
       </div>

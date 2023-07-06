@@ -380,17 +380,19 @@ export const THONG_KE_AMAX_PMAX = BASE_URL + 'nhomquanly/thong-so-amax-pmax';
 
 export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien';
-  export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN1 =
+export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN1 =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien1';
 
 export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap';
 
-  export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP =
+export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP =
   BASE_URL + 'nhomquanly/khoi-luong-quan-ly-van-hanh-luoi-dien-ha-ap';
 
-  export const SO_LUONG_KHACH_HANG =
-  BASE_URL + 'nhomquanly/so-luong-khach-hang';
+export const SO_LUONG_KHACH_HANG = BASE_URL + 'nhomquanly/so-luong-khach-hang';
 
-  export const SO_LUONG_CONG_TO =
-  BASE_URL + 'nhomquanly/so-luong-cong-to';
+export const SO_LUONG_CONG_TO = BASE_URL + 'nhomquanly/so-luong-cong-to';
+
+export const PHAN_MEM = BASE_URL + 'nhomquanly/phan-mem';
+export const KET_QUA_THUC_HIEN = BASE_URL + 'nhomquanly/ket-qua-thuc-hien';
+export const CONG_TAC_DIEU_HANH = BASE_URL + 'nhomquanly/cong-tac-dieu-hanh';
