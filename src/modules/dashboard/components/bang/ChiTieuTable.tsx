@@ -175,7 +175,24 @@ const ChiTieuTable = () => {
                 <strong className="view-chart">{text}</strong>
               </a>
             );
-          } else {
+          } else if (text === 'Suất sự cố lưới điện trung thế') {
+            setIDChiTieu(323);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          }
+          else if (text === 'Điện thương phẩm') {
+            setIDChiTieu(49);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          }
+          
+          else {
             return <strong className="view-chart">{text}</strong>;
           }
         }
