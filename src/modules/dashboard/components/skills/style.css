@@ -32,3 +32,56 @@
 {
     width: 50%;
 }
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap.scld110-layout > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line
+{
+    width: 99%;
+}
+
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap.scld110-layout > div > div.box-statistical
+{
+    width: 99%;
+}
+
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-bar
+{
+    width: 99%;
+}
+
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.box-statistical
+{
+    width: 99%;
+}
+
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-top
+{
+    width: 99%;
+}
+
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line
+{
+    width: 99%;
+}
+
+#boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap.ctngccd-layout > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line
+{
+    width: 99%;
+}
+
+#boChiTieuKinhDoanh .page-setOfIndicators--content.content-body:last-child .periods-item-wrap .statistical:last-child .page-setOfIndicators--charts {
+    margin-top: 20px;
+} 
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-line
+{
+    width: 99%;
+}
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div:nth-child(3)
+{
+    width: 99%;
+}
+
+#boChiTieuXayDung > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.box-statistical
+{
+    width: 99%;
+}
