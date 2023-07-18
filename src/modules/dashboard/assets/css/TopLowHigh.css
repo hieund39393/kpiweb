@@ -60,9 +60,12 @@
   .page-setOfIndicators--charts-top {
     height: 316px;
   }
+  #boChiTieuKyThuat > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div.page-setOfIndicators--charts.page-setOfIndicators--charts-top{
+    height: 600px;
+  }
 
   .low-high-box {
-    height: 250px;
+    height: 550px;
   }
 
   .low-high-box > .content-title > h3 {

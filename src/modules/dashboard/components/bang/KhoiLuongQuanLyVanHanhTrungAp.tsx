@@ -8,7 +8,8 @@ import {
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
-import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+
+import ChiTietDuongDayTrungAp from 'modules/dashboard/modal/chiTietDuongDayTrungAp';
 
 interface InputValue {
   ngayBaoCao: string;
@@ -44,8 +45,7 @@ const KhoiLuongQuanLyVanHanhTrungAp = () => {
   const modalSL = useMemo(
     () =>
       modalSanLuongDonVi && (
-        <SanLuongDien
-          chiTieuId={idChiTieu}
+        <ChiTietDuongDayTrungAp
           isShowModal={modalSanLuongDonVi}
           ngayBaoCao={inputValue.ngayBaoCao}
           tanSuat={inputValue.tanSuat}
@@ -135,7 +135,7 @@ const KhoiLuongQuanLyVanHanhTrungAp = () => {
   const getBangBaoCaoChiTieu = async () => {
     const res = await httpService.get(
       KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
-        `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
+      `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
     setData(res);
@@ -163,7 +163,7 @@ const KhoiLuongQuanLyVanHanhTrungAp = () => {
         </>
         <div style={{ margin: 10 }}>
           <div style={{ marginBottom: 10 }}>
-            <h3>1.1. Đường dây (km)</h3>
+           <a> <h3 onClick={handleShowSanLuongDonVi}>1.1. Đường dây (km)</h3></a>
           </div>
           <Table
             pagination={false}

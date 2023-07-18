@@ -42,6 +42,7 @@ const ChiTieuTable = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [thang, setThang] = useState<any>(null)
   const { chiTieu, value } = location.state;
 
   localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
@@ -191,7 +192,15 @@ const ChiTieuTable = () => {
               </a>
             );
           }
-          
+          else if (text === 'Giá bán điện bình quân') {
+            setIDChiTieu(123);
+            return (
+              <a onClick={handleShowSanLuongDonVi}>
+                <strong className="view-chart">{text}</strong>
+              </a>
+            );
+          }
+
           else {
             return <strong className="view-chart">{text}</strong>;
           }
@@ -241,7 +250,12 @@ const ChiTieuTable = () => {
           return <strong>{text}</strong>;
         }
         if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
+          if (text.includes("/")) {
+            return text;
+          } else {
+            return parseFloat(text).toLocaleString();
+          }
+          //return parseFloat(text).toLocaleString();
         }
       },
     },
@@ -255,12 +269,22 @@ const ChiTieuTable = () => {
           return <strong>{text}</strong>;
         }
         if (text !== null && text !== '') {
-          return parseFloat(text).toLocaleString();
+          if (text.includes("/")) {
+            return text;
+          } else {
+            return parseFloat(text).toLocaleString();
+          }
+
+          //return parseFloat(text).toLocaleString();
         }
       },
     },
     {
-      title: 'So sánh TH/Kế hoạch (%)',
+      title: () => {
+        var tonThat = data.find(x => x.tenChiTieu === "Tổn thất điện năng");
+        return tonThat === undefined ? 'So sánh TH/Kế hoạch (%)' : 'So sánh Lũy kế thực hiện - Kế hoạch'
+      },
+      //title: 'So sánh TH/Kế hoạch (%)',
       dataIndex: 'soSanhTHKeHoach',
       key: 'soSanhTHKeHoach',
       align: 'right',
@@ -274,7 +298,11 @@ const ChiTieuTable = () => {
       },
     },
     {
-      title: 'So sánh với cùng kỳ năm trước (%)',
+      title: () => {
+        var tonThat = data.find(x => x.tenChiTieu === "Tổn thất điện năng");
+        return tonThat === undefined ? 'So sánh với cùng kỳ năm trước (%)' : 'So sánh với cùng kỳ năm trước'
+      },
+      //title: 'So sánh với cùng kỳ năm trước (%)',
       dataIndex: 'soSanhVoiCungKyNamTruoc',
       key: 'soSanhVoiCungKyNamTruoc',
       align: 'right',
@@ -294,13 +322,16 @@ const ChiTieuTable = () => {
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
       if (chiTieu[0]?.value.toString() === idChiTieu.toString()) {
-        spanElement.textContent = chiTieu[0]?.label;
+
+
+        spanElement.textContent = chiTieu[0]?.label + " tháng " + thang;
       } else if (chiTieu[0]?.label) {
+
         const titleName = chiTieu.filter((x) => x.value.toString() === idChiTieu.toString());
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${'>'} ${titleName[0].label}`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${'>'} ${titleName[0].label}` + " tháng " + thang;
       }
     }
-  }, [chiTieu, value, inputValue]);
+  }, [chiTieu, value, inputValue, thang]);
 
   const getBangBaoCaoChiTieu = async () => {
     let ids = idChiTieu;
@@ -311,10 +342,11 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
+    setThang(res[0].thang)
   };
 
   const getBangBaoCaoChiTieu2 = async (value) => {
@@ -326,19 +358,19 @@ const ChiTieuTable = () => {
     }
     const res = await httpService.get(
       BANG_BAO_CAO_CHI_TIEU +
-        `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
+      `?ids=${ids}&ngayBaoCao=${inputValue?.ngayBaoCao}&tanSuat=${inputValue?.tanSuat}&donViId=${inputValue?.donViId}`,
       null
     );
     setData(res);
-
+    setThang(res[0].thang)
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');
     if (spanElement) {
       if (chiTieu[0].value === value) {
-        spanElement.textContent = chiTieu[0].label;
+
+        spanElement.textContent = chiTieu[0].label + " tháng " + thang;
       } else {
-        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${
-          chiTieu.filter((x) => x.value === value)[0].label
-        }`;
+        spanElement.textContent = `${chiTieu[0].label.split('(')[0]} ${`>`} ${chiTieu.filter((x) => x.value === value)[0].label
+          }` + " tháng " + thang;;
       }
     }
 

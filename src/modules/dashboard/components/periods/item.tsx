@@ -356,10 +356,11 @@ function PeriodsItem(props) {
                   >
                     Chi tiết
                   </Button>
-                ) : idChiTieuSuCo === 101 ||
+                ) :
                   idChiTieuSuCo === 98 ||
                   idChiTieuSuCo === 99 ||
-                  idChiTieuSuCo === 102 ||
+                  idChiTieuSuCo === 476 ||
+                  idChiTieuSuCo === 477 ||
                   idChiTieuSuCo === 215 ||
                   idChiTieuSuCo === 216 ? (
                   <Button

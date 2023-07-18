@@ -130,7 +130,7 @@
 
   .page-indicators {
     flex-direction: row;
-    display: flex;
+    /* display: flex; */
     flex-basis: 100%;
   }
 }
@@ -986,14 +986,12 @@
 }
 
 @media screen and (max-width: 576px) {
-
   #boChiTieuKyThuat.tongCongTy .suCoLuoiDienTrungThe.has-barTop.has-line:first-child .page-setOfIndicators--charts-top,
   #boChiTieuKyThuat.tongCongTy .suCoLuoiDienTrungThe.has-barTop.has-line:nth-child(3) .page-setOfIndicators--charts-top {
     top: 0 !important;
     right: 0 !important;
     width: 100% !important;
     position: inherit !important;
-
   }
 
   #dashboard .sanluong-dienthuongpham.not-speedometer .pie-summary-sanluong .pie-lazyload>.summary>.period-item>.p-rate>.period-item--wrapper,
@@ -1164,4 +1162,9 @@
 
 .periods-item-wrap{
   width: 100% !important;
+}
+
+#boChiTieuAnToan > div.bct-data__charts > div.page-setOfIndicators--content.content-body > div.periods-item-wrap > div > div:nth-child(2) > div
+{
+  margin-top: 20px;
 }
