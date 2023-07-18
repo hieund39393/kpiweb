@@ -48,6 +48,7 @@ import OngNguyenQuangTrung from 'modules/dashboard/components/bang/OngNguyenQuan
 import OngHoangMinhGiang from 'modules/dashboard/components/bang/OngHoangMinhGiang';
 import OngLeAnhDuong from 'modules/dashboard/components/bang/OngLeAnhDuong';
 import KetQuaThucHienNhiemVu from 'modules/dashboard/components/bang/KetQuaThucHienNhiemVu';
+import KetQuaThanhTraKiemTra from 'modules/dashboard/components/bang/KetQuaThanhTraKiemTra';
 
 export const routes = [
   {
@@ -368,6 +369,14 @@ export const routes = [
     title: '',
     component: <KetQuaThucHienNhiemVu />,
   },
+  {
+    key: 'ketquathanhtrakiemtra',
+    id: 53,
+    icon: '',
+    path: '/ket-qua-thanh-tra-kiem-tra',
+    title: '',
+    component: <KetQuaThanhTraKiemTra />,
+  },
 ];
 
 export const GET_CN_CON = BASE_URL + 'chuc-nang/chuc-nang-con';
@@ -396,3 +405,4 @@ export const SO_LUONG_CONG_TO = BASE_URL + 'nhomquanly/so-luong-cong-to';
 export const PHAN_MEM = BASE_URL + 'nhomquanly/phan-mem';
 export const KET_QUA_THUC_HIEN = BASE_URL + 'nhomquanly/ket-qua-thuc-hien';
 export const CONG_TAC_DIEU_HANH = BASE_URL + 'nhomquanly/cong-tac-dieu-hanh';
+export const KET_QUAN_THANH_TRA_KIEM_TRA = BASE_URL + 'nhomquanly/ket-qua-thanh-tra-kiem-tra';

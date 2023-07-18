@@ -57,6 +57,10 @@ const NhomQuanLy = () => {
       navigate('/tong-so-nhan-su-va-bien-dong-nhan-su', {
         state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
       });
+    } else if (value === '67') {
+      navigate('/ket-qua-thanh-tra-kiem-tra', {
+        state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
+      });
     } else if (value === '68') {
       navigate('/phan-mem', {
         state: { chiTieu: selectedArray.listChucNangChiTieu, value: value },
