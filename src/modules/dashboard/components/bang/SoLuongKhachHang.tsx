@@ -16,7 +16,7 @@ interface InputValue {
 
 const SoLuongKhachHang = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const { chiTieu, value } = location.state;
 
   localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
@@ -93,7 +93,73 @@ const SoLuongKhachHang = () => {
     );
     setData(res);
   };
-
+  const handleChangeNhom = (value) => {
+    if (value === '60') {
+      navigate('/thong-so-amax-pmax', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '61') {
+      navigate('/khoi-luong-quan-ly-van-hanh-luoi-dien', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '62') {
+      navigate('/khoi-luong-quan-ly-van-hanh-luoi-dien-trung-ap', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '63') {
+      navigate('/khoi-luong-quan-ly-van-hanh-duong-day-ha-ap', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '64') {
+      navigate('/so-luong-khach-hang', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '65') {
+      navigate('/so-luong-cong-to', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '66') {
+      navigate('/tong-so-nhan-su-va-bien-dong-nhan-su', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '67') {
+      navigate('/ket-qua-thanh-tra-kiem-tra', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '68') {
+      navigate('/phan-mem', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '69') {
+      navigate('/ong-nguyen-danh-duyen', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '70') {
+      navigate('/ong-nguyen-anh-dung', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '71') {
+      navigate('/ong-nguyen-anh-tuan', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '72') {
+      navigate('/ong-nguyen-quang-trung', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '73') {
+      navigate('/ong-hoang-minh-giang', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '74') {
+      navigate('/ong-le-anh-duong', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    } else if (value === '75') {
+      navigate('/ket-qua-thuc-hien-nhiem-vu', {
+        state: { chiTieu: chiTieu, value: value },
+      });
+    }
+  }
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
       <Filter setInput={setInputValue} ids={value} />
@@ -106,7 +172,7 @@ const SoLuongKhachHang = () => {
               width: '100%',
             }}
             defaultValue={idChiTieu}
-            // onChange={getBangBaoCaoChiTieu2}
+            onChange={handleChangeNhom}
             options={chiTieu?.map((option, index) => ({
               label: option.label,
               value: option.value,
