@@ -7,6 +7,7 @@ import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlterQuanLy';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+import chartService from 'modules/dashboard/services/ChartService';
 
 interface MenuItem {
   label: string;
@@ -40,6 +41,7 @@ const ThongSoAMaxPMax = () => {
   const handleShowSanLuongDonVi = () => {
     setModalSanLuongDonVi(true);
   };
+
   const handleCloseSanLuongDonVi = () => {
     setModalSanLuongDonVi(false);
   };
@@ -57,12 +59,26 @@ const ThongSoAMaxPMax = () => {
       ),
     [modalSanLuongDonVi]
   );
+  const showAmax = () => {
+    navigate('/bieu-do', { state: { chiTieuId: 324, chiTieuChaId: 325, chiTieu, value } });
+  };
+  const showPmax = () => {
+    navigate('/bieu-do', { state: { chiTieuId: 43, chiTieuChaId: 42, chiTieu, value } });
+  };
 
   const columns: ColumnsType<any> = [
     {
       title: 'Chỉ tiêu',
       dataIndex: 'chiTieu',
       key: 'chiTieu',
+      render: (text: string) => {
+        if (text.includes('Amax')) {
+          return <a onClick={showAmax}>{text}</a>;
+        }
+        if (text.includes('Pmax')) {
+          return <a onClick={showPmax}>{text}</a>;
+        }
+      },
     },
     {
       title: 'Tháng',
@@ -151,7 +167,7 @@ const ThongSoAMaxPMax = () => {
         state: { chiTieu: chiTieu, value: value },
       });
     }
-  }
+  };
   useEffect(() => {
     getBangBaoCaoChiTieu();
     const spanElement = document.querySelector('#bangChiTiet .ant-select-selection-item');

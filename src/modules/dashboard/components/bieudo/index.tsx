@@ -42,7 +42,7 @@ const BieuDo = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const { chiTieuId, chiTieuChaId } = location.state || {};
+  const { chiTieuId, chiTieuChaId, chiTieu, value } = location.state || {};
 
   const user = localStorageService.getUser();
 
@@ -76,22 +76,28 @@ const BieuDo = () => {
   const [isChange, setIsChange] = useState(false);
 
   const goBack = () => {
-    const chitieuST = localStorage.getItem('chiTieuST');
-    let menuItems: MenuItem[] = [];
-
-    if (chitieuST) {
-      menuItems = JSON.parse(chitieuST).map((item: { label: string; value: string }) => ({
-        label: item.label,
-        value: item.value,
-      }));
-    }
-
-    const storedValue: string | null = localStorage.getItem('selectedValue');
-    if (storedValue !== null) {
-      const parsedValue: number = parseInt(storedValue, 10);
-      navigate('/bang-chi-tiet', {
-        state: { chiTieu: menuItems, value: parsedValue },
+    if (chiTieuId === 43 || chiTieuId === 324) {
+      navigate('/thong-so-amax-pmax', {
+        state: { chiTieu: chiTieu, value: value },
       });
+    } else {
+      const chitieuST = localStorage.getItem('chiTieuST');
+      let menuItems: MenuItem[] = [];
+
+      if (chitieuST) {
+        menuItems = JSON.parse(chitieuST).map((item: { label: string; value: string }) => ({
+          label: item.label,
+          value: item.value,
+        }));
+      }
+
+      const storedValue: string | null = localStorage.getItem('selectedValue');
+      if (storedValue !== null) {
+        const parsedValue: number = parseInt(storedValue, 10);
+        navigate('/bang-chi-tiet', {
+          state: { chiTieu: menuItems, value: parsedValue },
+        });
+      }
     }
   };
 

@@ -56,6 +56,7 @@ function Charts(props) {
       ngayBaoCao: ngayBaoCao,
       pageIndex: _PAGEINDEX,
       pageSize: 100,
+      tanSuat: chiTieuId === 43 ? 'd' : null,
     };
 
     return chartService
@@ -207,7 +208,6 @@ function Charts(props) {
                   isChange={isChange}
                   classTrungThe={classTrungThe}
                   key={index} // Thêm key vào đây
-                  
                 />
               )
             );
