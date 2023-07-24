@@ -6,7 +6,8 @@ import { SO_LUONG_KHACH_HANG } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
-import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+
+import ChiTietSoLuongKhachHang from 'modules/dashboard/modal/chiTietSoLuongKhachHang';
 
 interface InputValue {
   ngayBaoCao: string;
@@ -42,8 +43,7 @@ const SoLuongKhachHang = () => {
   const modalSL = useMemo(
     () =>
       modalSanLuongDonVi && (
-        <SanLuongDien
-          chiTieuId={idChiTieu}
+        <ChiTietSoLuongKhachHang
           isShowModal={modalSanLuongDonVi}
           ngayBaoCao={inputValue.ngayBaoCao}
           tanSuat={inputValue.tanSuat}
@@ -115,6 +115,9 @@ const SoLuongKhachHang = () => {
           />
         </>
         <div style={{ margin: 10 }}>
+          <div style={{ marginBottom: 10 }}>
+           <a> <h3 onClick={handleShowSanLuongDonVi}>Chi tiết đơn vị</h3></a>
+          </div>
           <Table
             pagination={{
               defaultPageSize: 20,

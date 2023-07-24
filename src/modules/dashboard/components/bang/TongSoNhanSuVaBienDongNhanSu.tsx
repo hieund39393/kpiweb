@@ -2,11 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Select } from 'antd';
 import httpService from 'core/infrastructure/services/httpService';
-import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP } from 'modules/shared/menu/routes';
+import { QUAN_TRI_NHAN_SU } from 'modules/shared/menu/routes';
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
-import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+import ChiTietNhanSu from 'modules/dashboard/modal/chiTietNhanSu';
 
 interface InputValue {
   ngayBaoCao: string;
@@ -42,8 +42,7 @@ const TongSoNhanSuVaBienDongNhanSu = () => {
   const modalSL = useMemo(
     () =>
       modalSanLuongDonVi && (
-        <SanLuongDien
-          chiTieuId={idChiTieu}
+        <ChiTietNhanSu
           isShowModal={modalSanLuongDonVi}
           ngayBaoCao={inputValue.ngayBaoCao}
           tanSuat={inputValue.tanSuat}
@@ -89,12 +88,12 @@ const TongSoNhanSuVaBienDongNhanSu = () => {
         },
         {
           title: 'Chấm dứt HĐLĐ',
-          dataIndex: 'chamDutHDLD',
+          dataIndex: 'chamDutHD',
           key: 'chamDutHDLD',
         },
         {
           title: 'Thuyên chuyển công tác',
-          dataIndex: 'thuyenChuyenCongTac',
+          dataIndex: 'thuyenChuyen',
           key: 'thuyenChuyenCongTac',
         },
       ],
@@ -122,7 +121,7 @@ const TongSoNhanSuVaBienDongNhanSu = () => {
         .map((item) => parseInt(item.value));
     }
     const res = await httpService.get(
-      KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_TRUNG_AP +
+      QUAN_TRI_NHAN_SU +
         `?donViId=${inputValue?.donViId}&ngayBaoCao=${inputValue?.ngayBaoCao}`,
       null
     );
@@ -150,6 +149,9 @@ const TongSoNhanSuVaBienDongNhanSu = () => {
           />
         </>
         <div style={{ margin: 10 }}>
+          <div style={{ marginBottom: 10 }}>
+           <a> <h3 onClick={handleShowSanLuongDonVi}>Chi tiết đơn vị</h3></a>
+          </div>
           <Table
             pagination={{
               defaultPageSize: 20,

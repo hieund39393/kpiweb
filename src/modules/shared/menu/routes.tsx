@@ -401,8 +401,10 @@ export const KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP =
 export const SO_LUONG_KHACH_HANG = BASE_URL + 'nhomquanly/so-luong-khach-hang';
 
 export const SO_LUONG_CONG_TO = BASE_URL + 'nhomquanly/so-luong-cong-to';
-
+export const QUAN_TRI_NHAN_SU = BASE_URL + 'nhomquanly/quan-tri-nhan-su';
 export const PHAN_MEM = BASE_URL + 'nhomquanly/phan-mem';
 export const KET_QUA_THUC_HIEN = BASE_URL + 'nhomquanly/ket-qua-thuc-hien';
 export const CONG_TAC_DIEU_HANH = BASE_URL + 'nhomquanly/cong-tac-dieu-hanh';
 export const KET_QUAN_THANH_TRA_KIEM_TRA = BASE_URL + 'nhomquanly/ket-qua-thanh-tra-kiem-tra';
+export const CHI_TIET_TBA = BASE_URL + 'nhomquanly/chi-tiet-tba';
+export const CHI_TIET_MBA = BASE_URL + 'nhomquanly/chi-tiet-mba';

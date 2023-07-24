@@ -6,7 +6,9 @@ import { KHOI_LUONG_QUAN_LY_VAN_HANH_LUOI_DIEN_HA_AP } from 'modules/shared/menu
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
-import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+
+import ChiTietDuongDayHaAp from 'modules/dashboard/modal/chiTietDuongDayHaAp';
+import ChiTietTBAHaAp from 'modules/dashboard/modal/chiTietTBAHaAp';
 
 interface InputValue {
   ngayBaoCao: string;
@@ -23,6 +25,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
 
   const [data, setData] = useState<any>([]);
   const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
+  const [modalSanLuongDonVi1, setModalSanLuongDonVi1] = useState(false);
 
   const [inputValue, setInputValue] = useState<InputValue>({
     ngayBaoCao: '',
@@ -39,11 +42,17 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
     setModalSanLuongDonVi(false);
   };
 
+  const handleShowSanLuongDonVi1 = () => {
+    setModalSanLuongDonVi1(true);
+  };
+  const handleCloseSanLuongDonVi1 = () => {
+    setModalSanLuongDonVi1(false);
+  };
+
   const modalSL = useMemo(
     () =>
       modalSanLuongDonVi && (
-        <SanLuongDien
-          chiTieuId={idChiTieu}
+        <ChiTietDuongDayHaAp
           isShowModal={modalSanLuongDonVi}
           ngayBaoCao={inputValue.ngayBaoCao}
           tanSuat={inputValue.tanSuat}
@@ -51,6 +60,19 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
         />
       ),
     [modalSanLuongDonVi]
+  );
+
+  const modalSL1 = useMemo(
+    () =>
+      modalSanLuongDonVi1 && (
+        <ChiTietTBAHaAp
+          isShowModal={modalSanLuongDonVi1}
+          ngayBaoCao={inputValue.ngayBaoCao}
+          tanSuat={inputValue.tanSuat}
+          closeModal={handleCloseSanLuongDonVi1}
+        />
+      ),
+    [modalSanLuongDonVi1]
   );
 
   const columns1: ColumnsType<any> = [
@@ -161,7 +183,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
         </>
         <div style={{ margin: 10 }}>
           <div style={{ marginBottom: 10 }}>
-            <h3>1.1. Đường dây (km)</h3>
+          <a> <h3 onClick={handleShowSanLuongDonVi}>1.1. Đường dây (km)</h3></a>
           </div>
           <Table
             pagination={false}
@@ -169,7 +191,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
           <div style={{ marginBottom: 10, marginTop: 10 }}>
-            <h3>1.2. Trạm biến áp</h3>
+          <a> <h3 onClick={handleShowSanLuongDonVi1}>1.2. Trạm biến áp</h3></a>
           </div>
           <Table
             pagination={false}
@@ -179,6 +201,7 @@ const KhoiLuongQuanLyVanHanhDZHaAp = () => {
         </div>
       </div>
       <>{modalSL}</>
+      <>{modalSL1}</>
     </div>
   );
 };

@@ -9,7 +9,9 @@ import {
 import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
-import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+
+import ChiTietTBA from 'modules/dashboard/modal/chiTietTBACaoThe';
+import ChiTietMBA from 'modules/dashboard/modal/chiTietMBACaoThe';
 
 interface InputValue {
   ngayBaoCao: string;
@@ -27,6 +29,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
   const [data, setData] = useState<any>([]);
   const [data1, setData1] = useState<any>([]);
   const [modalSanLuongDonVi, setModalSanLuongDonVi] = useState(false);
+  const [modalSanLuongDonVi1, setModalSanLuongDonVi1] = useState(false);
 
   const [inputValue, setInputValue] = useState<InputValue>({
     ngayBaoCao: '',
@@ -43,11 +46,18 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
     setModalSanLuongDonVi(false);
   };
 
+
+  const handleShowSanLuongDonVi1 = () => {
+    setModalSanLuongDonVi1(true);
+  };
+  const handleCloseSanLuongDonVi1 = () => {
+    setModalSanLuongDonVi1(false);
+  };
+
   const modalSL = useMemo(
     () =>
       modalSanLuongDonVi && (
-        <SanLuongDien
-          chiTieuId={idChiTieu}
+        <ChiTietTBA
           isShowModal={modalSanLuongDonVi}
           ngayBaoCao={inputValue.ngayBaoCao}
           tanSuat={inputValue.tanSuat}
@@ -55,6 +65,19 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
         />
       ),
     [modalSanLuongDonVi]
+  );
+
+  const modalSL1 = useMemo(
+    () =>
+      modalSanLuongDonVi1 && (
+        <ChiTietMBA
+          isShowModal={modalSanLuongDonVi1}
+          ngayBaoCao={inputValue.ngayBaoCao}
+          tanSuat={inputValue.tanSuat}
+          closeModal={handleCloseSanLuongDonVi1}
+        />
+      ),
+    [modalSanLuongDonVi1]
   );
 
   const columns1: ColumnsType<any> = [
@@ -198,7 +221,9 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
             dataSource={data?.map((item) => ({ ...item, key: item.id }))}
           />
           <div style={{ marginBottom: 10, marginTop: 10 }}>
-            <h3>1.2. Trạm biến áp</h3>
+            <div style={{ marginBottom: 10, color:'blue' }}>
+              <h3 style={{ color:'blue' }}>1.2. <a style={{ color:'blue' }} onClick={handleShowSanLuongDonVi}>Trạm biến áp</a> và <a style={{ color:'blue' }} onClick={handleShowSanLuongDonVi1}>máy biến áp</a></h3>
+            </div>
           </div>
           <Table
             pagination={false}
@@ -208,6 +233,7 @@ const KhoiLuongQuanLyVanHanhLuoiDien = () => {
         </div>
       </div>
       <>{modalSL}</>
+      <>{modalSL1}</>
     </div>
   );
 };

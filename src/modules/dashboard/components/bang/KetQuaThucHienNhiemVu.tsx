@@ -65,64 +65,89 @@ const KetQuaThucHienNhiemVu = () => {
       key: 'tongSoCongViec',
     },
     {
-      title: 'Loại 1',
-      dataIndex: 'loaimot',
-      key: 'loaimot',
-    },
-    {
-      title: 'Loại 2',
-      dataIndex: 'loaihai',
-      key: 'loaihai',
-    },
-    {
-      title: 'Hoàn thành',
-      dataIndex: 'hoanThanh',
-      key: 'hoanThanh',
-    },
-    {
-      title: 'Đang làm',
-      dataIndex: 'dangLam',
-      key: 'dangLam',
-    },
-    {
-      title: 'Chủ trì',
-      dataIndex: 'chuTri',
-      key: 'chuTri',
-    },
-    {
-      title: 'Phối hợp',
-      dataIndex: 'phoiHop',
-      key: 'phoiHop',
-    },
-    {
-      title: 'Theo dõi',
-      dataIndex: 'theoDoi',
-      key: 'theoDoi',
-    },
-    {
-      title: 'Quá hạn',
-      dataIndex: 'quaHan',
-      key: 'quaHan',
-    },
-    {
-      title: 'Đến hạn',
-      dataIndex: 'denHan',
-      key: 'denHan',
-    },
-    {
-      title: 'Chờ duyệt',
-      dataIndex: 'choDuyet',
-      key: 'choDuyet',
-    },
-    {
-      title: 'Chờ duyệt gia hạn',
-      dataIndex: 'choDuyetGiaHan',
-      key: 'choDuyetGiaHan',
+      title: 'Phân loại',
+      children: [
+        {
+          title: 'Loại công việc',
+          children: [
+            {
+              title: 'Loại 1',
+              dataIndex: 'loai1',
+              key: 'loai1',
+            },
+            {
+              title: 'Loại 2',
+              dataIndex: 'loai2',
+              key: 'loai2',
+            },
+          ],
+        },
+        {
+          title: 'Trạng thái',
+          children: [
+            {
+              title: 'Hoàn thành',
+              dataIndex: 'hoanThanh',
+              key: 'hoanThanh',
+            },
+            {
+              title: 'Đang làm',
+              dataIndex: 'dangLam',
+              key: 'dangLam',
+            },
+          ],
+        },
+        {
+          title: 'Theo vai trò',
+          children: [
+            {
+              title: 'Chủ trì',
+              dataIndex: 'chuTri',
+              key: 'chuTri',
+            },
+            {
+              title: 'Phối hợp',
+              dataIndex: 'phoiHop',
+              key: 'phoiHop',
+            },
+            {
+              title: 'Theo dõi',
+              dataIndex: 'theoDoi',
+              key: 'theoDoi',
+            },
+          ],
+        },
+        {
+          title: 'Theo tiến độ báo cáo',
+          children: [
+            {
+              title: 'Quá hạn',
+              dataIndex: 'quaHan',
+              key: 'quaHan',
+            },
+            {
+              title: 'Đến hạn',
+              dataIndex: 'denHan',
+              key: 'denHan',
+            },
+            {
+              title: 'Chờ duyệt',
+              dataIndex: 'choDuyet',
+              key: 'choDuyet',
+            },
+            {
+              title: 'Chờ duyệt gia hạn',
+              dataIndex: 'choDuyetGiaHan',
+              key: 'choDuyetGiaHan',
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Gia hạn quá 2 lần',
-      dataIndex: 'giaHanQuaHaiLan',
-      key: 'giaHanQuaHaiLan',
+      dataIndex: 'giaHanLan2',
+      key: 'giaHanLan2',
     },
     {
       title: 'Tỷ lệ hoàn thành',
