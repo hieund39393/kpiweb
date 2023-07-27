@@ -5,6 +5,7 @@ export const update = BASE_URL + 'gia-tri-chi-tieu/update-ke-hoach';
 
 export const listThucHien = BASE_URL + 'gia-tri-chi-tieu/list-thuc-hien';
 export const updateThucHien = BASE_URL + 'gia-tri-chi-tieu/update-thuc-hien';
+export const importData = BASE_URL + 'gia-tri-chi-tieu/import-data';
 
 export const listLoaiChiTieu = BASE_URL + 'gia-tri-chi-tieu/list-chi-tieu';
 

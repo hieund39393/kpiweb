@@ -85,7 +85,7 @@
     }
 
     #filter-indicators .form-filter-indicators--reset {
-        max-width: 20%;
+        max-width: 5%;
         flex: 0 0 20%
     }
 }

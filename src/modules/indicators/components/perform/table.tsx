@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useRef, useState, RefObject } from 'react';
+import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -12,6 +14,7 @@ import {
   Input,
   Dropdown,
   notification,
+  Modal
 } from 'antd';
 import { InsertRowAboveOutlined } from '@ant-design/icons';
 import { FormInstance } from 'antd/lib/form';
@@ -59,6 +62,8 @@ import {
 import LocalStorageService from 'core/infrastructure/services/localStorageService';
 import { titleCase } from 'core/utils/utility';
 import { _TINHHINHVANHANH } from 'constant/chart';
+import { importData } from 'modules/indicators/route';
+
 type InputRef = RefObject<HTMLInputElement>;
 
 type OptionType = {
@@ -113,7 +118,7 @@ const EditableCell = ({
 
       toggleEdit();
       handleSave({ ...record, ...values });
-    } catch (errInfo) {}
+    } catch (errInfo) { }
   };
 
   let childNode = children;
@@ -458,6 +463,42 @@ function PerformTable() {
     }
   };
 
+
+
+  const [openImport, setOpenImport] = useState(false);
+
+  const showImportModal = () => {
+    setOpenImport(true);
+  }
+  const handleCancel = () => {
+    setOpenImport(false);
+  }
+  const handleOk = async () => {
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+      return;
+    }
+    const formData = new FormData();
+
+    const fileData = fileInput.files[0];
+    formData.append('file', fileData);
+
+    try {
+      const response = await axios({
+        method: "post",
+        url: importData,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log('Upload successful!', response.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+    setOpenImport(false);
+  };
+
+
   const renderFilter = () => (
     <>
       <Form
@@ -470,6 +511,11 @@ function PerformTable() {
           thangNam: moment(date, _MONTHFORMAT),
         }}
       >
+        <Modal title="Import dữ liệu" open={openImport} onCancel={handleCancel} onOk={handleOk} >
+          <p></p>
+          <Input type='file' />
+          <p></p>
+        </Modal>
         <Row gutter={16} className="box-filter form-filter-indicators">
           <Col span={20} sm={9} className="form-filter-indicators--group">
             <Form.Item name="donViID" label="Đơn vị">
@@ -507,7 +553,7 @@ function PerformTable() {
               className="type-indicators-update"
               name="loaiChiTieuID"
               label="Loại chỉ tiêu"
-              // rules={[{ required: _TRUE, message: _LOAICHITIEUREQUIRED }]}
+            // rules={[{ required: _TRUE, message: _LOAICHITIEUREQUIRED }]}
             >
               <Select<OptionType>
                 placeholder="Chọn loại chỉ tiêu"
@@ -518,10 +564,10 @@ function PerformTable() {
                 <Option value="null">Tất cả</Option>
                 {listLoaiChiTieu && listLoaiChiTieu.length
                   ? listLoaiChiTieu.map((chiTieu, index) => (
-                      <Option key={index} value={chiTieu.id}>
-                        {chiTieu.tenChiTieu}
-                      </Option>
-                    ))
+                    <Option key={index} value={chiTieu.id}>
+                      {chiTieu.tenChiTieu}
+                    </Option>
+                  ))
                   : null}
               </Select>
             </Form.Item>
@@ -559,7 +605,7 @@ function PerformTable() {
               )}
             </div>
           </Col>
-          <Col span={12} md={3} className="button-filter-indicators form-filter-indicators--reset">
+          <Col span={12} md={1} className="button-filter-indicators form-filter-indicators--reset">
             <Button
               htmlType="button"
               className="button-closed button-rest-report"
@@ -568,7 +614,7 @@ function PerformTable() {
               Bỏ lọc
             </Button>
           </Col>
-          <Col span={12} md={3} className="button-filter-indicators form-filter-indicators--submit">
+          <Col span={12} md={1} className="button-filter-indicators form-filter-indicators--submit">
             <Button
               type="primary"
               htmlType="submit"
@@ -577,6 +623,16 @@ function PerformTable() {
               Lấy dữ liệu
             </Button>
           </Col>
+          <Col span={12} md={1} className="button-filter-indicators form-filter-indicators--submit">
+            <Button
+              type="primary"
+              onClick={showImportModal}
+              className="button-primary button-submit-update"
+            >
+              Import
+            </Button>
+          </Col>
+
         </Row>
       </Form>
     </>
