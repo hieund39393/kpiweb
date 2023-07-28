@@ -7,6 +7,7 @@ import { Space, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import Filter from '../finlter';
 import SanLuongDien from 'modules/dashboard/modal/sanLuongDien';
+import './chitieutable.css'
 
 interface MenuItem {
   label: string;
@@ -39,11 +40,20 @@ interface InputValue {
 }
 
 const ChiTieuTable = () => {
+  const [hideColumn, setHideColumn] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const [thang, setThang] = useState<any>(null)
   const { chiTieu, value } = location.state;
+
+  useEffect(() => {
+    // Move the condition and state update inside the useEffect hook
+    if (value === '249' || value === '257' || value === '281' || value === '296') {
+      setHideColumn(true);
+    }
+  }, [value]);
 
   localStorage.setItem('chiTieuST', JSON.stringify(chiTieu));
 
@@ -244,6 +254,7 @@ const ChiTieuTable = () => {
       title: 'Giá trị thực hiện',
       dataIndex: 'giaTriThucHien',
       key: 'giaTriThucHien',
+      className: hideColumn ? 'hidden-column' : '',
       align: 'right',
       render: (text, record) => {
         if (record.chiTieuCha === true) {
@@ -400,13 +411,6 @@ const ChiTieuTable = () => {
     }
   };
 
-  // const [selectedValue, setSelectedValue] = useState(idChiTieu ?? chiTieu[0].value);
-
-  // const storedValue: string | null = localStorage.getItem('selectedValue');
-  // if (storedValue !== null) {
-  //   const parsedValue: number = parseInt(storedValue, 10);
-  //   setSelectedValue(parsedValue);
-  // }
   return (
     <div className="layout-page-content page-layout-content" id="dashboard">
       <Filter setInput={setInputValue} ids={value} />
